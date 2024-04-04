@@ -28,4 +28,6 @@ const Button = styled.button<{ $isActive: boolean }>`
     $isActive ? theme.colors.choral : theme.colors.dark_gray3};
   font-size: 19px;
   font-weight: 700;
+  border-radius: 10px;
+  border: none;
 `;
