@@ -11,7 +11,7 @@ const MediumButton = ({ type, children, onClick, state }: ButtonProps) => {
 
 export default MediumButton;
 
-const Button = styled.button<{ $isActive: boolean }>`
+const Button = styled.button<{ $isActive?: boolean }>`
   height: 36px;
   padding: 0 40px;
   display: flex;

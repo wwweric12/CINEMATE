@@ -11,9 +11,9 @@ const SmallButton = ({ type, children, onClick, state }: ButtonProps) => {
 
 export default SmallButton;
 
-const Button = styled.button<{ $isActive: boolean }>`
+const Button = styled.button<{ $isActive?: boolean }>`
+  width: 90px;
   height: 32px;
-  padding: 0 34px;
   display: flex;
   justify-content: center;
   align-items: center;

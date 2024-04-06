@@ -4,7 +4,7 @@ export interface ButtonProps {
   type?: 'submit' | 'button';
   children: string;
   onClick: () => void;
-  state: boolean;
+  state?: boolean;
 }
 
 const LargeButton = ({ type, children, onClick, state }: ButtonProps) => {
@@ -17,7 +17,7 @@ const LargeButton = ({ type, children, onClick, state }: ButtonProps) => {
 
 export default LargeButton;
 
-const Button = styled.button<{ $isActive: boolean }>`
+const Button = styled.button<{ $isActive?: boolean }>`
   height: 48px;
   padding: 0 108px;
   display: flex;
