@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
 import SmallButton from '../components/Button/SmallButton';
 
 const meta: Meta<typeof SmallButton> = {
@@ -13,9 +14,7 @@ export const SmallBtn: Story = {
   args: {
     type: 'button',
     children: 'button',
-    onClick: () => {
-      console.log('click');
-    },
+    onClick: fn(),
     state: true,
   },
 };

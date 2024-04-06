@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
 import LargeButton from '../components/Button/LargeButton';
 
 const meta: Meta<typeof LargeButton> = {
@@ -13,9 +14,7 @@ export const LargeBtn: Story = {
   args: {
     type: 'button',
     children: '회원가입',
-    onClick: () => {
-      console.log('click');
-    },
+    onClick: fn(),
     state: true,
   },
 };
