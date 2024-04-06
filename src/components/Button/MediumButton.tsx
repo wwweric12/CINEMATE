@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ButtonProps } from './LargeButton';
 
-const MiddleButton = ({ type, children, onClick, state }: ButtonProps) => {
+const MediumButton = ({ type, children, onClick, state }: ButtonProps) => {
   return (
     <Button type={type} onClick={onClick} $isActive={state}>
       {children}
@@ -9,11 +9,11 @@ const MiddleButton = ({ type, children, onClick, state }: ButtonProps) => {
   );
 };
 
-export default MiddleButton;
+export default MediumButton;
 
 const Button = styled.button<{ $isActive: boolean }>`
-  width: 120px;
   height: 36px;
+  padding: 0 40px;
   display: flex;
   justify-content: center;
   align-items: center;

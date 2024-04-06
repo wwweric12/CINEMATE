@@ -18,8 +18,8 @@ const LargeButton = ({ type, children, onClick, state }: ButtonProps) => {
 export default LargeButton;
 
 const Button = styled.button<{ $isActive: boolean }>`
-  width: 280px;
   height: 48px;
+  padding: 0 108px;
   display: flex;
   justify-content: center;
   align-items: center;
