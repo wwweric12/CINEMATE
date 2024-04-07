@@ -1,13 +1,7 @@
 import styled from 'styled-components';
+import { ButtonProps } from './LargeButton';
 
-export interface ButtonProps {
-  type?: 'submit' | 'button';
-  children: string;
-  onClick: () => void;
-  state?: boolean;
-}
-
-const LargeButton = ({ type, children, onClick, state }: ButtonProps) => {
+const SmallButton = ({ type, children, onClick, state }: ButtonProps) => {
   return (
     <Button type={type} onClick={onClick} $isActive={state}>
       {children}
@@ -15,19 +9,19 @@ const LargeButton = ({ type, children, onClick, state }: ButtonProps) => {
   );
 };
 
-export default LargeButton;
+export default SmallButton;
 
 const Button = styled.button<{ $isActive?: boolean }>`
-  height: 48px;
-  padding: 0 108px;
+  width: 90px;
+  height: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   background-color: ${({ $isActive, theme }) =>
-    $isActive ? theme.colors.choral : theme.colors.dark_gray3};
-  font-size: 19px;
+    $isActive ? theme.colors.choral : theme.colors.dark_gray4};
+  font-size: 10px;
   font-weight: 700;
-  border-radius: 10px;
+  border-radius: 6px;
   border: none;
 `;
