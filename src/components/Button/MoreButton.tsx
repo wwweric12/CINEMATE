@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import more from '../../assets/images/more_vector.svg';
-import { ButtonProps } from './LargeButton';
+import { ButtonProps } from './PrimaryButton';
 
 const MoreButton = ({ onClick, children }: ButtonProps) => {
   return (

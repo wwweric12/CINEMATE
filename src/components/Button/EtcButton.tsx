@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import union from '../../assets/images/union.svg';
-import SmallButton from './SmallButton';
-import { ButtonProps } from './LargeButton';
+import PrimaryButton, { ButtonProps } from './PrimaryButton';
 
 const EtcButton = () => {
   const REVIEW_SETTING: ButtonProps[] = [
@@ -12,6 +11,7 @@ const EtcButton = () => {
         handleModify();
       },
       state: false,
+      size: 'small',
     },
     {
       type: 'button',
@@ -20,6 +20,7 @@ const EtcButton = () => {
         handleDelete();
       },
       state: true,
+      size: 'small',
     },
   ];
   const handleModify = () => {
@@ -34,14 +35,15 @@ const EtcButton = () => {
       <ButtonContainer>
         <EtcBackgroundImg src={union} />
         {REVIEW_SETTING.map((item, i) => (
-          <SmallButton
+          <PrimaryButton
             key={i}
             type={item.type}
             onClick={item.onClick}
             state={item.state}
+            size="small"
           >
             {item.children}
-          </SmallButton>
+          </PrimaryButton>
         ))}
       </ButtonContainer>
     </>
