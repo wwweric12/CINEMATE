@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import MypageButton from '../components/atoms/MypageButton';
+import MypageButton from '../components/molecules/MypageButton';
 
 const meta: Meta<typeof MypageButton> = {
   title: 'Components/Button',
