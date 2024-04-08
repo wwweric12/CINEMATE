@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import union from '../../assets/images/union.svg';
-import PrimaryButton, { PrimaryButtonProps } from './PrimaryButton';
+import PrimaryButton, { PrimaryButtonProps } from '../atoms/PrimaryButton';
 
 const EtcButton = () => {
   const REVIEW_SETTING: PrimaryButtonProps[] = [

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import PrimaryButton from '../components/Button/PrimaryButton';
+import PrimaryButton from '../components/atoms/PrimaryButton';
 
 const meta: Meta<typeof PrimaryButton> = {
   title: 'Components/Button',
