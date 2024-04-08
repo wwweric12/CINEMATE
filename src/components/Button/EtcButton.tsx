@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import union from '../../assets/images/union.svg';
-import PrimaryButton, { ButtonProps } from './PrimaryButton';
+import PrimaryButton, { PrimaryButtonProps } from './PrimaryButton';
 
 const EtcButton = () => {
-  const REVIEW_SETTING: ButtonProps[] = [
+  const REVIEW_SETTING: PrimaryButtonProps[] = [
     {
       type: 'button',
       children: '수정하기',
