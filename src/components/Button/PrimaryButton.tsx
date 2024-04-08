@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export interface ButtonProps {
+export interface PrimaryButtonProps {
   type?: 'submit' | 'button';
   children: string;
   onClick: () => void;
@@ -14,7 +14,7 @@ const PrimaryButton = ({
   onClick,
   state,
   size,
-}: ButtonProps) => {
+}: PrimaryButtonProps) => {
   return (
     <Button type={type} onClick={onClick} $isActive={state} size={size}>
       {children}
@@ -26,7 +26,7 @@ export default PrimaryButton;
 
 const Button = styled.button<{
   $isActive?: boolean;
-  size: 'large' | 'medium' | 'small';
+  size: PrimaryButtonProps['size'];
 }>`
   padding: ${({ size }) => {
     switch (size) {
