@@ -15,6 +15,9 @@ const CancleButton = ({ onClick }: CancleButtonProps) => {
 
 export default CancleButton;
 
-const Button = styled.button``;
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+`;
 
 const Cancle = styled.img``;
