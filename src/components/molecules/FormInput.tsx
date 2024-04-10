@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import email from '../../assets/images/login_email.svg';
-import name from '../../assets/images/login_user.svg';
-import password from '../../assets/images/login_password.svg';
-import errorImg from '../../assets/images/login_error.svg';
-import success from '../../assets/images/login_success.svg';
+import emailSvg from '../../assets/images/login_email.svg';
+import nameSvg from '../../assets/images/login_user.svg';
+import passwordSvg from '../../assets/images/login_password.svg';
+import errorSvg from '../../assets/images/login_error.svg';
+import successSvg from '../../assets/images/login_success.svg';
 
 interface FormInputProps {
   type: 'name' | 'password' | 'email';
@@ -20,14 +20,14 @@ const FormInput = ({
   onChange,
   isValid,
 }: FormInputProps) => {
-  const image =
-    type === 'name'
-      ? name
-      : type === 'email'
-        ? email
-        : type === 'password'
-          ? password
-          : name;
+  let image;
+  if (type === 'name') {
+    image = nameSvg;
+  } else if (type === 'email') {
+    image = emailSvg;
+  } else if (type === 'password') {
+    image = passwordSvg;
+  }
 
   return (
     <InputContainer $isValid={isValid}>
@@ -39,7 +39,7 @@ const FormInput = ({
         onChange={onChange}
       />
       {isValid !== 'default' && (
-        <CheckImg src={isValid === 'error' ? errorImg : success} />
+        <CheckImg src={isValid === 'error' ? errorSvg : successSvg} />
       )}
     </InputContainer>
   );

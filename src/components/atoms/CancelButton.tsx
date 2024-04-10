@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import cancle from '../../assets/images/search_x.svg';
 
-interface CancleButtonProps {
+interface CancelButtonProps {
   onClick: () => void;
 }
 
-const CancleButton = ({ onClick }: CancleButtonProps) => {
+const CancleButton = ({ onClick }: CancelButtonProps) => {
   return (
     <Button onClick={onClick}>
-      <Cancle src={cancle} />
+      <Cancel src={cancle} />
     </Button>
   );
 };
@@ -20,4 +20,4 @@ const Button = styled.button`
   align-items: center;
 `;
 
-const Cancle = styled.img``;
+const Cancel = styled.img``;

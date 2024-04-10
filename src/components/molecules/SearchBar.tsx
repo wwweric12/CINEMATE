@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import search from '../../assets/images/search.svg';
-import CancleButton from '../atoms/CancleButton';
+import CancleButton from '../atoms/CancelButton';
 
 interface SearchBarProps {
   onChange: () => void;
