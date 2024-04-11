@@ -1,16 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import GenreImg from '../components/atoms/GenreImg';
+import SurveyImg from '../components/atoms/SurveyImg';
 
-const meta: Meta<typeof GenreImg> = {
+const meta: Meta<typeof SurveyImg> = {
   title: 'Components/Card',
-  component: GenreImg,
+  component: SurveyImg,
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Genre: Story = {
+export const SurveyImage: Story = {
   args: {
     isCheck: false,
+    sort: 'genre',
   },
 };

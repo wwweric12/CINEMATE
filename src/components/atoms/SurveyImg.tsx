@@ -1,27 +1,41 @@
 import styled from 'styled-components';
 import check from '../../assets/images/check.svg';
 
-interface GenreImgProps {
+interface SurveyImgProps {
   isCheck: boolean;
   src: string;
+  sort: 'genre' | 'movie';
 }
 
-const GenreImg = ({ isCheck, src }: GenreImgProps) => {
+const SurveyImg = ({ isCheck, src, sort }: SurveyImgProps) => {
   return (
-    <GenreImgContainer>
+    <SurveyImgContainer $sort={sort}>
       {isCheck && <Background />}
       {isCheck && <CheckImg src={check} />}
-      <GenreImage src={src} />
-    </GenreImgContainer>
+      <SurveyImage src={src} />
+    </SurveyImgContainer>
   );
 };
 
-export default GenreImg;
+export default SurveyImg;
 
-const GenreImgContainer = styled.div`
+const SurveyImgContainer = styled.div<{ $sort: SurveyImgProps['sort'] }>`
   position: relative;
-  width: 86px;
-  height: 86px;
+
+  width: ${({ $sort }) => {
+    if ($sort === 'genre') {
+      return '86px';
+    } else if ($sort === 'movie') {
+      return '88px';
+    }
+  }};
+  height: ${({ $sort }) => {
+    if ($sort === 'genre') {
+      return '86px';
+    } else if ($sort === 'movie') {
+      return '132px';
+    }
+  }};
   border-radius: 14px;
 `;
 
@@ -36,7 +50,7 @@ const Background = styled.div`
   border: ${({ theme }) => `1px solid ${theme.colors.choral}`};
 `;
 
-const GenreImage = styled.img`
+const SurveyImage = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 14px;
