@@ -2,16 +2,20 @@ import styled from 'styled-components';
 import check from '../../assets/images/check.svg';
 
 interface SurveyImgProps {
-  isCheck: boolean;
+  isChecked?: boolean;
   src: string;
   sort: 'genre' | 'movie';
 }
 
-const SurveyImg = ({ isCheck, src, sort }: SurveyImgProps) => {
+const SurveyImg = ({ isChecked, src, sort }: SurveyImgProps) => {
   return (
     <SurveyImgContainer $sort={sort}>
-      {isCheck && <Background />}
-      {isCheck && <CheckImg src={check} />}
+      {isChecked && (
+        <>
+          <Background />
+          <CheckImg src={check} />
+        </>
+      )}
       <SurveyImage src={src} />
     </SurveyImgContainer>
   );

@@ -20,7 +20,7 @@ const SearchCardContainer = styled.div`
   height: 52px;
   display: flex;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.dark_gray4};
+  background-color: ${({ theme }) => theme.colors.darkgray4};
   border-radius: 6px;
 `;
 

@@ -49,10 +49,10 @@ const Button = styled.button<{
     size === 'small'
       ? $isActive
         ? theme.colors.choral
-        : theme.colors.dark_gray4
+        : theme.colors.darkgray4
       : $isActive
         ? theme.colors.choral
-        : theme.colors.dark_gray3};
+        : theme.colors.darkgray3};
   font-size: ${({ size }) => {
     switch (size) {
       case 'large':

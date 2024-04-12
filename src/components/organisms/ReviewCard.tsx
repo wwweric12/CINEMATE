@@ -12,8 +12,8 @@ interface ReviewCard {
   content: string;
   date: number;
   count: number;
-  isLike: boolean;
-  isMine: boolean;
+  isLike?: boolean;
+  isMine?: boolean;
   handleHeart?: () => void;
 }
 
@@ -74,7 +74,7 @@ export default ReviewCard;
 const ReviewCardContainer = styled.div`
   width: 100%;
   padding: 18px 20px;
-  background-color: ${({ theme }) => theme.colors.dark_gray4};
+  background-color: ${({ theme }) => theme.colors.darkgray4};
   border-radius: 14px;
   display: flex;
   flex-direction: column;

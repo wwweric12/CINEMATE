@@ -38,7 +38,7 @@ const ReviewContainer = styled.div`
   flex-direction: column;
   width: 300px;
   padding: 18px 16px;
-  background-color: ${({ theme }) => theme.colors.dark_gray4};
+  background-color: ${({ theme }) => theme.colors.darkgray4};
   border-radius: 14px;
 `;
 

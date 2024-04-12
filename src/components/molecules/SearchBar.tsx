@@ -24,7 +24,7 @@ export default SearchBar;
 const SearchBarContainer = styled.form`
   display: flex;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.dark_gray4};
+  background-color: ${({ theme }) => theme.colors.darkgray4};
   border-radius: 999px;
   padding: 8px;
 `;

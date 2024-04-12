@@ -7,7 +7,7 @@ interface MovieCardProps {
   title: string;
   date: number;
   grade: number;
-  isLike: boolean;
+  isLike?: boolean;
   onClick: () => void;
 }
 
@@ -44,7 +44,7 @@ const CardContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 10px 14px;
-  background-color: ${({ theme }) => theme.colors.dark_gray4};
+  background-color: ${({ theme }) => theme.colors.darkgray4};
   border-radius: 10px;
 `;
 
