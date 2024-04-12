@@ -28,6 +28,7 @@ const Button = styled.button<{
   $isActive?: boolean;
   size: PrimaryButtonProps['size'];
 }>`
+  width: max-content;
   padding: ${({ size }) => {
     switch (size) {
       case 'large':
