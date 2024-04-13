@@ -11,7 +11,7 @@ type Story = StoryObj<typeof meta>;
 
 export const SurveyImage: Story = {
   args: {
-    isCheck: false,
+    isChecked: false,
     sort: 'genre',
   },
 };
