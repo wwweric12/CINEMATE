@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const DivideVector = () => {
-  return <Divider></Divider>;
+  return <Divider />;
 };
 
 export default DivideVector;
