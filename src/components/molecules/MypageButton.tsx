@@ -27,7 +27,7 @@ const ButtonContainer = styled.button`
   padding: 16px;
   align-items: center;
   border-radius: 10px;
-  background-color: ${({ theme }) => theme.colors.dark_gray4};
+  background-color: ${({ theme }) => theme.colors.darkgray4};
 `;
 
 const ContentContainer = styled.div`
