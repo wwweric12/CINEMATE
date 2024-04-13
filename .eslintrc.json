@@ -28,6 +28,8 @@
       "react/jsx-one-expression-per-line": "off",
       "react/jsx-props-no-spreading": "off",
       "react/react-in-jsx-scope": "off",
+      "import/no-named-as-default": "off",
+      "react/self-closing-comp": "warn",
       "prettier/prettier": ["error", { "endOfLine": "auto" }],
       "@typescript-eslint/no-empty-interface": [
         "warn",
