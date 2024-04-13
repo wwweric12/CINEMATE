@@ -1,19 +1,19 @@
 import styled from 'styled-components';
-import cancle from '../../assets/images/search_x.svg';
+import cancel from '../../assets/images/search_x.svg';
 
 interface CancelButtonProps {
   onClick: () => void;
 }
 
-const CancleButton = ({ onClick }: CancelButtonProps) => {
+const CancelButton = ({ onClick }: CancelButtonProps) => {
   return (
     <Button onClick={onClick}>
-      <Cancel src={cancle} />
+      <Cancel src={cancel} />
     </Button>
   );
 };
 
-export default CancleButton;
+export default CancelButton;
 
 const Button = styled.button`
   display: flex;
