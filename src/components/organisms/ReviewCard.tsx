@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import fillHeartSvg from '../../assets/images/fill_heart.svg';
-import emptyHeartSvg from '../../assets/images/heart.svg';
 import etcSvg from '../../assets/images/etc.svg';
 import ReviewGrade from '../atoms/ReviewGrade';
+import HeartButton from '../atoms/HeartButton';
 import EtcButton from './EtcButton';
 
 interface ReviewCard {
@@ -14,7 +13,7 @@ interface ReviewCard {
   count: number;
   isLike?: boolean;
   isMine?: boolean;
-  handleHeart?: () => void;
+  handleHeart: () => void;
 }
 
 const ReviewCard = ({
@@ -56,13 +55,7 @@ const ReviewCard = ({
       </CardHeader>
       <ReviewContent>{content}</ReviewContent>
       <CardFooter>
-        <HeartButton onClick={handleHeart}>
-          {isLike ? (
-            <ReviewLike src={fillHeartSvg} />
-          ) : (
-            <ReviewLike src={emptyHeartSvg} />
-          )}
-        </HeartButton>
+        <HeartButton isLike={isLike} onClick={handleHeart} />
         <LikeCount>{count}개</LikeCount>
       </CardFooter>
     </ReviewCardContainer>
@@ -136,12 +129,6 @@ const CardFooter = styled.div`
   display: flex;
   align-items: center;
 `;
-
-const ReviewLike = styled.img`
-  margin-right: 8px;
-`;
-
-const HeartButton = styled.button``;
 
 const LikeCount = styled.div`
   font-size: 14px;
