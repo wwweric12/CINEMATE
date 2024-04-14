@@ -23,6 +23,4 @@ export default HeartButton;
 
 const ButtonContainer = styled.button``;
 
-const ReviewLike = styled.img`
-  margin-right: 8px;
-`;
+const ReviewLike = styled.img``;
