@@ -4,13 +4,19 @@ import { ReactComponent as SearchSvg } from '../../assets/images/footer_search.s
 import { ReactComponent as UserSvg } from '../../assets/images/footer_user.svg';
 import { theme } from '../../styles/theme';
 
-interface FooterButtonProps {
+export interface FooterButtonProps {
   text: string;
   type: 'home' | 'search' | 'mypage';
   isSelected?: boolean;
+  onClick: () => void;
 }
 
-const FooterButton = ({ text, isSelected, type }: FooterButtonProps) => {
+const FooterButton = ({
+  text,
+  isSelected,
+  type,
+  onClick,
+}: FooterButtonProps) => {
   let color;
   if (isSelected) {
     color = theme.colors.choral;
@@ -18,7 +24,7 @@ const FooterButton = ({ text, isSelected, type }: FooterButtonProps) => {
     color = theme.colors.gray2;
   }
   return (
-    <ButtonContainer>
+    <ButtonContainer onClick={onClick}>
       {type === 'home' && <HomeSvg fill={color} />}
       {type === 'mypage' && <UserSvg fill={color} />}
       {type === 'search' && <SearchSvg fill={color} />}
@@ -30,6 +36,7 @@ const FooterButton = ({ text, isSelected, type }: FooterButtonProps) => {
 export default FooterButton;
 
 const ButtonContainer = styled.button`
+  width: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,4 +48,5 @@ const ButtonField = styled.div<{
 }>`
   color: ${({ $isSelected, theme }) =>
     $isSelected ? theme.colors.choral : theme.colors.gray2};
+  font-size: 12px;
 `;
