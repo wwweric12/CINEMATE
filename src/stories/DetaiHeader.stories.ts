@@ -11,6 +11,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const DetailHeader: Story = {
+  name: 'DetailHeader',
   args: {
     title: '뒤로가기 ',
     onClick: fn(),

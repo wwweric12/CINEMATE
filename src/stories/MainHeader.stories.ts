@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Header from '../components/molecules/MainHeader';
 
 const meta: Meta<typeof Header> = {
-  title: 'Components/atoms',
+  title: 'Components/Header',
   component: Header,
 };
 

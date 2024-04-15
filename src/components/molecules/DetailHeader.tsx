@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import prevSvg from '../../assets/images/prev.svg';
+import { ReactComponent as ChevronSvg } from '../../assets/images/chevron.svg';
 
 interface DetailHeaderProps {
   title?: string;
@@ -10,7 +10,7 @@ const DetailHeader = ({ title, onClick }: DetailHeaderProps) => {
   return (
     <HeaderContainer>
       <PrevButton onClick={onClick}>
-        <PrevImg src={prevSvg} />
+        <ChevronImg />
         <PrevTitle>{title}</PrevTitle>
       </PrevButton>
     </HeaderContainer>
@@ -29,7 +29,7 @@ const PrevButton = styled.button`
   align-items: center;
 `;
 
-const PrevImg = styled.img`
+const ChevronImg = styled(ChevronSvg)`
   margin-right: 12px;
 `;
 
