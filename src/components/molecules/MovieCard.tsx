@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import CancleButton from '../atoms/CancelButton';
-import starSvg from '../../assets/images/star.svg';
+import CancelButton from '../atoms/CancelButton';
+import MovieGrade from '../atoms/MovieGrade';
 
 interface MovieCardProps {
   movieImg: string;
   title: string;
   date: number;
   grade: number;
-  isLike?: boolean;
+  isLiked?: boolean;
   onClick: () => void;
 }
 
@@ -16,7 +16,7 @@ const MovieCard = ({
   title,
   date,
   grade,
-  isLike,
+  isLiked,
   onClick,
 }: MovieCardProps) => {
   return (
@@ -26,12 +26,9 @@ const MovieCard = ({
         <ContentBox>
           <MovieTitle>{title}</MovieTitle>
           <MovieDate>{date}</MovieDate>
-          <MovieGradeBox>
-            <StarSvg src={starSvg} />
-            <MovieGrade>{grade}</MovieGrade>
-          </MovieGradeBox>
+          <MovieGrade grade={grade} />
         </ContentBox>
-        {isLike && <CancleButton onClick={onClick} />}
+        {isLiked && <CancelButton onClick={onClick} />}
       </ContentContainer>
     </CardContainer>
   );
@@ -80,18 +77,4 @@ const MovieDate = styled.div`
   font-size: 12px;
   font-weight: 300;
   margin-bottom: 14px;
-`;
-
-const MovieGradeBox = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const StarSvg = styled.img`
-  margin-right: 4px;
-`;
-
-const MovieGrade = styled.div`
-  color: white;
-  font-size: 10px;
 `;
