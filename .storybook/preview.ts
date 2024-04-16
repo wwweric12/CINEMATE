@@ -1,6 +1,6 @@
 import type { Preview } from "@storybook/react";
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
-import {theme} from '../src/styles/theme'
+import { theme } from './../src/styles/theme';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../src/styles/GlobalStyle'
 
@@ -13,6 +13,15 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    backgrounds: {
+      default: 'dark',
+      values:[
+        {
+          name: 'dark',
+          value: '#211F1F'
+        },
+      ]  
+  },
   },
 };
 
