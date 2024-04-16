@@ -6,10 +6,10 @@ interface MovieListCardProps {
   img: string;
   title: string;
   grade: number;
-  isLike?: boolean;
+  isLiked?: boolean;
 }
 
-const MovieListCard = ({ img, title, grade, isLike }: MovieListCardProps) => {
+const MovieListCard = ({ img, title, grade, isLiked }: MovieListCardProps) => {
   const handleHeart = () => {};
   return (
     <CardContainer>
@@ -19,7 +19,7 @@ const MovieListCard = ({ img, title, grade, isLike }: MovieListCardProps) => {
           <Title>{title}</Title>
           <MovieGrade grade={grade} />
         </ContentBox>
-        <HeartButton isLike={isLike} onClick={handleHeart} />
+        <HeartButton isLiked={isLiked} onClick={handleHeart} />
       </ContentContainer>
     </CardContainer>
   );

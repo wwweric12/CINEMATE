@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import CancleButton from '../atoms/CancelButton';
+import CancelButton from '../atoms/CancelButton';
 import MovieGrade from '../atoms/MovieGrade';
 
 interface MovieCardProps {
@@ -7,7 +7,7 @@ interface MovieCardProps {
   title: string;
   date: number;
   grade: number;
-  isLike?: boolean;
+  isLiked?: boolean;
   onClick: () => void;
 }
 
@@ -16,7 +16,7 @@ const MovieCard = ({
   title,
   date,
   grade,
-  isLike,
+  isLiked,
   onClick,
 }: MovieCardProps) => {
   return (
@@ -28,7 +28,7 @@ const MovieCard = ({
           <MovieDate>{date}</MovieDate>
           <MovieGrade grade={grade} />
         </ContentBox>
-        {isLike && <CancleButton onClick={onClick} />}
+        {isLiked && <CancelButton onClick={onClick} />}
       </ContentContainer>
     </CardContainer>
   );

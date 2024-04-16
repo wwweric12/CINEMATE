@@ -11,9 +11,9 @@ interface ReviewCard {
   content: string;
   date: number;
   count: number;
-  isLike?: boolean;
+  isLiked?: boolean;
   isMine?: boolean;
-  handleHeart: () => void;
+  onHeartClick: () => void;
 }
 
 const ReviewCard = ({
@@ -22,9 +22,9 @@ const ReviewCard = ({
   content,
   date,
   count,
-  isLike,
+  isLiked,
   isMine,
-  handleHeart,
+  onHeartClick,
 }: ReviewCard) => {
   const [etcState, setEtcState] = useState(false);
   const handleEtc = () => {
@@ -55,7 +55,7 @@ const ReviewCard = ({
       </CardHeader>
       <ReviewContent>{content}</ReviewContent>
       <CardFooter>
-        <HeartButton isLike={isLike} onClick={handleHeart} />
+        <HeartButton isLiked={isLiked} onClick={onHeartClick} />
         <LikeCount>{count}개</LikeCount>
       </CardFooter>
     </ReviewCardContainer>

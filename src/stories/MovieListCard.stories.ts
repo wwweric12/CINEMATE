@@ -13,6 +13,6 @@ export const MovieListCard: Story = {
   args: {
     title: '브레드 이발소',
     grade: 4.3,
-    isLike: true,
+    isLiked: true,
   },
 };

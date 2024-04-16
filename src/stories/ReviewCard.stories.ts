@@ -15,7 +15,7 @@ export const ReviewCd: Story = {
     grade: 4.3,
     date: 8,
     count: 1,
-    isLike: true,
+    isLiked: true,
     isMine: false,
     content: '브레드 이발소 영화 진짜 재미 하나도 없다 에반데 ...',
   },

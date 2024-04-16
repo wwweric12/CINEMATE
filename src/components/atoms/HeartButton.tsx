@@ -1,20 +1,16 @@
 import styled from 'styled-components';
-import fillHeartSvg from '../../assets/images/fill_heart.svg';
-import emptyHeartSvg from '../../assets/images/heart.svg';
+import { ReactComponent as FillHeartSvg } from '../../assets/images/fill_heart.svg';
+import { ReactComponent as EmptyHeartSvg } from '../../assets/images/heart.svg';
 
 interface HeartButtonProps {
-  isLike?: boolean;
+  isLiked?: boolean;
   onClick: () => void;
 }
 
-const HeartButton = ({ isLike, onClick }: HeartButtonProps) => {
+const HeartButton = ({ isLiked, onClick }: HeartButtonProps) => {
   return (
     <ButtonContainer onClick={onClick}>
-      {isLike ? (
-        <ReviewLike src={fillHeartSvg} />
-      ) : (
-        <ReviewLike src={emptyHeartSvg} />
-      )}
+      {isLiked ? <FillHeartSvg /> : <EmptyHeartSvg />}
     </ButtonContainer>
   );
 };
@@ -22,5 +18,3 @@ const HeartButton = ({ isLike, onClick }: HeartButtonProps) => {
 export default HeartButton;
 
 const ButtonContainer = styled.button``;
-
-const ReviewLike = styled.img``;

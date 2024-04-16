@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const HeartBtn: Story = {
   args: {
-    isLike: true,
+    isLiked: true,
     onClick: fn(),
   },
 };
