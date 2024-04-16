@@ -17,17 +17,11 @@ const FooterButton = ({
   type,
   onClick,
 }: FooterButtonProps) => {
-  let color;
-  if (isSelected) {
-    color = theme.colors.choral;
-  } else {
-    color = theme.colors.gray2;
-  }
   return (
-    <ButtonContainer onClick={onClick}>
-      {type === 'home' && <HomeSvg fill={color} />}
-      {type === 'mypage' && <UserSvg fill={color} />}
-      {type === 'search' && <SearchSvg fill={color} />}
+    <ButtonContainer onClick={onClick} $isSelected={isSelected}>
+      {type === 'home' && <HomeSvg />}
+      {type === 'mypage' && <UserSvg />}
+      {type === 'search' && <SearchSvg />}
       <ButtonField $isSelected={isSelected}>{text}</ButtonField>
     </ButtonContainer>
   );
@@ -35,12 +29,16 @@ const FooterButton = ({
 
 export default FooterButton;
 
-const ButtonContainer = styled.button`
+const ButtonContainer = styled.button<{
+  $isSelected: FooterButtonProps['isSelected'];
+}>`
   width: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
+  color: ${({ $isSelected }) =>
+    $isSelected ? theme.colors.choral : theme.colors.gray2};
 `;
 
 const ButtonField = styled.div<{

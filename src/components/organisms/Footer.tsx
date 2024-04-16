@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import FooterButton, { FooterButtonProps } from '../atoms/FooterButton';
+import FooterButtons, { FooterButtonProps } from '../atoms/FooterButton';
 
 const Footer = () => {
   const footer: FooterButtonProps[] = [
@@ -25,10 +25,10 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-      {footer.map((item, i) => (
-        <FooterButton
+      {footer.map((item) => (
+        <FooterButtons
           onClick={item.onClick}
-          key={i}
+          key={item.type}
           type={item.type}
           text={item.text}
           isSelected={item.isSelected}
