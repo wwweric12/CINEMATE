@@ -8,6 +8,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/login" />
           <Route path="/" />
+          <Route path="/signup" />
         </Route>
       </Routes>
     </BrowserRouter>
