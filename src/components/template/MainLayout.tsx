@@ -6,6 +6,7 @@ import { Header } from '../organisms/Header';
 
 const MainLayout = () => {
   const hasFooter = ['/', 'search', 'mypage'];
+  const hasHeader = ['success'];
   const location = useLocation();
   const [searchInput, setSearchInput] = useState('');
   const navigate = useNavigate();
@@ -14,12 +15,14 @@ const MainLayout = () => {
   };
   return (
     <Container>
-      <Header
-        path={location.pathname}
-        value={searchInput}
-        setSearchInput={setSearchInput}
-        onPrevClick={handlePrevClick}
-      />
+      {!hasHeader.includes(location.pathname) && (
+        <Header
+          path={location.pathname}
+          value={searchInput}
+          setSearchInput={setSearchInput}
+          onPrevClick={handlePrevClick}
+        />
+      )}
       <Outlet />
       {hasFooter.includes(location.pathname) && <Footer />}
     </Container>

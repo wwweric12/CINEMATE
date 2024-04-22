@@ -9,6 +9,7 @@ function App() {
           <Route path="/login" />
           <Route path="/" />
           <Route path="/signup" />
+          <Route path="/success" />
         </Route>
       </Routes>
     </BrowserRouter>
