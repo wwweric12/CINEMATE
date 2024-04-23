@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export interface PrimaryButtonProps {
   type?: 'submit' | 'button';
   children: string;
-  onClick: () => void;
+  onClick?: () => void;
   state?: boolean;
   size: 'large' | 'medium' | 'small';
 }
@@ -16,7 +16,13 @@ const PrimaryButton = ({
   size,
 }: PrimaryButtonProps) => {
   return (
-    <Button type={type} onClick={onClick} $isActive={state} size={size}>
+    <Button
+      type={type}
+      onClick={onClick}
+      $isActive={state}
+      size={size}
+      disabled={!state}
+    >
       {children}
     </Button>
   );
@@ -29,6 +35,7 @@ const Button = styled.button<{
   size: PrimaryButtonProps['size'];
 }>`
   width: max-content;
+  min-width: 280px;
   padding: ${({ size }) => {
     switch (size) {
       case 'large':

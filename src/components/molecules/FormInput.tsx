@@ -1,9 +1,12 @@
 import styled from 'styled-components';
+import { forwardRef } from 'react';
+import { FieldErrors, UseFormRegisterReturn } from 'react-hook-form';
 import emailSvg from '../../assets/images/login_email.svg';
 import nameSvg from '../../assets/images/login_user.svg';
 import passwordSvg from '../../assets/images/login_password.svg';
 import errorSvg from '../../assets/images/login_error.svg';
 import successSvg from '../../assets/images/login_success.svg';
+import { LoginInput } from '../organisms/Login/LoginForm';
 
 interface FormInputProps {
   type: 'name' | 'password' | 'email';
@@ -11,45 +14,53 @@ interface FormInputProps {
   placeholder?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   isValid: 'default' | 'error' | 'success';
+  register?: UseFormRegisterReturn;
+  errors?: FieldErrors<LoginInput>;
 }
 
-const FormInput = ({
-  type,
-  placeholder,
-  value,
-  onChange,
-  isValid,
-}: FormInputProps) => {
-  let image;
-  if (type === 'name') {
-    image = nameSvg;
-  } else if (type === 'email') {
-    image = emailSvg;
-  } else if (type === 'password') {
-    image = passwordSvg;
-  }
+const FormInput = forwardRef(
+  ({
+    type,
+    placeholder,
+    value,
+    onChange,
+    isValid,
+    register,
+  }: FormInputProps) => {
+    let image;
+    if (type === 'name') {
+      image = nameSvg;
+    } else if (type === 'email') {
+      image = emailSvg;
+    } else if (type === 'password') {
+      image = passwordSvg;
+    }
 
-  return (
-    <InputContainer $isValid={isValid}>
-      <InputImg src={image} />
-      <InputField
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      />
-      {isValid !== 'default' && (
-        <CheckImg src={isValid === 'error' ? errorSvg : successSvg} />
-      )}
-    </InputContainer>
-  );
-};
+    return (
+      <InputContainer $isValid={isValid}>
+        <InputImg src={image} />
+        <InputField
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          {...register}
+        />
+        {isValid !== 'default' && (
+          <CheckImg src={isValid === 'error' ? errorSvg : successSvg} />
+        )}
+      </InputContainer>
+    );
+  },
+);
+FormInput.displayName = 'FormInput';
 
 export default FormInput;
 
 const InputContainer = styled.div<{ $isValid?: FormInputProps['isValid'] }>`
   display: flex;
   align-items: center;
+  min-width: 280px;
   padding: 15px 12px;
   border-radius: 10px;
   border: ${({ theme, $isValid }) => {
