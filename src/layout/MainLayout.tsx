@@ -1,8 +1,8 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useState } from 'react';
-import Footer from '../organisms/Footer';
-import { Header } from '../organisms/Header';
+import Footer from '../components/organisms/Footer';
+import { Header } from '../components/organisms/Header';
 
 const MainLayout = () => {
   const hasFooter = ['/', 'search', 'mypage'];
@@ -35,4 +35,5 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   position: relative;
+  background-color: ${({ theme }) => theme.colors.darkgray2};
 `;
