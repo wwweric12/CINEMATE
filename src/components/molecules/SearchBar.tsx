@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import search from '../../assets/images/search.svg';
-import CancleButton from '../atoms/CancelButton';
+import CancelButton from '../atoms/CancelButton';
 
 interface SearchBarProps {
   onChange: () => void;
@@ -14,7 +14,7 @@ const SearchBar = ({ onChange, onSubmit, value }: SearchBarProps) => {
     <SearchBarContainer onSubmit={onSubmit}>
       <SearchImg src={search} />
       <Input value={value} onChange={onChange} />
-      <CancleButton onClick={handleClick} />
+      <CancelButton onClick={handleClick} />
     </SearchBarContainer>
   );
 };
