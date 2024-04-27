@@ -1,23 +1,25 @@
 import styled from 'styled-components';
-import { ReactComponent as MoreVectorSvg } from '../../assets/images/more_vector.svg';
+
+type SelectOption = 'latest' | 'like' | 'old' | 'grade';
 
 interface SelectFilterProps {
-  defaultoption: 'latest' | 'like' | 'old' | 'grade';
-  onSelectChange: (selectoption: SelectFilterProps['defaultoption']) => void;
+  defaultOption: SelectOption;
+  onSelectChange: (selectoption: SelectFilterProps['defaultOption']) => void;
 }
 
-const SelectFilter = ({ defaultoption, onSelectChange }: SelectFilterProps) => {
+const OPTIONS: { value: SelectOption; name: string }[] = [
+  { value: 'latest', name: '최신순' },
+  { value: 'like', name: '좋아요 순' },
+  { value: 'old', name: '오래된 순' },
+  { value: 'grade', name: '평점순' },
+];
+
+const SelectFilter = ({ defaultOption, onSelectChange }: SelectFilterProps) => {
   const handleSelectChange = (e: React.FormEvent<HTMLSelectElement>) => {
     const selectedOption = e.currentTarget
-      .value as SelectFilterProps['defaultoption'];
+      .value as SelectFilterProps['defaultOption'];
     onSelectChange(selectedOption);
   };
-  const OPTIONS = [
-    { value: 'latest', name: '최신순' },
-    { value: 'like', name: '좋아요 순' },
-    { value: 'old', name: '오래된 순' },
-    { value: 'grade', name: '평점순' },
-  ];
 
   return (
     <SelectWrapper>
@@ -26,7 +28,7 @@ const SelectFilter = ({ defaultoption, onSelectChange }: SelectFilterProps) => {
           <SelectOption
             key={item.value}
             value={item.value}
-            defaultValue={defaultoption}
+            defaultValue={defaultOption}
           >
             {item.name}
           </SelectOption>
