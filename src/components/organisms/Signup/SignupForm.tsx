@@ -1,75 +1,97 @@
 import styled from 'styled-components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 import PrimaryButton from '../../atoms/PrimaryButton';
 import FormInput from '../../molecules/FormInput';
 import { validation } from './Validation';
 
-export interface LoginInput {
+export interface SignupInput {
+  name: string;
   email: string;
   password: string;
 }
 
-const LoginForm = () => {
+const SignupForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginInput>({
+    watch,
+  } = useForm<SignupInput>({
     resolver: yupResolver(validation),
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<LoginInput> = (data) => {
+  const value = watch();
+
+  const onSubmit: SubmitHandler<SignupInput> = (data) => {
     console.log(data);
   };
   return (
-    <LoginContainer>
-      <Title>로그인</Title>
-      <LoginFormBox onSubmit={handleSubmit(onSubmit)}>
+    <SignupContainer>
+      <Title>회원가입</Title>
+      <SignupFormBox onSubmit={handleSubmit(onSubmit)}>
         <InputContainer>
+          <InputBox>
+            <FormInput
+              type="name"
+              placeholder="닉네임을 입력해주세요"
+              isValid={errors['name'] ? 'error' : 'default'}
+              register={register('name')}
+              errors={errors}
+            />
+            {errors.name ? (
+              <ErrorMessage>{errors.name.message}</ErrorMessage>
+            ) : (
+              <SignupMessage>2~8글자 이내로 작성해주세요</SignupMessage>
+            )}
+          </InputBox>
           <InputBox>
             <FormInput
               type="email"
               placeholder="이메일을 입력해주세요"
-              validationStatus={errors['email'] ? 'error' : 'default'}
+              isValid={errors['email'] ? 'error' : 'default'}
               register={register('email')}
               errors={errors}
             />
-            {errors.email && (
+            {errors.email ? (
               <ErrorMessage>{errors.email.message}</ErrorMessage>
+            ) : (
+              <SignupMessage>이메일 형식에 맞춰서 입력해주세요</SignupMessage>
             )}
           </InputBox>
           <InputBox>
             <FormInput
               type="password"
               placeholder="비밀번호를 입력해주세요"
-              validationStatus={errors['password'] ? 'error' : 'default'}
+              isValid={errors['password'] ? 'error' : 'default'}
               register={register('password')}
               errors={errors}
             />
-            {errors.password && (
+            {errors.password ? (
               <ErrorMessage>{errors.password.message}</ErrorMessage>
+            ) : (
+              <SignupMessage>
+                영문과 숫자, 특수기호를 조합하여 8~14글자 이내로 입력해주세요
+              </SignupMessage>
             )}
           </InputBox>
         </InputContainer>
-        <PrimaryButton type="submit" size="large" state={true}>
-          로그인
+        <PrimaryButton
+          type="submit"
+          size="large"
+          state={!!value.email && !!value.name && !!value.password}
+        >
+          회원가입
         </PrimaryButton>
-      </LoginFormBox>
-      <LinkContainer>
-        <Link to="/signup">
-          <SignupLink>회원가입</SignupLink>
-        </Link>
-      </LinkContainer>
-    </LoginContainer>
+      </SignupFormBox>
+    </SignupContainer>
   );
 };
 
-export default LoginForm;
+export default SignupForm;
 
-const LoginContainer = styled.div`
+const SignupContainer = styled.div`
   width: fit-content;
   display: flex;
   flex-direction: column;
@@ -81,11 +103,9 @@ const Title = styled.div`
   font-weight: 700;
   margin-bottom: 56px;
   color: ${({ theme }) => theme.colors.gray1};
-  line-height: 1.3;
-  letter-spacing: -2.5%;
 `;
 
-const LoginFormBox = styled.form`
+const SignupFormBox = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -100,8 +120,16 @@ const InputContainer = styled.div`
 `;
 const InputBox = styled.div`
   display: flex;
+  width: min-content;
   flex-direction: column;
   gap: 4px;
+`;
+
+const SignupMessage = styled.div`
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.gray1};
+  font-weight: 500;
+  margin: 0 10px;
 `;
 
 const ErrorMessage = styled.div`
@@ -109,19 +137,4 @@ const ErrorMessage = styled.div`
   font-weight: 500;
   color: red;
   margin: 0 10px;
-`;
-
-const LinkContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: end;
-`;
-
-const SignupLink = styled.div`
-  font-size: 10px;
-  font-weight: 600;
-  color: white;
-  padding: 6px 2px;
-  margin-right: 12px;
-  border-bottom: 1px solid white;
 `;
