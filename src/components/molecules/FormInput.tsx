@@ -13,7 +13,7 @@ interface FormInputProps {
   value?: string;
   placeholder?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  isValid: 'default' | 'error' | 'success';
+  validationStatus: 'default' | 'error' | 'success';
   register?: UseFormRegisterReturn;
   errors?: FieldErrors<LoginInput>;
 }
@@ -24,7 +24,7 @@ const FormInput = forwardRef(
     placeholder,
     value,
     onChange,
-    isValid,
+    validationStatus,
     register,
   }: FormInputProps) => {
     let image;
@@ -37,7 +37,7 @@ const FormInput = forwardRef(
     }
 
     return (
-      <InputContainer $isValid={isValid}>
+      <InputContainer $validationStatus={validationStatus}>
         <InputImg src={image} />
         <InputField
           type={type}
@@ -46,8 +46,10 @@ const FormInput = forwardRef(
           onChange={onChange}
           {...register}
         />
-        {isValid !== 'default' && (
-          <CheckImg src={isValid === 'error' ? errorSvg : successSvg} />
+        {validationStatus !== 'default' && (
+          <CheckImg
+            src={validationStatus === 'error' ? errorSvg : successSvg}
+          />
         )}
       </InputContainer>
     );
@@ -57,14 +59,16 @@ FormInput.displayName = 'FormInput';
 
 export default FormInput;
 
-const InputContainer = styled.div<{ $isValid?: FormInputProps['isValid'] }>`
+const InputContainer = styled.div<{
+  $validationStatus?: FormInputProps['validationStatus'];
+}>`
   display: flex;
   align-items: center;
   min-width: 280px;
   padding: 15px 12px;
   border-radius: 10px;
-  border: ${({ theme, $isValid }) => {
-      switch ($isValid) {
+  border: ${({ theme, $validationStatus }) => {
+      switch ($validationStatus) {
         case 'success':
           return theme.colors.green;
         case 'error':

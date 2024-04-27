@@ -33,7 +33,7 @@ const LoginForm = () => {
             <FormInput
               type="email"
               placeholder="이메일을 입력해주세요"
-              isValid={errors['email'] ? 'error' : 'default'}
+              validationStatus={errors['email'] ? 'error' : 'default'}
               register={register('email')}
               errors={errors}
             />
@@ -45,7 +45,7 @@ const LoginForm = () => {
             <FormInput
               type="password"
               placeholder="비밀번호를 입력해주세요"
-              isValid={errors['password'] ? 'error' : 'default'}
+              validationStatus={errors['password'] ? 'error' : 'default'}
               register={register('password')}
               errors={errors}
             />
@@ -59,9 +59,9 @@ const LoginForm = () => {
         </PrimaryButton>
       </LoginFormBox>
       <LinkContainer>
-        {/* <Link to="/signup"> */}
-        <SignupLink>회원가입</SignupLink>
-        {/* </Link> */}
+        <Link to="/signup">
+          <SignupLink>회원가입</SignupLink>
+        </Link>
       </LinkContainer>
     </LoginContainer>
   );
