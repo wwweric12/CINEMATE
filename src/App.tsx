@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainLayout from './layout/MainLayout';
 import LoginTemplate from './components/template/LoginTemplate';
-import SignupForm from './components/organisms/Signup/SignupForm';
+import SignupTemplate from './components/template/SignupTemplate';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/login" element={<LoginTemplate />} />
           <Route path="/" />
-          <Route path="/signup" element={<SignupForm />} />
+          <Route path="/signup" element={<SignupTemplate />} />
           <Route path="/success" />
         </Route>
       </Routes>
