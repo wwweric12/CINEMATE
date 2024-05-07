@@ -10,9 +10,9 @@ interface GenreSurveyImgProps {
 const GenreSurveyImg = ({ isChecked, src, name }: GenreSurveyImgProps) => {
   return (
     <SurveyImgContainer>
+      <Background $isChecked={isChecked} />
       {isChecked && (
         <>
-          <Background />
           <CheckImg src={check} />
         </>
       )}
@@ -26,20 +26,22 @@ export default GenreSurveyImg;
 
 const SurveyImgContainer = styled.div`
   position: relative;
-  width: 86px;
+  min-width: 86px;
   height: 86px;
   border-radius: 14px;
 `;
 
-const Background = styled.div`
+const Background = styled.div<{ $isChecked?: boolean }>`
   position: absolute;
   top: 0px;
   left: 0px;
   width: 100%;
   height: 100%;
   border-radius: 14px;
-  background-color: rgba(0, 0, 0, 0.8);
-  border: ${({ theme }) => `1px solid ${theme.colors.choral}`};
+  background-color: ${({ $isChecked }) =>
+    $isChecked ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.5)'};
+  border: ${({ $isChecked, theme }) =>
+    $isChecked ? `1px solid ${theme.colors.choral}` : 'none'};
 `;
 
 const GenreName = styled.div<{ $isChecked?: boolean }>`
@@ -59,6 +61,7 @@ const SurveyImage = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 14px;
+  object-fit: cover;
 `;
 
 const CheckImg = styled.img`
