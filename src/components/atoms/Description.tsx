@@ -3,7 +3,7 @@ import styled from 'styled-components';
 interface DescriptionProps {
   title: string;
   content: string;
-  state?: 'survey' | 'success';
+  state?: 'survey' | 'signup';
 }
 
 const Description = ({ title, content, state }: DescriptionProps) => {
@@ -30,7 +30,7 @@ const Title = styled.div<{ state: DescriptionProps['state'] }>`
   margin-bottom: ${({ state }) => {
     if (state === 'survey') {
       return '12px';
-    } else if (state === 'success') {
+    } else if (state === 'signup') {
       return '14px';
     }
   }};
