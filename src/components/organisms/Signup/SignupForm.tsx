@@ -36,7 +36,7 @@ const SignupForm = () => {
             <FormInput
               type="name"
               placeholder="닉네임을 입력해주세요"
-              isValid={errors['name'] ? 'error' : 'default'}
+              validationStatus={errors['name'] ? 'error' : 'default'}
               register={register('name')}
               errors={errors}
             />
@@ -50,7 +50,7 @@ const SignupForm = () => {
             <FormInput
               type="email"
               placeholder="이메일을 입력해주세요"
-              isValid={errors['email'] ? 'error' : 'default'}
+              validationStatus={errors['email'] ? 'error' : 'default'}
               register={register('email')}
               errors={errors}
             />
@@ -64,7 +64,7 @@ const SignupForm = () => {
             <FormInput
               type="password"
               placeholder="비밀번호를 입력해주세요"
-              isValid={errors['password'] ? 'error' : 'default'}
+              validationStatus={errors['password'] ? 'error' : 'default'}
               register={register('password')}
               errors={errors}
             />

@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Filter: Story = {
   name: 'SelectFilter',
   args: {
-    defaultoption: 'latest',
+    defaultOption: 'latest',
     onSelectChange: fn(),
   },
 };
