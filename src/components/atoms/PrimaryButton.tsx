@@ -35,7 +35,6 @@ const Button = styled.button<{
   size: PrimaryButtonProps['size'];
 }>`
   width: max-content;
-  min-width: 280px;
   padding: ${({ size }) => {
     switch (size) {
       case 'large':

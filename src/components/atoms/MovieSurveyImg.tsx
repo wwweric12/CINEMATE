@@ -4,12 +4,11 @@ import check from '../../assets/images/check.svg';
 interface SurveyImgProps {
   isChecked?: boolean;
   src: string;
-  sort: 'genre' | 'movie';
 }
 
-const SurveyImg = ({ isChecked, src, sort }: SurveyImgProps) => {
+const MovieSurveyImg = ({ isChecked, src }: SurveyImgProps) => {
   return (
-    <SurveyImgContainer $sort={sort}>
+    <SurveyImgContainer>
       {isChecked && (
         <>
           <Background />
@@ -21,25 +20,12 @@ const SurveyImg = ({ isChecked, src, sort }: SurveyImgProps) => {
   );
 };
 
-export default SurveyImg;
+export default MovieSurveyImg;
 
-const SurveyImgContainer = styled.div<{ $sort: SurveyImgProps['sort'] }>`
+const SurveyImgContainer = styled.div`
   position: relative;
-
-  width: ${({ $sort }) => {
-    if ($sort === 'genre') {
-      return '86px';
-    } else if ($sort === 'movie') {
-      return '88px';
-    }
-  }};
-  height: ${({ $sort }) => {
-    if ($sort === 'genre') {
-      return '86px';
-    } else if ($sort === 'movie') {
-      return '132px';
-    }
-  }};
+  width: '88px';
+  height: '132px';
   border-radius: 14px;
 `;
 
