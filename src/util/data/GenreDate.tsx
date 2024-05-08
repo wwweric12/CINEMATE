@@ -1,10 +1,10 @@
-export interface Genre {
+export interface GenreImage {
   name: string;
   type: string;
   image: string;
 }
 
-export const GENRE_LIST: Genre[] = [
+export const GENRE_LIST: GenreImage[] = [
   {
     name: '액션',
     type: 'Action',

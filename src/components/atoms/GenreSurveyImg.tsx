@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import check from '../../assets/images/small_check.svg';
+import { ReactComponent as CheckSvg } from '../../assets/images/small_check.svg';
 
 interface GenreSurveyImgProps {
   isChecked?: boolean;
@@ -13,7 +13,7 @@ const GenreSurveyImg = ({ isChecked, src, name }: GenreSurveyImgProps) => {
       <Background $isChecked={isChecked} />
       {isChecked && (
         <>
-          <CheckImg src={check} />
+          <CheckImg />
         </>
       )}
       <GenreName $isChecked={isChecked}>{name}</GenreName>
@@ -64,7 +64,7 @@ const SurveyImage = styled.img`
   object-fit: cover;
 `;
 
-const CheckImg = styled.img`
+const CheckImg = styled(CheckSvg)`
   z-index: 5;
   position: absolute;
   top: 8px;

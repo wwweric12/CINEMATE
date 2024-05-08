@@ -2,28 +2,36 @@ import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import GenreSurveyImg from '../atoms/GenreSurveyImg';
-import { GenreList, genreListState } from '../../store/atoms/Genre/state';
+import { Genre, genreListState } from '../../store/atoms/Genre/state';
 import PrimaryButton from '../atoms/PrimaryButton';
-import { GENRE_LIST, Genre } from '../../util/data/GenreDate';
+import { GENRE_LIST, GenreImage } from '../../util/data/GenreDate';
 
 const GenreSurveyForm = () => {
-  const [genreList, setGenreList] = useRecoilState(genreListState);
+  const [genreList, setGenreList] = useRecoilState<Genre[]>(genreListState);
   const navigate = useNavigate();
-  const countSelectedGenre = (obj: GenreList) => {
-    return Object.values(obj).filter((value) => value === true).length;
+  const countSelectedGenre = (obj: Genre[]) => {
+    return obj.filter((value) => value.selected).length;
   };
 
-  const handleSelectedGenre = (item: Genre) => {
+  const handleSelectedGenre = (item: GenreImage) => {
     if (countSelectedGenre(genreList) < 3) {
-      setGenreList((prevGenreList) => ({
-        ...prevGenreList,
-        [item.name]: !prevGenreList[item.name],
-      }));
+      setGenreList(
+        genreList.map((value) =>
+          value.key === item.type
+            ? { ...value, selected: !value.selected }
+            : value,
+        ),
+      );
     } else {
-      setGenreList((prevGenreList) => ({
-        ...prevGenreList,
-        [item.name]: false,
-      }));
+      setGenreList(
+        genreList.map((value) => {
+          if (value.key === item.type) {
+            return { ...value, selected: false };
+          } else {
+            return value;
+          }
+        }),
+      );
     }
   };
 
@@ -44,7 +52,10 @@ const GenreSurveyForm = () => {
             <GenreSurveyImg
               name={item.name}
               src={item.image}
-              isChecked={genreList[item.name]}
+              isChecked={
+                genreList.find((value) => value.key === item.type)?.selected ||
+                false
+              }
             />
           </GenreButton>
         ))}
@@ -52,7 +63,7 @@ const GenreSurveyForm = () => {
       <PrimaryButton
         size="medium"
         type="submit"
-        state={countSelectedGenre(genreList) == 3}
+        state={countSelectedGenre(genreList) === 3}
       >
         다음으로
       </PrimaryButton>
