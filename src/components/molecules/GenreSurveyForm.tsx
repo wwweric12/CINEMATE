@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 import GenreSurveyImg from '../atoms/GenreSurveyImg';
 import { GenreList, genreListState } from '../../store/atoms/Genre/state';
 import PrimaryButton from '../atoms/PrimaryButton';
@@ -7,7 +8,7 @@ import { GENRE_LIST, Genre } from '../../util/data/GenreDate';
 
 const GenreSurveyForm = () => {
   const [genreList, setGenreList] = useRecoilState(genreListState);
-
+  const navigate = useNavigate();
   const countSelectedGenre = (obj: GenreList) => {
     return Object.values(obj).filter((value) => value === true).length;
   };
@@ -28,7 +29,7 @@ const GenreSurveyForm = () => {
 
   const handleSurveySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(genreList);
+    navigate('/survey/movies/1');
   };
 
   return (

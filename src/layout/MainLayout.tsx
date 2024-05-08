@@ -17,6 +17,7 @@ const MainLayout = () => {
     <Container>
       {!hasNotHeaderPages.includes(location.pathname) && (
         <Header
+          title="뒤로가기"
           path={location.pathname}
           value={searchInput}
           setSearchInput={setSearchInput}

@@ -23,7 +23,12 @@ type HeaderProps = {
 export const Header = ({ path, ...props }: HeaderProps) => {
   const mainHeader = ['/login', '/', 'mypage'];
   const searchHeader = ['/search'];
-  const detailHeader = ['/signup'];
+  const detailHeader = [
+    '/signup',
+    '/survey/genre',
+    '/survey/movies/1',
+    '/survey/movies/2',
+  ];
   const renderInner = () => {
     if (searchHeader.includes(path)) {
       const { onSearchSubmit, value, setSearchInput } = props as SearchBarProps;
