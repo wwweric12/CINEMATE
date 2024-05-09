@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export interface PrimaryButtonProps {
   type?: 'submit' | 'button';
-  children: string;
+  children: React.ReactNode;
   onClick?: () => void;
   state?: boolean;
   size: 'large' | 'medium' | 'small';
