@@ -34,17 +34,28 @@ const Button = styled.button<{
   $isActive?: boolean;
   size: PrimaryButtonProps['size'];
 }>`
-  width: max-content;
+  min-width: ${({ size }) => {
+    switch (size) {
+      case 'large':
+        return '280px';
+      case 'medium':
+        return '120px';
+      case 'small':
+        return '90px';
+      default:
+        return '120px';
+    }
+  }};
   padding: ${({ size }) => {
     switch (size) {
       case 'large':
-        return '15px 108px';
+        return '15px 0';
       case 'medium':
-        return '13px 40px';
+        return '13px 0';
       case 'small':
-        return '10px 28px';
+        return '10px 0';
       default:
-        return '48px';
+        return '15px 0';
     }
   }};
   display: flex;
