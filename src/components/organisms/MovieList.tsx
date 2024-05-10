@@ -22,46 +22,59 @@ const LIST_DATA = [
 interface MovieListProps {
   isGenre: boolean;
   listData: MovieListCardProps[];
+  genre: string;
 }
 
-const MovieList = ({ isGenre, listData }: MovieListProps) => {
+const MovieList = ({ isGenre, listData, genre }: MovieListProps) => {
   const handleCardClick = () => {
     //영화 정보페이지로 이동
   };
   return (
-    <MovieListContainer>
-      {isGenre && <GenreName />}
-      {LIST_DATA.map((item) => (
-        <MovieButton key={item.id} onClick={handleCardClick}>
-          <MovieListCard
-            id={item.id}
-            img={item.img}
-            title={item.title}
-            grade={item.grade}
-            isLiked={item.isLiked}
-          />
-        </MovieButton>
-      ))}
+    <MovieListContainer $isGenre={isGenre}>
+      {isGenre && <GenreName>{genre}</GenreName>}
+      <MovieListBox>
+        {LIST_DATA.map((item) => (
+          <MovieButton key={item.id} onClick={handleCardClick}>
+            <MovieListCard
+              id={item.id}
+              img={item.img}
+              title={item.title}
+              grade={item.grade}
+              isLiked={item.isLiked}
+            />
+          </MovieButton>
+        ))}
+      </MovieListBox>
     </MovieListContainer>
   );
 };
 
 export default MovieList;
 
-const MovieListContainer = styled.div`
+const MovieListContainer = styled.div<{ $isGenre: boolean }>`
   display: flex;
+  flex-direction: column;
   width: max-content;
-  align-items: center;
   background-color: rgba(163, 163, 163, 0.1);
-  padding: 24px 40px;
+  padding: ${({ $isGenre }) =>
+    $isGenre ? '10px 40px 20px 40px' : '24px 40px'};
+`;
+
+const MovieListBox = styled.div`
+  display: flex;
+  align-items: center;
   gap: 10px;
   overflow-x: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const GenreName = styled.div`
   color: ${({ theme }) => theme.colors.gray1};
   font-size: 14px;
   font-weight: 700;
+  margin-bottom: 10px;
 `;
 
 const MovieButton = styled.button``;

@@ -14,5 +14,6 @@ export const Filter: Story = {
   name: 'MovieList',
   args: {
     isGenre: false,
+    genre: '애니메이션 영화',
   },
 };
