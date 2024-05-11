@@ -4,27 +4,9 @@ import MovieListCard, { MovieListCardProps } from '../molecules/MovieListCard';
 import { ReactComponent as PrevSvg } from '../../assets/images/back.svg';
 import { ReactComponent as NextSvg } from '../../assets/images/next.svg';
 
-const LIST_DATA = [
-  { id: 1, img: '', title: '브레드', grade: 4.5, isLiked: true },
-  { id: 1, img: '', title: '김김', grade: 4.5, isLiked: true },
-  { id: 1, img: '', title: '다다', grade: 4.5, isLiked: false },
-  { id: 1, img: '', title: '서', grade: 4.3, isLiked: true },
-  {
-    id: 1,
-    img: '',
-    title: '해리포터와 아즈카반의 죄수',
-    grade: 4.5,
-    isLiked: true,
-  },
-  { id: 1, img: '', title: '상태', grade: 4.5, isLiked: true },
-  { id: 1, img: '', title: '나', grade: 4.5, isLiked: true },
-  { id: 1, img: '', title: '축구', grade: 4.5, isLiked: true },
-  { id: 1, img: '', title: '우리집 강아지', grade: 4.5, isLiked: true },
-];
-
 interface MovieListProps {
   isGenre: boolean;
-  listData?: MovieListCardProps[];
+  listData: MovieListCardProps[];
   genre?: string;
 }
 interface ScrollState {
@@ -94,7 +76,7 @@ const MovieList = ({ isGenre, listData, genre }: MovieListProps) => {
 
       {isGenre && <GenreName>{genre}</GenreName>}
       <MovieListBox ref={scrollRef} $isGenre={isGenre}>
-        {LIST_DATA.map((item) => (
+        {listData.map((item) => (
           <MovieButton key={item.id} onClick={handleCardClick}>
             <MovieListCard
               id={item.id}
@@ -136,7 +118,7 @@ const GenreName = styled.div`
   color: ${({ theme }) => theme.colors.gray1};
   font-size: 14px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin: 10px 40px;
 `;
 
 const MovieButton = styled.button``;
