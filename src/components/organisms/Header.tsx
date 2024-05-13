@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FormEventHandler } from 'react';
+import { ChangeEventHandler, FormEventHandler } from 'react';
 import Logo from '../atoms/Logo';
 import CancelButton from '../atoms/CancelButton';
 import { ReactComponent as ChevronSvg } from '../../assets/images/chevron.svg';
@@ -11,7 +11,8 @@ type DetailHeaderProps = {
 };
 
 type SearchBarProps = {
-  onSearchSubmit: () => FormEventHandler<HTMLFormElement>;
+  onSearchSubmit: FormEventHandler<HTMLFormElement>;
+  onSearchChange: ChangeEventHandler<HTMLInputElement>;
   value: string;
   setSearchInput: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -31,19 +32,19 @@ export const Header = ({ path, ...props }: HeaderProps) => {
   ];
   const renderInner = () => {
     if (searchHeader.includes(path)) {
-      const { onSearchSubmit, value, setSearchInput } = props as SearchBarProps;
+      const { onSearchSubmit, value, setSearchInput, onSearchChange } =
+        props as SearchBarProps;
       const handleCancelClick = () => {
         setSearchInput('');
       };
 
-      const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchInput(e.target.value);
-      };
       return (
-        <SearchBarContainer onSubmit={onSearchSubmit}>
-          <SearchImg />
-          <Input value={value} onChange={handleSearchChange} />
-          <CancelButton onClick={handleCancelClick} />
+        <SearchBarContainer>
+          <SearchBarBox onSubmit={onSearchSubmit}>
+            <SearchImg />
+            <Input value={value} onChange={onSearchChange} />
+            <CancelButton onClick={handleCancelClick} />
+          </SearchBarBox>
         </SearchBarContainer>
       );
     } else if (detailHeader.includes(path)) {
@@ -91,7 +92,11 @@ const PrevTitle = styled.div`
   color: white;
 `;
 
-const SearchBarContainer = styled.form`
+const SearchBarContainer = styled.div`
+  padding: 26px;
+`;
+
+const SearchBarBox = styled.form`
   display: flex;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.darkgray4};
