@@ -70,6 +70,19 @@ const MovieSurveyForm = () => {
     }
   };
 
+  const handleCheckImg = (item: MovieSurveyData) => {
+    if (param.id === '1') {
+      return (
+        movieList.first.find((value) => value.id === item.id)?.selected || false
+      );
+    } else {
+      return (
+        movieList.second.find((value) => value.id === item.id)?.selected ||
+        false
+      );
+    }
+  };
+
   return (
     <FormContainer onSubmit={handleSurveySubmit}>
       <MovieContainer>
@@ -79,16 +92,7 @@ const MovieSurveyForm = () => {
             key={item.id}
             onClick={() => handleSelectedMovie(item)}
           >
-            <MovieSurveyImg
-              src={item.image}
-              isChecked={
-                param.id === '1'
-                  ? movieList.first.find((value) => value.id === item.id)
-                      ?.selected || false
-                  : movieList.second.find((value) => value.id === item.id)
-                      ?.selected || false
-              }
-            />
+            <MovieSurveyImg src={item.image} isChecked={handleCheckImg(item)} />
           </MovieButton>
         ))}
       </MovieContainer>
@@ -101,7 +105,7 @@ const MovieSurveyForm = () => {
             : countSelectedMovie(movieList.second) > 0
         }
       >
-        다음으로 {String(Number(param.id) + 1)}/3
+        다음으로 {Number(param.id) + 1}/3
       </PrimaryButton>
     </FormContainer>
   );
