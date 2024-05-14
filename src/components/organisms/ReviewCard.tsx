@@ -83,7 +83,6 @@ const CardHeader = styled.div`
 `;
 
 const Reviewer = styled.div`
-  color: white;
   font-size: 16px;
   font-weight: 700;
   margin-right: 8px;
@@ -118,7 +117,6 @@ const ReviewDate = styled.div`
 const ReviewContent = styled.div`
   width: 100%;
   min-height: 52px;
-  color: white;
   font-size: 14px;
   font-weight: 300;
   margin-bottom: 5px;

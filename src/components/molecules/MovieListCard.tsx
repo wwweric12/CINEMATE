@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import MovieGrade from '../atoms/MovieGrade';
 import HeartButton from '../atoms/HeartButton';
 
-interface MovieListCardProps {
+export interface MovieListCardProps {
+  id: number;
   img: string;
   title: string;
   grade: number;
@@ -44,6 +45,7 @@ const MovieImg = styled.img`
 
 const ContentContainer = styled.div`
   width: 100%;
+  height: 50px;
   display: flex;
   align-items: center;
   padding: 10px 8px;
@@ -57,7 +59,6 @@ const ContentBox = styled.div`
 `;
 
 const Title = styled.div`
-  color: white;
   font-size: 14px;
   font-weight: 500;
   max-height: 30px;

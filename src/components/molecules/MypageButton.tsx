@@ -34,7 +34,6 @@ const ContentContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  color: white;
   font-weight: 500;
   font-size: 16px;
   margin-right: 8px;

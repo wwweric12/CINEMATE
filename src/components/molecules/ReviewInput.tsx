@@ -47,7 +47,6 @@ const ReviewField = styled.textarea`
   height: 146px;
   font-size: 16px;
   text-align: left;
-  color: white;
   &::-webkit-scrollbar {
     display: none;
   }
