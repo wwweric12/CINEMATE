@@ -5,6 +5,7 @@ import LoginTemplate from './components/template/LoginTemplate';
 import SignupTemplate from './components/template/SignupTemplate';
 import SucessTemplate from './components/template/SucessTemplate';
 import GenreSurveyTemplate from './components/template/GenreSurveyTemplate';
+import MovieSurveyTemplate from './components/template/MovieSurveyTemplate';
 
 function App() {
   return (
@@ -18,7 +19,10 @@ function App() {
             <Route path="/signup/success" element={<SucessTemplate />} />
             <Route path="/survey/success" element={<SucessTemplate />} />
             <Route path="/survey/genre" element={<GenreSurveyTemplate />} />
-            <Route path="/survey/movies/:id" />
+            <Route
+              path="/survey/movies/:id"
+              element={<MovieSurveyTemplate />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>

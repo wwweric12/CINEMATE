@@ -34,7 +34,8 @@ export default MainLayout;
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   position: relative;
   background-color: ${({ theme }) => theme.colors.darkgray2};
 `;

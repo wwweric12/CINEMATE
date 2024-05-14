@@ -38,7 +38,7 @@ const SucessTemplate = () => {
     if (location.pathname === successPath[0]) {
       navigate('/login');
     } else if (location.pathname === successPath[1]) {
-      navigate('/main');
+      navigate('/');
     }
   };
   return (
@@ -69,7 +69,7 @@ const TemplateContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 260px;
+  padding: 260px 40px 80px 40px;
 `;
 
 const FieldContainer = styled.div`

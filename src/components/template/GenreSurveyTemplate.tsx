@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import GenreSurveyForm from '../molecules/GenreSurveyForm';
+import GenreSurveyForm from '../organisms/GenreSurveyForm';
 import Description from '../atoms/Description';
 
 const GenreSurveyTemplate = () => {

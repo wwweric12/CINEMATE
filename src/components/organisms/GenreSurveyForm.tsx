@@ -65,7 +65,7 @@ const GenreSurveyForm = () => {
         type="submit"
         state={countSelectedGenre(genreList) === 3}
       >
-        다음으로
+        다음으로 1/3
       </PrimaryButton>
     </FormContainer>
   );
