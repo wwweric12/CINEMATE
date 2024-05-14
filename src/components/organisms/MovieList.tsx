@@ -5,7 +5,7 @@ import { ReactComponent as PrevSvg } from '../../assets/images/back.svg';
 import { ReactComponent as NextSvg } from '../../assets/images/next.svg';
 
 interface MovieListProps {
-  isGenre: boolean;
+  isGenre?: boolean;
   listData: MovieListCardProps[];
   genre?: string;
 }
@@ -100,7 +100,7 @@ const MovieListContainer = styled.div`
   flex-direction: column;
 `;
 
-const MovieListBox = styled.div<{ $isGenre: boolean }>`
+const MovieListBox = styled.div<{ $isGenre?: boolean }>`
   display: flex;
   align-items: center;
   gap: 10px;

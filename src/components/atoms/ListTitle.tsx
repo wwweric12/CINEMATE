@@ -19,7 +19,4 @@ const ListTitleField = styled.div`
   font-size: 22px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.choral};
-  span {
-    color: white;
-  }
 `;

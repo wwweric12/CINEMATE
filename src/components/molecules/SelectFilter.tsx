@@ -55,7 +55,6 @@ const SelectContainer = styled.select`
   text-align: center;
   background-color: transparent;
   font-size: 12px;
-  color: white;
   border: none;
   padding: 6px 3px;
 `;

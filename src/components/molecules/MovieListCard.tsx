@@ -59,7 +59,6 @@ const ContentBox = styled.div`
 `;
 
 const Title = styled.div`
-  color: white;
   font-size: 14px;
   font-weight: 500;
   max-height: 30px;

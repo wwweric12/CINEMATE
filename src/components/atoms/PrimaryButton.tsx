@@ -50,7 +50,6 @@ const Button = styled.button<{
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
   background-color: ${({ $isActive, theme, size }) =>
     size === 'small'
       ? $isActive

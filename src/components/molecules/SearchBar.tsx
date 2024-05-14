@@ -36,5 +36,4 @@ const SearchImg = styled.img`
 const Input = styled.input`
   margin-right: 8px;
   font-size: 16px;
-  color: white;
 `;

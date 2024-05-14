@@ -6,9 +6,11 @@ const GlobalStyle = createGlobalStyle`
   *, body {
     margin: 0;
     padding: 0;
+    color: white;
     font-family: 'Pretendard', sans-serif;
     box-sizing: border-box;
   }
+
   button {
     margin: 0;
     padding: 0;

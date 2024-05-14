@@ -40,7 +40,7 @@ const MovieListTemplate = ({
       <TitleLayout>
         <ListTitle title="사용자 맞춤 " />
       </TitleLayout>
-      <MovieList isGenre={false} listData={LIST_DATA} />
+      <MovieList listData={LIST_DATA} />
       <TitleLayout>
         <ListTitle title="선호하는 장르별 " />
       </TitleLayout>
@@ -48,7 +48,7 @@ const MovieListTemplate = ({
         {genreMovieList.map((item) => (
           <MovieList
             key={item.genre}
-            isGenre={true}
+            isGenre
             listData={item.data}
             genre={item.genre}
           />

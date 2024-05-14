@@ -36,5 +36,4 @@ const ChevronImg = styled(ChevronSvg)`
 const PrevTitle = styled.div`
   font-size: 16px;
   font-weight: 500;
-  color: white;
 `;

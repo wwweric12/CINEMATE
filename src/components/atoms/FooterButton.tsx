@@ -18,10 +18,10 @@ const FooterButton = ({
   onClick,
 }: FooterButtonProps) => {
   return (
-    <ButtonContainer onClick={onClick} $isSelected={isSelected}>
-      {type === 'home' && <HomeSvg />}
-      {type === 'mypage' && <UserSvg />}
-      {type === 'search' && <SearchSvg />}
+    <ButtonContainer onClick={onClick}>
+      {type === 'home' && <HomeImg $isSelected={isSelected} />}
+      {type === 'mypage' && <UserImg $isSelected={isSelected} />}
+      {type === 'search' && <SearchImg $isSelected={isSelected} />}
       <ButtonField $isSelected={isSelected}>{text}</ButtonField>
     </ButtonContainer>
   );
@@ -29,16 +29,37 @@ const FooterButton = ({
 
 export default FooterButton;
 
-const ButtonContainer = styled.button<{
-  $isSelected: FooterButtonProps['isSelected'];
-}>`
+const ButtonContainer = styled.button`
   width: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  color: ${({ $isSelected }) =>
-    $isSelected ? theme.colors.choral : theme.colors.gray2};
+`;
+
+const HomeImg = styled(HomeSvg)<{
+  $isSelected: FooterButtonProps['isSelected'];
+}>`
+  path {
+    fill: ${({ $isSelected }) =>
+      $isSelected ? theme.colors.choral : theme.colors.gray2};
+  }
+`;
+const UserImg = styled(UserSvg)<{
+  $isSelected: FooterButtonProps['isSelected'];
+}>`
+  path {
+    fill: ${({ $isSelected }) =>
+      $isSelected ? theme.colors.choral : theme.colors.gray2};
+  }
+`;
+const SearchImg = styled(SearchSvg)<{
+  $isSelected: FooterButtonProps['isSelected'];
+}>`
+  path {
+    fill: ${({ $isSelected }) =>
+      $isSelected ? theme.colors.choral : theme.colors.gray2};
+  }
 `;
 
 const ButtonField = styled.div<{
