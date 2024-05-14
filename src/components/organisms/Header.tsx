@@ -88,7 +88,6 @@ const ChevronImg = styled(ChevronSvg)`
 const PrevTitle = styled.div`
   font-size: 16px;
   font-weight: 500;
-  color: white;
 `;
 
 const SearchBarContainer = styled.form`
@@ -106,5 +105,4 @@ const SearchImg = styled(SearchSvg)`
 const Input = styled.input`
   margin-right: 8px;
   font-size: 16px;
-  color: white;
 `;

@@ -33,6 +33,5 @@ const MovieImg = styled.img`
 
 const MovieTitle = styled.div`
   width: 100%;
-  color: white;
   font-size: 14px;
 `;

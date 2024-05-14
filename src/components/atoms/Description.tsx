@@ -26,7 +26,6 @@ const DescriptionContainer = styled.div`
 const Title = styled.div<{ state: DescriptionProps['state'] }>`
   font-size: 20px;
   font-weight: 700;
-  color: white;
   margin-bottom: ${({ state }) => {
     if (state === 'survey') {
       return '12px';

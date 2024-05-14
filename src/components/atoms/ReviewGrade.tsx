@@ -33,6 +33,5 @@ const StarImg = styled(StarSvg)`
 `;
 
 const GradePoint = styled.div`
-  color: white;
   font-size: 10px;
 `;

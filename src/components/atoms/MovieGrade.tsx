@@ -26,6 +26,5 @@ const StarSvg = styled.img`
 `;
 
 const Grade = styled.div`
-  color: white;
   font-size: 10px;
 `;

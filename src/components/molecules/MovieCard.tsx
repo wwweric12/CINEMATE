@@ -68,7 +68,6 @@ const ContentBox = styled.div`
 const MovieTitle = styled.div`
   font-size: 16px;
   font-weight: 600;
-  color: white;
   margin-bottom: 4px;
 `;
 
