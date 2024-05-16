@@ -3,21 +3,23 @@ import CancelButton from '../atoms/CancelButton';
 import MovieGrade from '../atoms/MovieGrade';
 
 interface MovieCardProps {
+  id: number;
   movieImg: string;
   title: string;
   date: number;
   grade: number;
   isLiked?: boolean;
-  onClick: () => void;
+  onCancelClick: (id: number) => void;
 }
 
 const MovieCard = ({
+  id,
   movieImg,
   title,
   date,
   grade,
   isLiked,
-  onClick,
+  onCancelClick,
 }: MovieCardProps) => {
   return (
     <CardContainer>
@@ -28,7 +30,7 @@ const MovieCard = ({
           <MovieDate>{date}</MovieDate>
           <MovieGrade grade={grade} />
         </ContentBox>
-        {isLiked && <CancelButton onClick={onClick} />}
+        {!isLiked && <CancelButton onClick={() => onCancelClick(id)} />}
       </ContentContainer>
     </CardContainer>
   );

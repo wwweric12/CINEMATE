@@ -8,6 +8,7 @@ import GenreSurveyTemplate from './components/template/GenreSurveyTemplate';
 import MovieSurveyTemplate from './components/template/MovieSurveyTemplate';
 import MypageTemplate from './components/template/MypageTemplate';
 import MypageReviewsTemplate from './components/template/MypageReviewsTemplate';
+import MypageMoviesTemplate from './components/template/MypageMoviesTemplate';
 
 function App() {
   return (
@@ -29,7 +30,10 @@ function App() {
               path="/mypage"
               element={<MypageTemplate name="김동영" review={2} movie={1} />}
             />
-            <Route path="/mypage/movies" />
+            <Route
+              path="/mypage/movies"
+              element={<MypageMoviesTemplate count={3} />}
+            />
             <Route
               path="/mypage/reviews"
               element={<MypageReviewsTemplate name="김동영" count={3} />}
