@@ -7,7 +7,7 @@ interface CancelButtonProps {
 
 const CancelButton = ({ onClick }: CancelButtonProps) => {
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} type="reset">
       <Cancel src={cancel} />
     </Button>
   );

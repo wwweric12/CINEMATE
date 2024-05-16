@@ -28,6 +28,7 @@ const MainLayout = () => {
       text: searchInput,
     };
     setKeyword((prev) => [...prev, newKeyword]);
+    setSearchInput('');
   };
 
   return (
