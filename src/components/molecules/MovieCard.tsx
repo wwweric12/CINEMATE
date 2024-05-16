@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import CancelButton from '../atoms/CancelButton';
 import MovieGrade from '../atoms/MovieGrade';
 
-interface MovieCardProps {
+export interface MovieCardProps {
   movieImg: string;
   title: string;
   date: number;
   grade: number;
   isLiked?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const MovieCard = ({
@@ -28,7 +28,7 @@ const MovieCard = ({
           <MovieDate>{date}</MovieDate>
           <MovieGrade grade={grade} />
         </ContentBox>
-        {isLiked && <CancelButton onClick={onClick} />}
+        {isLiked && <CancelButton onClick={() => onClick} />}
       </ContentContainer>
     </CardContainer>
   );

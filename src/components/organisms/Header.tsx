@@ -23,7 +23,7 @@ type HeaderProps = {
 
 export const Header = ({ path, ...props }: HeaderProps) => {
   const mainHeader = ['/login', '/', 'mypage'];
-  const searchHeader = ['/search'];
+  const searchHeader = '/search';
   const detailHeader = [
     '/signup',
     '/survey/genre',
@@ -31,7 +31,7 @@ export const Header = ({ path, ...props }: HeaderProps) => {
     '/survey/movies/2',
   ];
   const renderInner = () => {
-    if (searchHeader.includes(path)) {
+    if (path.includes(searchHeader)) {
       const { onSearchSubmit, value, setSearchInput, onSearchChange } =
         props as SearchBarProps;
       const handleCancelClick = () => {
