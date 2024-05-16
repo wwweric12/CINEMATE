@@ -6,6 +6,7 @@ import HeartButton from '../atoms/HeartButton';
 import EtcButton from './EtcButton';
 
 interface ReviewCard {
+  id: number;
   reviewer: string;
   grade: number;
   content: string;
@@ -13,10 +14,11 @@ interface ReviewCard {
   count: number;
   isLiked?: boolean;
   isMine?: boolean;
-  onHeartClick: () => void;
+  onHeartClick: (id: number) => void;
 }
 
 const ReviewCard = ({
+  id,
   reviewer,
   grade,
   content,
@@ -55,7 +57,7 @@ const ReviewCard = ({
       </CardHeader>
       <ReviewContent>{content}</ReviewContent>
       <CardFooter>
-        <HeartButton isLiked={isLiked} onClick={onHeartClick} />
+        <HeartButton isLiked={isLiked} onClick={() => onHeartClick(id)} />
         <LikeCount>{count}개</LikeCount>
       </CardFooter>
     </ReviewCardContainer>

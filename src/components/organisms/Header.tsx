@@ -28,6 +28,8 @@ export const Header = ({ path, ...props }: HeaderProps) => {
     '/survey/genre',
     '/survey/movies/1',
     '/survey/movies/2',
+    '/mypage/movies',
+    '/mypage/reviews',
   ];
   const renderInner = () => {
     if (searchHeader.includes(path)) {
