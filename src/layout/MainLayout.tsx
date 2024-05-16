@@ -5,7 +5,7 @@ import Footer from '../components/organisms/Footer';
 import { Header } from '../components/organisms/Header';
 
 const MainLayout = () => {
-  const hasFooter = ['/', 'search', 'mypage'];
+  const hasFooter = ['/', '/search', '/mypage'];
   const hasNotHeaderPages = ['success'];
   const location = useLocation();
   const [searchInput, setSearchInput] = useState('');

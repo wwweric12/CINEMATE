@@ -30,6 +30,9 @@ const GlobalStyle = createGlobalStyle`
   input:focus, textarea:focus {
     outline: none;
   }
+  a{
+    text-decoration: none;
+  }
 `;
 
 export default GlobalStyle;

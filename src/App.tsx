@@ -6,6 +6,7 @@ import SignupTemplate from './components/template/SignupTemplate';
 import SucessTemplate from './components/template/SucessTemplate';
 import GenreSurveyTemplate from './components/template/GenreSurveyTemplate';
 import MovieSurveyTemplate from './components/template/MovieSurveyTemplate';
+import MypageTemplate from './components/template/MypageTemplate';
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
             <Route
               path="/survey/movies/:id"
               element={<MovieSurveyTemplate />}
+            />
+            <Route
+              path="/mypage"
+              element={<MypageTemplate name="김동영" review={2} movie={1} />}
             />
           </Route>
         </Routes>

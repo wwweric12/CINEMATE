@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
 import MypageButton from '../components/molecules/MypageButton';
 
 const meta: Meta<typeof MypageButton> = {
@@ -14,6 +13,5 @@ export const MypageBtn: Story = {
   args: {
     content: '작성한 리뷰',
     count: 1,
-    onClick: fn(),
   },
 };
