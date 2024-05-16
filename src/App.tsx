@@ -8,7 +8,6 @@ import GenreSurveyTemplate from './components/template/GenreSurveyTemplate';
 import SearchTemplate from './components/template/SearchTemplate';
 import MovieSurveyTemplate from './components/template/MovieSurveyTemplate';
 
-
 function App() {
   return (
     <RecoilRoot>
@@ -23,6 +22,7 @@ function App() {
             <Route path="/survey/genre" element={<GenreSurveyTemplate />} />
             <Route path="/survey/movies/:id" />
             <Route path="/search" element={<SearchTemplate />} />
+            <Route path="/search/:movie" />
             <Route
               path="/survey/movies/:id"
               element={<MovieSurveyTemplate />}

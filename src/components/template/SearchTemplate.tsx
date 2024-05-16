@@ -14,14 +14,16 @@ const SearchTemplate = () => {
       <TitleContainer>
         <SearchText>최근 검색 기록</SearchText>
         <DivideVector />
-        {keyword &&
-          keyword.map((item) => (
-            <SearchRecordButton
-              key={item.id}
-              text={item.text}
-              onRemoveKeyword={() => handleDeleteKeyword(item.id)}
-            />
-          ))}
+        <SearchRecordContainer>
+          {keyword &&
+            keyword.map((item) => (
+              <SearchRecordButton
+                key={item.id}
+                text={item.text}
+                onRemoveKeyword={() => handleDeleteKeyword(item.id)}
+              />
+            ))}
+        </SearchRecordContainer>
       </TitleContainer>
     </>
   );
@@ -41,4 +43,11 @@ const SearchText = styled.div`
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 16px;
+`;
+
+const SearchRecordContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 `;
