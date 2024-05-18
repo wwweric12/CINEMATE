@@ -81,6 +81,7 @@ const SignupForm = () => {
           type="submit"
           size="large"
           state={!!value.email && !!value.name && !!value.password}
+          disabledState={!!value.email && !!value.name && !!value.password}
         >
           회원가입
         </PrimaryButton>
