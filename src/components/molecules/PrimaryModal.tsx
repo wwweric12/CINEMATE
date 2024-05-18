@@ -8,6 +8,8 @@ interface PrimaryModalProps {
   fieldText: string;
   cancelText: string;
   checkText: string;
+  onCanCelClick: () => void;
+  onCheckClick: () => void;
 }
 
 const PrimaryModal = ({
@@ -15,6 +17,8 @@ const PrimaryModal = ({
   fieldText,
   cancelText,
   checkText,
+  onCanCelClick,
+  onCheckClick,
 }: PrimaryModalProps) => {
   return (
     <ModalContainer>
@@ -22,10 +26,10 @@ const PrimaryModal = ({
       {state === 'warn' && <WarningSvg />}
       <ModalField>{fieldText}</ModalField>
       <ButtonContainer>
-        <PrimaryButton size="medium" state={false}>
+        <PrimaryButton size="medium" state={false} onClick={onCanCelClick}>
           {cancelText}
         </PrimaryButton>
-        <PrimaryButton size="medium" state>
+        <PrimaryButton size="medium" state onClick={onCheckClick}>
           {checkText}
         </PrimaryButton>
       </ButtonContainer>

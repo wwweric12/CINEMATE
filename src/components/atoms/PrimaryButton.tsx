@@ -63,6 +63,8 @@ const Button = styled.button<{
   display: flex;
   justify-content: center;
   align-items: center;
+  color: ${({ theme, $colorState }) =>
+    $colorState ? 'white ' : theme.colors.gray2};
   background-color: ${({ $colorState, theme, size }) =>
     size === 'small'
       ? $colorState
