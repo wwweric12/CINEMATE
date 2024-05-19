@@ -6,7 +6,7 @@ export interface PrimaryButtonProps {
   onClick?: () => void;
   state?: boolean;
   size: 'large' | 'medium' | 'small';
-  disabledState?: boolean;
+  enabled?: boolean;
 }
 
 const PrimaryButton = ({
@@ -15,7 +15,7 @@ const PrimaryButton = ({
   onClick,
   state,
   size,
-  disabledState,
+  enabled,
 }: PrimaryButtonProps) => {
   return (
     <Button
@@ -23,7 +23,7 @@ const PrimaryButton = ({
       onClick={onClick}
       $colorState={state}
       size={size}
-      disabled={!disabledState}
+      disabled={!enabled}
     >
       {children}
     </Button>

@@ -27,6 +27,10 @@ const SignupForm = () => {
   const onSubmit: SubmitHandler<SignupInput> = (data) => {
     console.log(data);
   };
+
+  const handleSubmitButton = () => {
+    return !!value.email && !!value.name && !!value.password;
+  };
   return (
     <SignupContainer>
       <Title>회원가입</Title>
@@ -80,8 +84,8 @@ const SignupForm = () => {
         <PrimaryButton
           type="submit"
           size="large"
-          state={!!value.email && !!value.name && !!value.password}
-          disabledState={!!value.email && !!value.name && !!value.password}
+          state={handleSubmitButton()}
+          enabled={handleSubmitButton()}
         >
           회원가입
         </PrimaryButton>

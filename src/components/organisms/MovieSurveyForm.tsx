@@ -104,7 +104,7 @@ const MovieSurveyForm = () => {
             ? countSelectedMovie(movieList.first) > 0
             : countSelectedMovie(movieList.second) > 0
         }
-        disabledState={
+        enabled={
           param.id === '1'
             ? countSelectedMovie(movieList.first) > 0
             : countSelectedMovie(movieList.second) > 0
