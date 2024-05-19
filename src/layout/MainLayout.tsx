@@ -7,7 +7,7 @@ import { Header } from '../components/organisms/Header';
 import { keywordState } from '../store/atoms/Keyword/state';
 
 const MainLayout = () => {
-  const hasFooter = ['/', 'search', 'mypage'];
+  const hasFooter = ['/', '/search', '/mypage'];
   const hasNotHeaderPages = ['success'];
   const location = useLocation();
   const [searchInput, setSearchInput] = useState('');

@@ -7,6 +7,9 @@ import SucessTemplate from './components/template/SucessTemplate';
 import GenreSurveyTemplate from './components/template/GenreSurveyTemplate';
 import SearchTemplate from './components/template/SearchTemplate';
 import MovieSurveyTemplate from './components/template/MovieSurveyTemplate';
+import MypageTemplate from './components/template/MypageTemplate';
+import MypageReviewsTemplate from './components/template/MypageReviewsTemplate';
+import MypageMoviesTemplate from './components/template/MypageMoviesTemplate';
 import SearchResultTemplate from './components/template/SearchResultTemplate';
 
 function App() {
@@ -27,6 +30,18 @@ function App() {
             <Route
               path="/survey/movies/:id"
               element={<MovieSurveyTemplate />}
+            />
+            <Route
+              path="/mypage"
+              element={<MypageTemplate name="김동영" review={2} movie={1} />}
+            />
+            <Route
+              path="/mypage/movies"
+              element={<MypageMoviesTemplate count={3} />}
+            />
+            <Route
+              path="/mypage/reviews"
+              element={<MypageReviewsTemplate name="김동영" count={3} />}
             />
           </Route>
         </Routes>

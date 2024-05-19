@@ -4,12 +4,11 @@ import next from '../../assets/images/next.svg';
 interface MypageProps {
   content: string;
   count: number;
-  onClick: () => void;
 }
 
-const MypageButton = ({ content, count, onClick }: MypageProps) => {
+const MypageButton = ({ content, count }: MypageProps) => {
   return (
-    <ButtonContainer onClick={onClick}>
+    <ButtonContainer>
       <ContentContainer>
         <ButtonContent>{content}</ButtonContent>
         <ContentCount>{count}</ContentCount>
@@ -23,6 +22,7 @@ export default MypageButton;
 
 const ButtonContainer = styled.button`
   min-width: 280px;
+  width: 100%;
   display: flex;
   padding: 16px;
   align-items: center;
