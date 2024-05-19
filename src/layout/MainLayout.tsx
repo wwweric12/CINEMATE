@@ -1,18 +1,37 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { ChangeEventHandler, FormEventHandler, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import Footer from '../components/organisms/Footer';
 import { Header } from '../components/organisms/Header';
+import { keywordState } from '../store/atoms/Keyword/state';
 
 const MainLayout = () => {
   const hasFooter = ['/', 'search', 'mypage'];
   const hasNotHeaderPages = ['success'];
   const location = useLocation();
   const [searchInput, setSearchInput] = useState('');
+  const [keyword, setKeyword] = useRecoilState(keywordState);
   const navigate = useNavigate();
   const handlePrevClick = () => {
     navigate(-1);
   };
+
+  const handleSearchChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  const handleSearchSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    const newKeyword = {
+      id: Date.now(),
+      text: searchInput,
+    };
+    setKeyword((prev) => [...prev, newKeyword]);
+    navigate(`/search/${searchInput}`);
+    setSearchInput('');
+  };
+
   return (
     <Container>
       {!hasNotHeaderPages.includes(location.pathname) && (
@@ -22,6 +41,8 @@ const MainLayout = () => {
           value={searchInput}
           setSearchInput={setSearchInput}
           onPrevClick={handlePrevClick}
+          onSearchSubmit={handleSearchSubmit}
+          onSearchChange={handleSearchChange}
         />
       )}
       <Outlet />
