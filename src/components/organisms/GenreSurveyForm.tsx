@@ -64,6 +64,7 @@ const GenreSurveyForm = () => {
         size="medium"
         type="submit"
         state={countSelectedGenre(genreList) === 3}
+        enabled={countSelectedGenre(genreList) === 3}
       >
         다음으로 1/3
       </PrimaryButton>

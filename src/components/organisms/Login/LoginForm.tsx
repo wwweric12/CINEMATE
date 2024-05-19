@@ -54,7 +54,7 @@ const LoginForm = () => {
             )}
           </InputBox>
         </InputContainer>
-        <PrimaryButton type="submit" size="large" state={true}>
+        <PrimaryButton type="submit" size="large" state>
           로그인
         </PrimaryButton>
       </LoginFormBox>

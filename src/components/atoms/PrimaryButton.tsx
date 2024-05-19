@@ -6,6 +6,7 @@ export interface PrimaryButtonProps {
   onClick?: () => void;
   state?: boolean;
   size: 'large' | 'medium' | 'small';
+  enabled?: boolean;
 }
 
 const PrimaryButton = ({
@@ -14,14 +15,15 @@ const PrimaryButton = ({
   onClick,
   state,
   size,
+  enabled,
 }: PrimaryButtonProps) => {
   return (
     <Button
       type={type}
       onClick={onClick}
-      $isActive={state}
+      $colorState={state}
       size={size}
-      disabled={!state}
+      disabled={!enabled}
     >
       {children}
     </Button>
@@ -31,7 +33,7 @@ const PrimaryButton = ({
 export default PrimaryButton;
 
 const Button = styled.button<{
-  $isActive?: boolean;
+  $colorState?: boolean;
   size: PrimaryButtonProps['size'];
 }>`
   min-width: ${({ size }) => {
@@ -61,12 +63,14 @@ const Button = styled.button<{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ $isActive, theme, size }) =>
+  color: ${({ theme, $colorState }) =>
+    $colorState ? 'white ' : theme.colors.gray2};
+  background-color: ${({ $colorState, theme, size }) =>
     size === 'small'
-      ? $isActive
+      ? $colorState
         ? theme.colors.choral
         : theme.colors.darkgray4
-      : $isActive
+      : $colorState
         ? theme.colors.choral
         : theme.colors.darkgray3};
   font-size: ${({ size }) => {

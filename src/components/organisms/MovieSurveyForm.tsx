@@ -104,6 +104,11 @@ const MovieSurveyForm = () => {
             ? countSelectedMovie(movieList.first) > 0
             : countSelectedMovie(movieList.second) > 0
         }
+        enabled={
+          param.id === '1'
+            ? countSelectedMovie(movieList.first) > 0
+            : countSelectedMovie(movieList.second) > 0
+        }
       >
         다음으로 {Number(param.id) + 1}/3
       </PrimaryButton>
