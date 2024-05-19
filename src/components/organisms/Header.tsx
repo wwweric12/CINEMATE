@@ -43,7 +43,7 @@ export const Header = ({ path, ...props }: HeaderProps) => {
           <SearchBarBox onSubmit={onSearchSubmit}>
             <SearchImg />
             <Input value={value} onChange={onSearchChange} />
-            <CancelButton onClick={handleCancelClick} />
+            <CancelButton onCancelClick={handleCancelClick} />
           </SearchBarBox>
         </SearchBarContainer>
       );

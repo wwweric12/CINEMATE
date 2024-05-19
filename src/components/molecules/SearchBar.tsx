@@ -14,7 +14,7 @@ const SearchBar = ({ onChange, onSubmit, value }: SearchBarProps) => {
     <SearchBarContainer onSubmit={onSubmit}>
       <SearchImg src={search} />
       <Input value={value} onChange={onChange} />
-      <CancelButton onClick={handleClick} />
+      <CancelButton onCancelClick={handleClick} />
     </SearchBarContainer>
   );
 };

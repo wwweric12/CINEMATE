@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import cancel from '../../assets/images/search_x.svg';
 
 interface CancelButtonProps {
-  onClick: () => void;
+  onCancelClick: () => void;
 }
 
-const CancelButton = ({ onClick }: CancelButtonProps) => {
+const CancelButton = ({ onCancelClick }: CancelButtonProps) => {
   return (
-    <Button onClick={onClick} type="reset">
+    <Button onClick={onCancelClick} type="reset">
       <Cancel src={cancel} />
     </Button>
   );

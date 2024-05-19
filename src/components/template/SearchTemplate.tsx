@@ -20,7 +20,7 @@ const SearchTemplate = () => {
               <SearchRecordButton
                 key={item.id}
                 text={item.text}
-                onRemoveKeyword={() => handleDeleteKeyword(item.id)}
+                onKeywordRemove={() => handleDeleteKeyword(item.id)}
               />
             ))}
         </SearchRecordContainer>

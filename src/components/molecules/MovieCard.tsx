@@ -28,7 +28,7 @@ const MovieCard = ({
           <MovieDate>{date}</MovieDate>
           <MovieGrade grade={grade} />
         </ContentBox>
-        {isLiked && <CancelButton onClick={() => onClick} />}
+        {isLiked && onClick && <CancelButton onCancelClick={onClick} />}
       </ContentContainer>
     </CardContainer>
   );

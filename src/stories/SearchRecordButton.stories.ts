@@ -14,6 +14,6 @@ export const SearchRecord: Story = {
   name: 'SearchRecordButton',
   args: {
     text: '파묘',
-    onRemoveKeyword: fn(),
+    onKeywordRemove: fn(),
   },
 };

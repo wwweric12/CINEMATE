@@ -3,17 +3,17 @@ import CancelButton from './CancelButton';
 
 interface SearchRecordButtonProps {
   text: string;
-  onRemoveKeyword: () => void;
+  onKeywordRemove: () => void;
 }
 
 const SearchRecordButton = ({
   text,
-  onRemoveKeyword,
+  onKeywordRemove,
 }: SearchRecordButtonProps) => {
   return (
     <ButtonContainer>
       <ButtonField>{text}</ButtonField>
-      <CancelButton onClick={onRemoveKeyword} />
+      <CancelButton onCancelClick={onKeywordRemove} />
     </ButtonContainer>
   );
 };
