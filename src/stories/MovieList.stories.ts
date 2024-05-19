@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
 import MovieList from '../components/organisms/MovieList';
 
 const meta: Meta<typeof MovieList> = {
@@ -15,5 +14,6 @@ export const Filter: Story = {
   args: {
     isGenre: false,
     genre: '애니메이션 영화',
+    listData: [],
   },
 };

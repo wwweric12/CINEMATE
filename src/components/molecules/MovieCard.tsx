@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import CancelButton from '../atoms/CancelButton';
 import MovieGrade from '../atoms/MovieGrade';
 
-interface MovieCardProps {
+
+export interface MovieCardProps {
   id: number;
   movieImg: string;
   title: string;

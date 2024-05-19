@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FormEventHandler } from 'react';
+import { ChangeEventHandler, FormEventHandler } from 'react';
 import Logo from '../atoms/Logo';
 import CancelButton from '../atoms/CancelButton';
 import { ReactComponent as ChevronSvg } from '../../assets/images/chevron.svg';
@@ -11,7 +11,8 @@ type DetailHeaderProps = {
 };
 
 type SearchBarProps = {
-  onSearchSubmit: () => FormEventHandler<HTMLFormElement>;
+  onSearchSubmit: FormEventHandler<HTMLFormElement>;
+  onSearchChange: ChangeEventHandler<HTMLInputElement>;
   value: string;
   setSearchInput: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -22,7 +23,7 @@ type HeaderProps = {
 
 export const Header = ({ path, ...props }: HeaderProps) => {
   const mainHeader = ['/login', '/', 'mypage'];
-  const searchHeader = ['/search'];
+  const searchHeader = '/search';
   const detailHeader = [
     '/signup',
     '/survey/genre',
@@ -32,20 +33,20 @@ export const Header = ({ path, ...props }: HeaderProps) => {
     '/mypage/reviews',
   ];
   const renderInner = () => {
-    if (searchHeader.includes(path)) {
-      const { onSearchSubmit, value, setSearchInput } = props as SearchBarProps;
+    if (path.includes(searchHeader)) {
+      const { onSearchSubmit, value, setSearchInput, onSearchChange } =
+        props as SearchBarProps;
       const handleCancelClick = () => {
         setSearchInput('');
       };
 
-      const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchInput(e.target.value);
-      };
       return (
-        <SearchBarContainer onSubmit={onSearchSubmit}>
-          <SearchImg />
-          <Input value={value} onChange={handleSearchChange} />
-          <CancelButton onClick={handleCancelClick} />
+        <SearchBarContainer>
+          <SearchBarBox onSubmit={onSearchSubmit}>
+            <SearchImg />
+            <Input value={value} onChange={onSearchChange} />
+            <CancelButton onCancelClick={handleCancelClick} />
+          </SearchBarBox>
         </SearchBarContainer>
       );
     } else if (detailHeader.includes(path)) {
@@ -92,7 +93,11 @@ const PrevTitle = styled.div`
   font-weight: 500;
 `;
 
-const SearchBarContainer = styled.form`
+const SearchBarContainer = styled.div`
+  padding: 26px;
+`;
+
+const SearchBarBox = styled.form`
   display: flex;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.darkgray4};
