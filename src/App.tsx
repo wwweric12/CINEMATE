@@ -45,7 +45,7 @@ function App() {
               element={<MypageReviewsTemplate name="김동영" count={3} />}
             />
             <Route
-              path="/movie/:id"
+              path="/movies/:id"
               element={
                 <MovieDetailTemplate
                   backgroundImg="https://upload.wikimedia.org/wikipedia/ko/b/b8/1917%EC%98%81%ED%99%94_%ED%8F%AC%EC%8A%A4%ED%84%B0.jpg"

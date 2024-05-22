@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import GradeStar from '../atoms/GradeStar';
 import PrimaryButton from '../atoms/PrimaryButton';
+import { createArray } from '../../util/CreateArray';
 
 interface RatingMovieProps {
   onReviewWrite: () => void;
@@ -9,11 +10,12 @@ interface RatingMovieProps {
 
 const RatingMovie = ({ onReviewWrite }: RatingMovieProps) => {
   const [score, setScore] = useState<number>(0);
+  const starArray = createArray(5);
   return (
     <Container>
       <Text>평가하기</Text>
       <StarContainer>
-        {Array.from({ length: 5 }, (_, index) => (
+        {starArray.map((index) => (
           <GradeStar
             key={index}
             index={index + 1}

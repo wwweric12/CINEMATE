@@ -49,7 +49,7 @@ export const Header = ({ path, ...props }: HeaderProps) => {
           </SearchBarBox>
         </SearchBarContainer>
       );
-    } else if (detailHeader.includes(path) || path.includes('/movie')) {
+    } else if (detailHeader.includes(path) || path.includes('/movies')) {
       const { onPrevClick, title } = props as DetailHeaderProps;
       return (
         <HeaderContainer>
