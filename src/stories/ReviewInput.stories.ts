@@ -15,6 +15,6 @@ export const Revinput: Story = {
     maxLength: 999,
     length: 0,
     placeholder: '리뷰를 작성해주세요',
-    onChange: fn(),
+    onInputChange: fn(),
   },
 };
