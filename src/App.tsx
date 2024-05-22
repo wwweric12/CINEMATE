@@ -12,6 +12,7 @@ import MypageReviewsTemplate from './components/template/MypageReviewsTemplate';
 import MypageMoviesTemplate from './components/template/MypageMoviesTemplate';
 import SearchResultTemplate from './components/template/SearchResultTemplate';
 import MovieDetailTemplate from './components/template/MovieDetailTemplate';
+import CreateReviewTemplate from './components/template/CreateReviewTemplate';
 
 function App() {
   return (
@@ -59,7 +60,10 @@ function App() {
                   onSelectChange={() => console.log(12)}
                 />
               }
-            />
+              <Route
+                path="/movies/:id/review"
+                element={<CreateReviewTemplate />}
+              />
           </Route>
         </Routes>
       </BrowserRouter>

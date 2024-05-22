@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ChangeEventHandler, FormEventHandler } from 'react';
+import { useParams } from 'react-router-dom';
 import Logo from '../atoms/Logo';
 import CancelButton from '../atoms/CancelButton';
 import { ReactComponent as ChevronSvg } from '../../assets/images/chevron.svg';
@@ -22,6 +23,7 @@ type HeaderProps = {
 } & (SearchBarProps | DetailHeaderProps);
 
 export const Header = ({ path, ...props }: HeaderProps) => {
+  const param = useParams();
   const mainHeader = ['/login', '/', 'mypage'];
   const searchHeader = '/search';
   const detailHeader = [
@@ -31,6 +33,7 @@ export const Header = ({ path, ...props }: HeaderProps) => {
     '/survey/movies/2',
     '/mypage/movies',
     '/mypage/reviews',
+    `/movie/${param.id}/review`,
   ];
   const renderInner = () => {
     if (path.includes(searchHeader)) {
