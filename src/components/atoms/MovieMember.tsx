@@ -18,15 +18,15 @@ export default MovieMember;
 
 const MovieMemberContainer = styled.div`
   display: flex;
-  width: 58px;
+  width: 52px;
   flex-direction: column;
   align-items: center;
   gap: 6px;
 `;
 
 const MemberImage = styled.img`
-  width: 58px;
-  height: 58px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
 `;
 

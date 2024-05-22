@@ -49,7 +49,7 @@ export const Header = ({ path, ...props }: HeaderProps) => {
           </SearchBarBox>
         </SearchBarContainer>
       );
-    } else if (detailHeader.includes(path)) {
+    } else if (detailHeader.includes(path) || path.includes('/movie')) {
       const { onPrevClick, title } = props as DetailHeaderProps;
       return (
         <HeaderContainer>
@@ -77,6 +77,7 @@ const HeaderContainer = styled.div`
   left: 0;
   padding: 20px 40px;
   background-color: ${({ theme }) => theme.colors.darkgray2};
+  z-index: 30;
 `;
 
 const PrevButton = styled.button`

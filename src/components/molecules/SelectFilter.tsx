@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 type SelectOption = 'latest' | 'like' | 'old' | 'grade';
 
-interface SelectFilterProps {
+export interface SelectFilterProps {
   defaultOption: SelectOption;
   onSelectChange: (selectoption: SelectFilterProps['defaultOption']) => void;
 }

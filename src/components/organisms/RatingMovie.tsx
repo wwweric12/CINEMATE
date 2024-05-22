@@ -4,10 +4,10 @@ import GradeStar from '../atoms/GradeStar';
 import PrimaryButton from '../atoms/PrimaryButton';
 
 interface RatingMovieProps {
-  onWriteReview: () => void;
+  onReviewWrite: () => void;
 }
 
-const RatingMovie = ({ onWriteReview }: RatingMovieProps) => {
+const RatingMovie = ({ onReviewWrite }: RatingMovieProps) => {
   const [score, setScore] = useState<number>(0);
   return (
     <Container>
@@ -22,7 +22,7 @@ const RatingMovie = ({ onWriteReview }: RatingMovieProps) => {
           />
         ))}
       </StarContainer>
-      <PrimaryButton type="button" size="medium" state onClick={onWriteReview}>
+      <PrimaryButton type="button" size="medium" state onClick={onReviewWrite}>
         리뷰 작성하기
       </PrimaryButton>
     </Container>
@@ -32,7 +32,6 @@ const RatingMovie = ({ onWriteReview }: RatingMovieProps) => {
 export default RatingMovie;
 
 const Container = styled.div`
-  margin-top: 100px;
   width: 280px;
   background-color: ${({ theme }) => theme.colors.darkgray6};
   display: flex;

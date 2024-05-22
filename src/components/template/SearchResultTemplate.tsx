@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import DivideVector from '../atoms/DivideVector';
 import MovieCard from '../molecules/MovieCard';
 
@@ -27,6 +27,7 @@ const SearchResultTemplate = () => {
         {DATA_LIST.map((item) => (
           <Link to={`/movie/${item.id}`} key={item.id}>
             <MovieCard
+              id={item.id}
               movieImg={item.img}
               title={item.title}
               date={item.date}
