@@ -45,7 +45,7 @@ function App() {
               element={<MypageReviewsTemplate name="김동영" count={3} />}
             />
             <Route
-              path="/movie/:id/review"
+              path="/movies/:id/review"
               element={<CreateReviewTemplate />}
             />
           </Route>
