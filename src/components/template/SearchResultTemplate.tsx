@@ -27,6 +27,7 @@ const SearchResultTemplate = () => {
         {DATA_LIST.map((item) => (
           <Link to={`/movie/${item.id}`} key={item.id}>
             <MovieCard
+              id={item.id}
               movieImg={item.img}
               title={item.title}
               date={item.date}

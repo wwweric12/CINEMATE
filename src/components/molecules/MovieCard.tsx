@@ -9,7 +9,7 @@ export interface MovieCardProps {
   date: number;
   grade: number;
   isLiked?: boolean;
-  onCancelClick: (id: number) => void;
+  onCancelClick?: (id: number) => void;
 }
 
 const MovieCard = ({
@@ -30,7 +30,9 @@ const MovieCard = ({
           <MovieDate>{date}</MovieDate>
           <MovieGrade grade={grade} />
         </ContentBox>
-        {!isLiked && <CancelButton onCancelClick={() => onCancelClick(id)} />}
+        {!isLiked && onCancelClick && (
+          <CancelButton onCancelClick={() => onCancelClick(id)} />
+        )}
       </ContentContainer>
     </CardContainer>
   );

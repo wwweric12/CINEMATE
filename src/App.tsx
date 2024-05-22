@@ -11,6 +11,7 @@ import MypageTemplate from './components/template/MypageTemplate';
 import MypageReviewsTemplate from './components/template/MypageReviewsTemplate';
 import MypageMoviesTemplate from './components/template/MypageMoviesTemplate';
 import SearchResultTemplate from './components/template/SearchResultTemplate';
+import CreateReviewTemplate from './components/template/CreateReviewTemplate';
 
 function App() {
   return (
@@ -42,6 +43,10 @@ function App() {
             <Route
               path="/mypage/reviews"
               element={<MypageReviewsTemplate name="김동영" count={3} />}
+            />
+            <Route
+              path="/movie/:id/review"
+              element={<CreateReviewTemplate />}
             />
           </Route>
         </Routes>

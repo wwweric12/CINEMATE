@@ -26,10 +26,22 @@ const PrimaryModal = ({
       {state === 'warn' && <WarningSvg />}
       <ModalField>{fieldText}</ModalField>
       <ButtonContainer>
-        <PrimaryButton size="medium" state={false} onClick={onCancelClick}>
+        <PrimaryButton
+          size="medium"
+          state={false}
+          onClick={onCancelClick}
+          type="button"
+          enabled
+        >
           {cancelText}
         </PrimaryButton>
-        <PrimaryButton size="medium" state onClick={onCheckClick}>
+        <PrimaryButton
+          size="medium"
+          state
+          onClick={onCheckClick}
+          type="button"
+          enabled
+        >
           {checkText}
         </PrimaryButton>
       </ButtonContainer>

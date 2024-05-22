@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { ChangeEventHandler } from 'react';
 import InputLength from '../atoms/InputLength';
 
 interface ReviewInput {
   maxLength: number;
-  onChange: () => void;
+  onInputChange: ChangeEventHandler<HTMLTextAreaElement>;
   value: string;
   length: number;
   placeholder: string;
@@ -11,7 +12,7 @@ interface ReviewInput {
 
 const ReviewInput = ({
   maxLength,
-  onChange,
+  onInputChange,
   value,
   length,
   placeholder,
@@ -20,7 +21,7 @@ const ReviewInput = ({
     <ReviewContainer>
       <ReviewField
         maxLength={maxLength}
-        onChange={onChange}
+        onChange={onInputChange}
         value={value}
         placeholder={placeholder}
       />
@@ -36,7 +37,8 @@ export default ReviewInput;
 const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 100%;
+  max-width: 380px;
   padding: 18px 16px;
   background-color: ${({ theme }) => theme.colors.darkgray4};
   border-radius: 14px;
