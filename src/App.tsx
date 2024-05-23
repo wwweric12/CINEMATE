@@ -13,6 +13,7 @@ import MypageMoviesTemplate from './components/template/MypageMoviesTemplate';
 import SearchResultTemplate from './components/template/SearchResultTemplate';
 import MovieDetailTemplate from './components/template/MovieDetailTemplate';
 import CreateReviewTemplate from './components/template/CreateReviewTemplate';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<MainLayout />}>
-            <Route path="/login" element={<LoginTemplate />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/" />
             <Route path="/signup" element={<SignupTemplate />} />
             <Route path="/signup/success" element={<SucessTemplate />} />
@@ -60,10 +61,11 @@ function App() {
                   onSelectChange={() => console.log(12)}
                 />
               }
-              <Route
-                path="/movies/:id/review"
-                element={<CreateReviewTemplate />}
-              />
+            />
+            <Route
+              path="/movies/:id/review"
+              element={<CreateReviewTemplate />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
