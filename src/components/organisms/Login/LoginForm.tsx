@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import PrimaryButton from '../../atoms/PrimaryButton';
 import FormInput from '../../molecules/FormInput';
+import { AuthFormValues } from '../../../types/auth';
 import { validation } from './Validation';
 
 export interface LoginInput {
@@ -11,7 +12,11 @@ export interface LoginInput {
   password: string;
 }
 
-const LoginForm = () => {
+export interface LoginFormProps {
+  onLoginSubmit: SubmitHandler<AuthFormValues>;
+}
+
+const LoginForm = ({ onLoginSubmit }: LoginFormProps) => {
   const {
     register,
     handleSubmit,
@@ -21,13 +26,10 @@ const LoginForm = () => {
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<LoginInput> = (data) => {
-    console.log(data);
-  };
   return (
     <LoginContainer>
       <Title>로그인</Title>
-      <LoginFormBox onSubmit={handleSubmit(onSubmit)}>
+      <LoginFormBox onSubmit={handleSubmit(onLoginSubmit)}>
         <InputContainer>
           <InputBox>
             <FormInput
@@ -54,7 +56,7 @@ const LoginForm = () => {
             )}
           </InputBox>
         </InputContainer>
-        <PrimaryButton type="submit" size="large" state>
+        <PrimaryButton type="submit" size="large" state enabled>
           로그인
         </PrimaryButton>
       </LoginFormBox>

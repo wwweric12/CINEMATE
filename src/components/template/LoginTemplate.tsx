@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import LoginForm from '../organisms/Login/LoginForm';
+import LoginForm, { LoginFormProps } from '../organisms/Login/LoginForm';
 
-const LoginTemplate = () => {
+const LoginTemplate = ({ onLoginSubmit }: LoginFormProps) => {
   return (
     <TemplateContainer>
-      <LoginForm />
+      <LoginForm onLoginSubmit={onLoginSubmit} />
     </TemplateContainer>
   );
 };
