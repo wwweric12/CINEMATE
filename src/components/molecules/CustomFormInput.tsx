@@ -13,9 +13,8 @@ export interface FormInputProps {
   value?: string;
   control: Control<SignupInput>;
   placeholder?: string;
-  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onInputChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   validationStatus: 'default' | 'error' | 'success';
-  duplicatedStatus?: boolean;
 }
 
 const CustomFormInput = ({
@@ -24,7 +23,6 @@ const CustomFormInput = ({
   control,
   onInputChange,
   validationStatus,
-  duplicatedStatus,
 }: FormInputProps) => {
   let image: string;
   if (type === 'nickName') {
@@ -49,7 +47,7 @@ const CustomFormInput = ({
             value={value || ''}
             onChange={(event) => {
               onChange(event.target.value);
-              onInputChange(event);
+              onInputChange && onInputChange(event);
             }}
           />
           {validationStatus !== 'default' && (

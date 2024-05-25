@@ -1,82 +1,126 @@
 import styled from 'styled-components';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
+import { ChangeEvent } from 'react';
 import PrimaryButton from '../../atoms/PrimaryButton';
-import FormInput from '../../molecules/FormInput';
+import { AuthFormValues } from '../../../types/auth';
+import CustomFormInput from '../../molecules/CustomFormInput';
 import { validation } from './Validation';
 
 export interface SignupInput {
-  name: string;
+  nickName: string;
   email: string;
   password: string;
 }
 
-const SignupForm = () => {
+export interface SignupFormProps {
+  nameCheck: boolean;
+  emailCheck: boolean;
+  onSignupSubmit: SubmitHandler<AuthFormValues>;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const SignupForm = ({
+  onSignupSubmit,
+  onInputChange,
+  nameCheck,
+  emailCheck,
+}: SignupFormProps) => {
   const {
-    register,
     handleSubmit,
     formState: { errors },
-    watch,
+    control,
   } = useForm<SignupInput>({
     resolver: yupResolver(validation),
-    mode: 'onSubmit',
+    mode: 'onChange',
   });
 
-  const value = watch();
-
-  const onSubmit: SubmitHandler<SignupInput> = (data) => {
-    console.log(data);
-  };
+  const [nickName, email, password] = useWatch({
+    control,
+    name: ['nickName', 'email', 'password'],
+  });
 
   const handleSubmitButton = () => {
-    return !!value.email && !!value.name && !!value.password;
+    return !!email && !!nickName && !!password;
   };
+
+  const handleDuplicatedInput = (type: keyof SignupInput) => {
+    if (type === 'email') {
+      return emailCheck;
+    } else if (type === 'nickName') {
+      return nameCheck;
+    }
+  };
+
   return (
     <SignupContainer>
       <Title>회원가입</Title>
-      <SignupFormBox onSubmit={handleSubmit(onSubmit)}>
+      <SignupFormBox onSubmit={handleSubmit(onSignupSubmit)}>
         <InputContainer>
           <InputBox>
-            <FormInput
-              type="name"
+            <CustomFormInput
+              control={control}
+              type="nickName"
               placeholder="닉네임을 입력해주세요"
-              validationStatus={errors['name'] ? 'error' : 'default'}
-              register={register('name')}
-              errors={errors}
+              validationStatus={
+                errors['nickName'] || handleDuplicatedInput('nickName')
+                  ? 'error'
+                  : handleDuplicatedInput('nickName') || !nickName
+                    ? 'default'
+                    : 'success'
+              }
+              onInputChange={onInputChange}
             />
-            {errors.name ? (
-              <ErrorMessage>{errors.name.message}</ErrorMessage>
+            {errors.nickName ? (
+              <ErrorMessage>{errors.nickName.message}</ErrorMessage>
+            ) : handleDuplicatedInput('nickName') ? (
+              <ErrorMessage>중복된 닉네임입니다</ErrorMessage>
+            ) : nickName ? (
+              <SuccessMessage>사용 가능한 닉네임입니다</SuccessMessage>
             ) : (
               <SignupMessage>2~8글자 이내로 작성해주세요</SignupMessage>
             )}
           </InputBox>
           <InputBox>
-            <FormInput
+            <CustomFormInput
+              control={control}
               type="email"
               placeholder="이메일을 입력해주세요"
-              validationStatus={errors['email'] ? 'error' : 'default'}
-              register={register('email')}
-              errors={errors}
+              validationStatus={
+                errors['email'] || handleDuplicatedInput('email')
+                  ? 'error'
+                  : handleDuplicatedInput('email') || !email
+                    ? 'default'
+                    : 'success'
+              }
+              onInputChange={onInputChange}
             />
             {errors.email ? (
               <ErrorMessage>{errors.email.message}</ErrorMessage>
+            ) : handleDuplicatedInput('email') ? (
+              <ErrorMessage>중복된 이메일입니다</ErrorMessage>
+            ) : email ? (
+              <SuccessMessage>사용 가능한 이메일입니다</SuccessMessage>
             ) : (
               <SignupMessage>이메일 형식에 맞춰서 입력해주세요</SignupMessage>
             )}
           </InputBox>
           <InputBox>
-            <FormInput
+            <CustomFormInput
+              control={control}
               type="password"
               placeholder="비밀번호를 입력해주세요"
-              validationStatus={errors['password'] ? 'error' : 'default'}
-              register={register('password')}
-              errors={errors}
+              validationStatus={
+                errors['password'] ? 'error' : !password ? 'default' : 'success'
+              }
             />
             {errors.password ? (
               <ErrorMessage>{errors.password.message}</ErrorMessage>
+            ) : password ? (
+              <SuccessMessage>사용 가능한 비밀번호입니다</SuccessMessage>
             ) : (
               <SignupMessage>
-                영문과 숫자, 특수기호를 조합하여 8~14글자 이내로 입력해주세요
+                영문과 숫자, 특수기호를 조합하여 6~14글자 이내로 입력해주세요
               </SignupMessage>
             )}
           </InputBox>
@@ -141,5 +185,12 @@ const ErrorMessage = styled.div`
   font-size: 12px;
   font-weight: 500;
   color: red;
+  margin: 0 10px;
+`;
+
+const SuccessMessage = styled.div`
+  font-size: 12px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.green};
   margin: 0 10px;
 `;

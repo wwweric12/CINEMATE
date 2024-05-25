@@ -1,34 +1,36 @@
 import styled from 'styled-components';
-import { forwardRef } from 'react';
-import { FieldErrors, UseFormRegisterReturn } from 'react-hook-form';
+import { ChangeEvent, forwardRef } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 import emailSvg from '../../assets/images/login_email.svg';
 import nameSvg from '../../assets/images/login_user.svg';
 import passwordSvg from '../../assets/images/login_password.svg';
 import errorSvg from '../../assets/images/login_error.svg';
 import successSvg from '../../assets/images/login_success.svg';
-import { LoginInput } from '../organisms/Login/LoginForm';
 
-interface FormInputProps {
-  type: 'name' | 'password' | 'email';
+export interface FormInputProps {
+  type: 'nickName' | 'password' | 'email';
   value?: string;
   placeholder?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   validationStatus: 'default' | 'error' | 'success';
   register?: UseFormRegisterReturn;
-  errors?: FieldErrors<LoginInput>;
+  duplicatedStatus?: boolean;
 }
 
-const FormInput = forwardRef(
-  ({
-    type,
-    placeholder,
-    value,
-    onChange,
-    validationStatus,
-    register,
-  }: FormInputProps) => {
+const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
+  (
+    {
+      type,
+      placeholder,
+      value,
+      onChange,
+      validationStatus,
+      register,
+    }: FormInputProps,
+    ref,
+  ) => {
     let image;
-    if (type === 'name') {
+    if (type === 'nickName') {
       image = nameSvg;
     } else if (type === 'email') {
       image = emailSvg;
@@ -40,11 +42,12 @@ const FormInput = forwardRef(
       <InputContainer $validationStatus={validationStatus}>
         <InputImg src={image} />
         <InputField
+          ref={ref}
           type={type}
           placeholder={placeholder}
           value={value}
-          onChange={onChange}
           {...register}
+          onChange={onChange}
         />
         {validationStatus !== 'default' && (
           <CheckImg
