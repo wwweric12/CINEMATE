@@ -5,16 +5,16 @@ export interface GetMovieListPayload {
 }
 
 export interface MovieListPayload {
-  defaultRecommendResult: DefaultRecommendResult[];
+  defaultRecommendResult: MovieData[];
   genreMovieLists: GenreMovieList[];
 }
 
 export interface GenreMovieList {
   genreId: number;
-  movieList: DefaultRecommendResult[];
+  movieList: MovieData[];
 }
 
-export interface DefaultRecommendResult {
+export interface MovieData {
   id: number;
   movieId: number;
   rating: number;
