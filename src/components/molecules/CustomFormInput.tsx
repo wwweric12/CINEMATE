@@ -1,66 +1,67 @@
 import styled from 'styled-components';
-import { ChangeEvent, forwardRef } from 'react';
-import { UseFormRegisterReturn } from 'react-hook-form';
+import { ChangeEvent } from 'react';
+import { Control, Controller } from 'react-hook-form';
 import emailSvg from '../../assets/images/login_email.svg';
 import nameSvg from '../../assets/images/login_user.svg';
 import passwordSvg from '../../assets/images/login_password.svg';
 import errorSvg from '../../assets/images/login_error.svg';
 import successSvg from '../../assets/images/login_success.svg';
+import { SignupInput } from '../organisms/Signup/SignupForm';
 
 export interface FormInputProps {
   type: 'nickName' | 'password' | 'email';
   value?: string;
+  control: Control<SignupInput>;
   placeholder?: string;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onInputChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   validationStatus: 'default' | 'error' | 'success';
-  register?: UseFormRegisterReturn;
-  duplicatedStatus?: boolean;
 }
 
-const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
-  (
-    {
-      type,
-      placeholder,
-      value,
-      onChange,
-      validationStatus,
-      register,
-    }: FormInputProps,
-    ref,
-  ) => {
-    let image;
-    if (type === 'nickName') {
-      image = nameSvg;
-    } else if (type === 'email') {
-      image = emailSvg;
-    } else if (type === 'password') {
-      image = passwordSvg;
-    }
+const CustomFormInput = ({
+  type,
+  placeholder,
+  control,
+  onInputChange,
+  validationStatus,
+}: FormInputProps) => {
+  let image: string;
+  if (type === 'nickName') {
+    image = nameSvg;
+  } else if (type === 'email') {
+    image = emailSvg;
+  } else if (type === 'password') {
+    image = passwordSvg;
+  }
 
-    return (
-      <InputContainer $validationStatus={validationStatus}>
-        <InputImg src={image} />
-        <InputField
-          ref={ref}
-          type={type}
-          placeholder={placeholder}
-          value={value}
-          {...register}
-          onChange={onChange}
-        />
-        {validationStatus !== 'default' && (
-          <CheckImg
-            src={validationStatus === 'error' ? errorSvg : successSvg}
+  return (
+    <Controller
+      control={control}
+      name={type}
+      render={({ field: { onChange, value } }) => (
+        <InputContainer $validationStatus={validationStatus}>
+          <InputImg src={image} />
+          <InputField
+            name={type}
+            type={type}
+            placeholder={placeholder}
+            value={value || ''}
+            onChange={(event) => {
+              onChange(event.target.value);
+              onInputChange && onInputChange(event);
+            }}
           />
-        )}
-      </InputContainer>
-    );
-  },
-);
-FormInput.displayName = 'FormInput';
+          {validationStatus !== 'default' && (
+            <CheckImg
+              src={validationStatus === 'error' ? errorSvg : successSvg}
+            />
+          )}
+        </InputContainer>
+      )}
+    />
+  );
+};
 
-export default FormInput;
+export default CustomFormInput;
 
 const InputContainer = styled.div<{
   $validationStatus?: FormInputProps['validationStatus'];

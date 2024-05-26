@@ -22,6 +22,29 @@ export const authFetcher = async ({ path, data }: AuthProps) => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       alert(error);
+    } else {
+      throw error;
+    }
+  }
+};
+
+interface AuthDuplicatedProps {
+  data: string;
+  path: 'email' | 'nickname';
+}
+
+export const authDuplicatedFetcher = async ({
+  data,
+  path,
+}: AuthDuplicatedProps) => {
+  try {
+    const res = await Axios.get(`/api/${path}/${data}/exists`);
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      alert(error);
+    } else {
+      throw error;
     }
   }
 };

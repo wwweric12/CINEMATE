@@ -1,11 +1,21 @@
 import styled from 'styled-components';
 
-import SignupForm from '../organisms/Signup/SignupForm';
+import SignupForm, { SignupFormProps } from '../organisms/Signup/SignupForm';
 
-const SignupTemplate = () => {
+const SignupTemplate = ({
+  onSignupSubmit,
+  onInputChange,
+  emailCheck,
+  nameCheck,
+}: SignupFormProps) => {
   return (
     <TemplateContainer>
-      <SignupForm />
+      <SignupForm
+        nameCheck={nameCheck}
+        emailCheck={emailCheck}
+        onInputChange={onInputChange}
+        onSignupSubmit={onSignupSubmit}
+      />
     </TemplateContainer>
   );
 };
