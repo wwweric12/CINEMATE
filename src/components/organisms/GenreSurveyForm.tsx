@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import GenreSurveyImg from '../atoms/GenreSurveyImg';
 import { Genre, genreListState } from '../../store/atoms/Genre/state';
 import PrimaryButton from '../atoms/PrimaryButton';
-import { GENRE_LIST, GenreImage } from '../../util/data/GenreDate';
+import { GENRE_LIST, GenreData } from '../../util/data/GenreDate';
 
 const GenreSurveyForm = () => {
   const [genreList, setGenreList] = useRecoilState<Genre[]>(genreListState);
@@ -13,7 +13,7 @@ const GenreSurveyForm = () => {
     return obj.filter((value) => value.selected).length;
   };
 
-  const handleSelectedGenre = (item: GenreImage) => {
+  const handleSelectedGenre = (item: GenreData) => {
     if (countSelectedGenre(genreList) < 3) {
       setGenreList(
         genreList.map((value) =>

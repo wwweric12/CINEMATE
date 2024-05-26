@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import MovieGrade from '../atoms/MovieGrade';
 import HeartButton from '../atoms/HeartButton';
 
@@ -10,11 +11,19 @@ export interface MovieListCardProps {
   isLiked?: boolean;
 }
 
-const MovieListCard = ({ img, title, grade, isLiked }: MovieListCardProps) => {
+const MovieListCard = ({
+  id,
+  img,
+  title,
+  grade,
+  isLiked,
+}: MovieListCardProps) => {
   const handleHeart = () => {};
   return (
     <CardContainer>
-      <MovieImg src={img} />
+      <Link to={`movies/${id}`}>
+        <MovieImg src={img} />
+      </Link>
       <ContentContainer>
         <ContentBox>
           <Title>{title}</Title>
@@ -38,7 +47,6 @@ const CardContainer = styled.div`
 `;
 
 const MovieImg = styled.img`
-  width: 100%;
   height: 190px;
   border-radius: 10px 10px 0 0;
 `;
