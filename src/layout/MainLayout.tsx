@@ -46,7 +46,10 @@ const MainLayout = () => {
       id: Date.now(),
       text: searchInput,
     };
-    setKeyword((prev) => [...prev, newKeyword]);
+    setKeyword((prev) => {
+      const isDuplicate = prev.some((item) => item.text === newKeyword.text);
+      return isDuplicate ? prev : [...prev, newKeyword];
+    });
     navigate(`/search/${searchInput}`);
     setSearchInput('');
     setSearchMovie([]);
