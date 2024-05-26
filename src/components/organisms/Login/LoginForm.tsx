@@ -37,7 +37,6 @@ const LoginForm = ({ onLoginSubmit }: LoginFormProps) => {
               placeholder="이메일을 입력해주세요"
               validationStatus={errors['email'] ? 'error' : 'default'}
               register={register('email')}
-              errors={errors}
             />
             {errors.email && (
               <ErrorMessage>{errors.email.message}</ErrorMessage>
@@ -49,7 +48,6 @@ const LoginForm = ({ onLoginSubmit }: LoginFormProps) => {
               placeholder="비밀번호를 입력해주세요"
               validationStatus={errors['password'] ? 'error' : 'default'}
               register={register('password')}
-              errors={errors}
             />
             {errors.password && (
               <ErrorMessage>{errors.password.message}</ErrorMessage>

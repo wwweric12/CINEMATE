@@ -15,6 +15,7 @@ import MovieDetailTemplate from './components/template/MovieDetailTemplate';
 import CreateReviewTemplate from './components/template/CreateReviewTemplate';
 import LoginPage from './pages/LoginPage';
 import MovieListPage from './pages/MovieListPage';
+import SignupPage from './pages/SignupPage';
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<MovieListPage />} />
-            <Route path="/signup" element={<SignupTemplate />} />
+            <Route path="/signup" element={<SignupPage />} />
             <Route path="/signup/success" element={<SucessTemplate />} />
             <Route path="/survey/success" element={<SucessTemplate />} />
             <Route path="/survey/genre" element={<GenreSurveyTemplate />} />
