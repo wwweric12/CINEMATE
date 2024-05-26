@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import MainLayout from './layout/MainLayout';
-import LoginTemplate from './components/template/LoginTemplate';
-import SignupTemplate from './components/template/SignupTemplate';
 import SucessTemplate from './components/template/SucessTemplate';
 import GenreSurveyTemplate from './components/template/GenreSurveyTemplate';
 import SearchTemplate from './components/template/SearchTemplate';

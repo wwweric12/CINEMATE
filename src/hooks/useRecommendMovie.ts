@@ -3,22 +3,29 @@ import { AxiosError } from 'axios';
 import { Axios } from '../util/axios/axios';
 import { GetMovieListPayload } from '../types/GetMovieListPayload';
 
-const fetchMovie = async () => {
+const fetchMovie = async (token: string) => {
   const res = await Axios.get('/api/recommendation', {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      Authorization: `Bearer ${token}`,
     },
   });
   return res.data;
 };
 
 export const useRecommendMovie = () => {
+  const token = localStorage.getItem('accessToken');
   const {
     isLoading: isMovieLoading,
     isError: isMovieError,
     data: MovieState,
     isSuccess,
-  } = useQuery<GetMovieListPayload, AxiosError>(['movieList'], fetchMovie);
+  } = useQuery<GetMovieListPayload, AxiosError>(
+    ['movieList', token],
+    () => fetchMovie(token || ''),
+    {
+      enabled: !!token,
+    },
+  );
 
   return { isMovieLoading, isMovieError, MovieState, isSuccess };
 };

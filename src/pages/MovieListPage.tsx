@@ -5,6 +5,7 @@ import { useRecommendMovie } from '../hooks/useRecommendMovie';
 
 const MovieListPage = () => {
   const navigate = useNavigate();
+  const { isMovieLoading, MovieState } = useRecommendMovie();
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
     if (!token) {
@@ -12,7 +13,6 @@ const MovieListPage = () => {
       navigate('/login');
     }
   }, []);
-  const { isMovieLoading, MovieState } = useRecommendMovie();
 
   if (isMovieLoading) {
     return <div>Loding...</div>;
@@ -20,15 +20,14 @@ const MovieListPage = () => {
   if (!MovieState) {
     return null;
   }
+
   return (
-    MovieState && (
-      <>
-        <MovieListTemplate
-          defaultRecommendResult={MovieState?.data.defaultRecommendResult}
-          genreMovieLists={MovieState?.data.genreMovieLists}
-        />
-      </>
-    )
+    <>
+      <MovieListTemplate
+        defaultRecommendResult={MovieState?.data.defaultRecommendResult}
+        genreMovieLists={MovieState?.data.genreMovieLists}
+      />
+    </>
   );
 };
 
