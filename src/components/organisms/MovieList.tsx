@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
-import MovieListCard, { MovieListCardProps } from '../molecules/MovieListCard';
+import MovieListCard from '../molecules/MovieListCard';
 import { ReactComponent as PrevSvg } from '../../assets/images/back.svg';
 import { ReactComponent as NextSvg } from '../../assets/images/next.svg';
+import { DefaultRecommendResult } from '../../types/GetMovieListPayload';
 
 interface MovieListProps {
   isGenre?: boolean;
-  listData: MovieListCardProps[];
+  listData: DefaultRecommendResult[];
   genre?: string;
 }
 interface ScrollState {
@@ -57,10 +58,6 @@ const MovieList = ({ isGenre, listData, genre }: MovieListProps) => {
     }
   };
 
-  const handleCardClick = () => {
-    //영화 정보페이지로 이동
-  };
-
   return (
     <MovieListContainer>
       {scrollState.left && (
@@ -77,15 +74,14 @@ const MovieList = ({ isGenre, listData, genre }: MovieListProps) => {
       {isGenre && <GenreName>{genre}</GenreName>}
       <MovieListBox ref={scrollRef} $isGenre={isGenre}>
         {listData.map((item) => (
-          <MovieButton key={item.id} onClick={handleCardClick}>
-            <MovieListCard
-              id={item.id}
-              img={item.img}
-              title={item.title}
-              grade={item.grade}
-              isLiked={item.isLiked}
-            />
-          </MovieButton>
+          <MovieListCard
+            key={item.id}
+            id={item.id}
+            img={item.posterPath}
+            title={item.movieTitle}
+            grade={item.rating}
+            isLiked={true} //아직 Api에 있지 않음 추후에 교체
+          />
         ))}
       </MovieListBox>
     </MovieListContainer>
