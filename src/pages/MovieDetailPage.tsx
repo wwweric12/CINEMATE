@@ -1,26 +1,35 @@
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MovieDetailTemplate from '../components/template/MovieDetailTemplate';
 import { useMovieDetail } from '../hooks/useMovieDetail';
 import { PutRating, PutRatingProps } from '../api/ratingFetcher';
+import { useRating } from '../hooks/useRating';
 
 const MovieDetailPage = () => {
   const params = useParams<{ id: string }>();
-  const [score, setScore] = useState<number>(0);
   const movieId = params.id || '';
+
+  const { isRatingLoading, RatingState } = useRating(movieId);
   const { isMovieDetailLoading, MovieDetailState } = useMovieDetail(movieId);
+
+  const [score, setScore] = useState<number>(RatingState?.data || 0);
+
+  useEffect(() => {
+    if (RatingState !== undefined) {
+      setScore(RatingState.data);
+    }
+  }, [RatingState]);
 
   const handleHeartClick = (id: string) => {};
 
   const handleRatingClick = ({ movieId, rating }: PutRatingProps) => {
-    const res = PutRating({ movieId, rating });
-    console.log(res);
+    PutRating({ movieId, rating });
   };
 
-  if (isMovieDetailLoading) {
+  if (isMovieDetailLoading || isRatingLoading) {
     return <div>Loding...</div>;
   }
-  if (!MovieDetailState) {
+  if (!MovieDetailState || !RatingState) {
     return null;
   }
 
