@@ -7,12 +7,16 @@ import SelectFilter, { SelectFilterProps } from '../molecules/SelectFilter';
 import ReviewCard from '../organisms/ReviewCard';
 import { MovieData } from '../../types/GetMovieListPayload';
 import { Credit } from '../../types/GetMovieDetailPayload';
+import { PutRatingProps } from '../../api/ratingFetcher';
 
 interface MovieDetailTemplateProps {
+  score: number;
+  setScore: React.Dispatch<React.SetStateAction<number>>;
   movie: MovieData;
   credit: Credit;
   onHeartClick: () => void;
   onSelectChange: (selectoption: SelectFilterProps['defaultOption']) => void;
+  onRatingClick: ({ movieId, rating }: PutRatingProps) => void;
 }
 
 const REVIEW_DATA = [
@@ -49,13 +53,15 @@ const REVIEW_DATA = [
 ];
 
 const MovieDetailTemplate = ({
+  score,
+  setScore,
   movie,
   credit,
   onHeartClick,
   onSelectChange,
+  onRatingClick,
 }: MovieDetailTemplateProps) => {
   const handleHeartClick = (id: number) => {};
-  const handleReviewWrite = () => {};
 
   return (
     <>
@@ -97,7 +103,12 @@ const MovieDetailTemplate = ({
         </MovieMembersContainer>
         <ContentTitle>리뷰 및 평점</ContentTitle>
         <RatingMovieContainer>
-          <RatingMovie onReviewWrite={handleReviewWrite} />
+          <RatingMovie
+            movieId={movie.id}
+            onRatingClick={onRatingClick}
+            score={score}
+            setScore={setScore}
+          />
         </RatingMovieContainer>
         <ReviewContainer>
           <ReviewHeader>
