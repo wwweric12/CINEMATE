@@ -5,26 +5,15 @@ import MovieMember from '../atoms/MovieMember';
 import RatingMovie from '../organisms/RatingMovie';
 import SelectFilter, { SelectFilterProps } from '../molecules/SelectFilter';
 import ReviewCard from '../organisms/ReviewCard';
+import { MovieData } from '../../types/GetMovieListPayload';
+import { Credit } from '../../types/GetMovieDetailPayload';
 
-interface MovieDetailTemplate {
-  backgroundImg: string;
-  date: number;
-  title: string;
-  grade: number;
-  isLiked: boolean;
+interface MovieDetailTemplateProps {
+  movie: MovieData;
+  credit: Credit;
   onHeartClick: () => void;
-  movieImg: string;
-  moviePlot: string;
   onSelectChange: (selectoption: SelectFilterProps['defaultOption']) => void;
 }
-
-const MEMBER_LIST = [
-  { image: '', name: '김남주' },
-  { image: '', name: '김남주' },
-  { image: '', name: '김남주' },
-  { image: '', name: '김남주' },
-  { image: '', name: '김남주' },
-];
 
 const REVIEW_DATA = [
   {
@@ -60,46 +49,50 @@ const REVIEW_DATA = [
 ];
 
 const MovieDetailTemplate = ({
-  backgroundImg,
-  date,
-  title,
-  grade,
-  isLiked,
+  movie,
+  credit,
   onHeartClick,
-  movieImg,
-  moviePlot,
   onSelectChange,
-}: MovieDetailTemplate) => {
-  const handleReviewWrite = () => {};
+}: MovieDetailTemplateProps) => {
   const handleHeartClick = (id: number) => {};
+  const handleReviewWrite = () => {};
 
   return (
     <>
-      <BackgroundContainer image={backgroundImg}>
+      <BackgroundContainer image={movie.backdropPath}>
         <BackgroundImage />
         <MovieHeaderField>
           <MovieInfoContainer>
-            <MovieDate>{date}</MovieDate>
+            <MovieDate>{movie.releaseDate}</MovieDate>
             <InfoLayout>
-              <MovieTitle>{title}</MovieTitle>
-              <MovieGrade grade={grade} />
+              <MovieTitle>{movie.movieTitle}</MovieTitle>
+              <MovieGrade grade={movie.rating} />
             </InfoLayout>
           </MovieInfoContainer>
           <ButtonImageLayout>
-            <HeartButton isLiked={isLiked} onClick={onHeartClick} />
-            <MovieImage src={movieImg} />
+            <HeartButton isLiked={true} onClick={onHeartClick} />
+            <MovieImage src={movie.posterPath} />
           </ButtonImageLayout>
         </MovieHeaderField>
       </BackgroundContainer>
       <FieldContainer>
         <ContentTitle>작품정보</ContentTitle>
-        <PlotField>{moviePlot}</PlotField>
-        <ContentTitle>감독 및 출연진</ContentTitle>
+        <PlotField>{movie.overview}</PlotField>
+        <ContentTitle>감독</ContentTitle>
+        <DirectorContainer>
+          <MovieMember
+            image={credit.crew[0].profile_path}
+            name={credit.crew[0].name}
+          />
+        </DirectorContainer>
+        <ContentTitle>출연진</ContentTitle>
         <MovieMembersContainer>
-          {MEMBER_LIST.map((item) => (
-            <>
-              <MovieMember image={item.image} name={item.name} />
-            </>
+          {credit.cast.map((item) => (
+            <MovieMember
+              key={item.id}
+              image={item.profile_path}
+              name={item.name}
+            />
           ))}
         </MovieMembersContainer>
         <ContentTitle>리뷰 및 평점</ContentTitle>
@@ -231,9 +224,18 @@ const PlotField = styled.div`
   margin-bottom: 28px;
 `;
 
+const DirectorContainer = styled.div`
+  width: 100%;
+  padding: 20px;
+  background-color: rgba(163, 163, 163, 0.1);
+  border-radius: 12px;
+  margin-bottom: 22px;
+`;
+
 const MovieMembersContainer = styled.div`
   display: flex;
   align-self: center;
+  justify-content: space-between;
   max-height: 204px;
   padding: 20px;
   background-color: rgba(163, 163, 163, 0.1);

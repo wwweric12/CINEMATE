@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 import MovieListCard from '../molecules/MovieListCard';
 import { ReactComponent as PrevSvg } from '../../assets/images/back.svg';
 import { ReactComponent as NextSvg } from '../../assets/images/next.svg';
-import { DefaultRecommendResult } from '../../types/GetMovieListPayload';
+import { MovieData } from '../../types/GetMovieListPayload';
 
 interface MovieListProps {
   isGenre?: boolean;
-  listData: DefaultRecommendResult[];
+  listData: MovieData[];
   genre?: string;
 }
 interface ScrollState {

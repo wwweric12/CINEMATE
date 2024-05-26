@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface MovieMemberProps {
-  image: string;
+  image?: string;
   name: string;
 }
 
@@ -18,15 +18,15 @@ export default MovieMember;
 
 const MovieMemberContainer = styled.div`
   display: flex;
-  width: 52px;
+  width: 54px;
   flex-direction: column;
   align-items: center;
   gap: 6px;
 `;
 
 const MemberImage = styled.img`
-  width: 52px;
-  height: 52px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
 `;
 
