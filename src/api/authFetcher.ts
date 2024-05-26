@@ -22,6 +22,8 @@ export const authFetcher = async ({ path, data }: AuthProps) => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       alert(error);
+    } else {
+      throw error;
     }
   }
 };
@@ -41,6 +43,8 @@ export const authDuplicatedFetcher = async ({
   } catch (error) {
     if (axios.isAxiosError(error)) {
       alert(error);
+    } else {
+      throw error;
     }
   }
 };
