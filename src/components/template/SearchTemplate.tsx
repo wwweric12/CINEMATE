@@ -14,7 +14,6 @@ const SearchTemplate = () => {
     setKeyword((value) => value.filter((item) => item.id !== id));
   };
   if (searchMovie && searchMovie?.length !== 0) {
-    console.log(searchMovie);
     return (
       <ListContainer>
         {searchMovie?.map((item) => (

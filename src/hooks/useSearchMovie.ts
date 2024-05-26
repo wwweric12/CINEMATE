@@ -1,7 +1,6 @@
 import { useQuery } from 'react-query';
 import { AxiosError } from 'axios';
 import { Axios } from '../util/axios/axios';
-import { MovieData } from '../types/GetMovieListPayload';
 import { GetSearchMoviePayload } from '../types/GetSearchMoviesPayload';
 
 interface FetchSearchProps {
