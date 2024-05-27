@@ -3,62 +3,34 @@ import HeartButton from '../atoms/HeartButton';
 import MovieGrade from '../atoms/MovieGrade';
 import MovieMember from '../atoms/MovieMember';
 import RatingMovie from '../organisms/RatingMovie';
-import SelectFilter, { SelectFilterProps } from '../molecules/SelectFilter';
+import SelectFilter, { SelectOption } from '../molecules/SelectFilter';
 import ReviewCard from '../organisms/ReviewCard';
 import { MovieData } from '../../types/GetMovieListPayload';
 import { Credit } from '../../types/GetMovieDetailPayload';
 import { PutRatingProps } from '../../api/ratingFetcher';
+import { Review } from '../../types/GetReviewPayload';
 
 interface MovieDetailTemplateProps {
   score: number;
+  orderby: SelectOption;
+  setOrderby: React.Dispatch<React.SetStateAction<SelectOption>>;
   setScore: React.Dispatch<React.SetStateAction<number>>;
   movie: MovieData;
   credit: Credit;
+  ReviewState: Review[];
   onHeartClick: () => void;
-  onSelectChange: (selectoption: SelectFilterProps['defaultOption']) => void;
   onRatingClick: ({ movieId, rating }: PutRatingProps) => void;
 }
 
-const REVIEW_DATA = [
-  {
-    id: 123,
-    reviewer: '김동영',
-    grade: 4.5,
-    content: '아니이건좀 아닌데',
-    count: 3,
-    date: 3,
-    isLiked: false,
-    isMine: false,
-  },
-  {
-    id: 123123,
-    reviewer: '김동영',
-    grade: 4.5,
-    content: '아니이건좀 아닌데',
-    count: 3,
-    date: 3,
-    isLiked: false,
-    isMine: false,
-  },
-  {
-    id: 123123123,
-    reviewer: '김동영',
-    grade: 4.5,
-    content: '아니이건좀 아닌데',
-    count: 3,
-    date: 3,
-    isLiked: false,
-    isMine: false,
-  },
-];
-
 const MovieDetailTemplate = ({
+  orderby,
+  setOrderby,
   score,
   setScore,
+  ReviewState,
   movie,
   credit,
   onHeartClick,
-  onSelectChange,
   onRatingClick,
 }: MovieDetailTemplateProps) => {
   const handleHeartClick = (id: number) => {};
@@ -113,22 +85,19 @@ const MovieDetailTemplate = ({
         <ReviewContainer>
           <ReviewHeader>
             <ReviewTitle>모든 리뷰</ReviewTitle>
-            <SelectFilter
-              defaultOption="latest"
-              onSelectChange={onSelectChange}
-            />
+            <SelectFilter defaultOption={orderby} setOrderby={setOrderby} />
           </ReviewHeader>
           <ReviewFieldContainer>
-            {REVIEW_DATA.map((item) => (
+            {ReviewState.map((item) => (
               <ReviewCard
                 key={item.id}
                 id={item.id}
-                reviewer={item.reviewer}
-                grade={item.grade}
+                reviewer={item.member.nickName}
+                grade={item.rating}
                 content={item.content}
-                count={item.count}
-                date={item.date}
-                isLiked={item.isLiked}
+                count={item.likes}
+                date={1}
+                isLiked={true}
                 isMine={item.isMine}
                 onHeartClick={() => handleHeartClick(item.id)}
               />

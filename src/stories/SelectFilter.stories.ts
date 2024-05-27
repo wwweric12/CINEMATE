@@ -14,6 +14,6 @@ export const Filter: Story = {
   name: 'SelectFilter',
   args: {
     defaultOption: 'latest',
-    onSelectChange: fn(),
+    setOrderby: fn(),
   },
 };
