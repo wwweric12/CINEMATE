@@ -7,6 +7,7 @@ import { useRating } from '../hooks/useRating';
 import { useReview } from '../hooks/useReview';
 import { SelectOption } from '../components/molecules/SelectFilter';
 import { DeleteReview } from '../api/reviewFetcher';
+import { PostMovieLike, PostReviewLike, ReviewProps } from '../api/likeFetcher';
 
 const MovieDetailPage = () => {
   const params = useParams<{ id: string }>();
@@ -24,7 +25,13 @@ const MovieDetailPage = () => {
     }
   }, [RatingState]);
 
-  const handleHeartClick = (id: string) => {};
+  const handleMovieHeartClick = async (movieId: number) => {
+    const res = await PostMovieLike({ movieId });
+  };
+
+  const handleReviewHeartClick = async ({ movieId, reviewId }: ReviewProps) => {
+    const res = await PostReviewLike({ movieId, reviewId });
+  };
 
   const handleRatingClick = ({ movieId, rating }: PutRatingProps) => {
     PutRating({ movieId, rating });
@@ -52,9 +59,10 @@ const MovieDetailPage = () => {
         ReviewState={ReviewState.data}
         movie={MovieDetailState?.data.movie}
         credit={MovieDetailState?.data.credit}
-        onHeartClick={() => handleHeartClick(movieId)}
+        onMovieHeartClick={handleMovieHeartClick}
         onRatingClick={handleRatingClick}
         onDeleteClick={handleDeleteClick}
+        onReviewHeartClick={handleReviewHeartClick}
       />
     )
   );

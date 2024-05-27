@@ -10,6 +10,7 @@ import { MovieData } from '../../types/GetMovieListPayload';
 import { Credit } from '../../types/GetMovieDetailPayload';
 import { PutRatingProps } from '../../api/ratingFetcher';
 import { Review } from '../../types/GetReviewPayload';
+import { ReviewProps } from '../../api/likeFetcher';
 
 interface MovieDetailTemplateProps {
   score: number;
@@ -19,9 +20,10 @@ interface MovieDetailTemplateProps {
   movie: MovieData;
   credit: Credit;
   ReviewState: Review[];
-  onHeartClick: () => void;
   onRatingClick: ({ movieId, rating }: PutRatingProps) => void;
   onDeleteClick: () => void;
+  onMovieHeartClick: (movieId: number) => void;
+  onReviewHeartClick: ({ movieId, reviewId }: ReviewProps) => void;
 }
 
 const MovieDetailTemplate = ({
@@ -32,12 +34,12 @@ const MovieDetailTemplate = ({
   ReviewState,
   movie,
   credit,
-  onHeartClick,
   onRatingClick,
   onDeleteClick,
+  onMovieHeartClick,
+  onReviewHeartClick,
 }: MovieDetailTemplateProps) => {
   const navigate = useNavigate();
-  const handleHeartClick = (id: number) => {};
   const handleModifyClick = () => {
     navigate(`/movies/${movie.id}/review`, { state: 'update' });
   };
@@ -54,7 +56,10 @@ const MovieDetailTemplate = ({
             </InfoLayout>
           </MovieInfoContainer>
           <ButtonImageLayout>
-            <HeartButton isLiked={true} onClick={onHeartClick} />
+            <HeartButton
+              isLiked={movie.isLiked}
+              onClick={() => onMovieHeartClick(movie.id)}
+            />
             <MovieImage src={movie.posterPath} />
           </ButtonImageLayout>
         </MovieHeaderField>
@@ -98,6 +103,7 @@ const MovieDetailTemplate = ({
               <ReviewCard
                 key={item.id}
                 id={item.id}
+                movieId={item.movieId}
                 reviewer={item.member.nickName}
                 grade={item.rating}
                 content={item.content}
@@ -107,7 +113,7 @@ const MovieDetailTemplate = ({
                 isMine={item.isMine}
                 onModifyClick={handleModifyClick}
                 onDeleteClick={onDeleteClick}
-                onHeartClick={() => handleHeartClick(item.id)}
+                onReviewHeartClick={onReviewHeartClick}
               />
             ))}
           </ReviewFieldContainer>
@@ -118,18 +124,6 @@ const MovieDetailTemplate = ({
 };
 
 export default MovieDetailTemplate;
-
-const Background = styled.div`
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-`;
 
 const BackgroundContainer = styled.div<{ image: string }>`
   position: relative;

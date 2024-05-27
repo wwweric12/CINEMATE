@@ -24,4 +24,5 @@ export interface MovieData {
   releaseDate: string;
   posterPath: string;
   overview: string;
+  isLiked?: boolean;
 }
