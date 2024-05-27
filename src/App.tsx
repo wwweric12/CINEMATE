@@ -14,6 +14,7 @@ import SignupPage from './pages/SignupPage';
 import MovieDetailPage from './pages/MovieDetailPage';
 import CreateReviewPage from './pages/CreateReviewPage';
 import SearchResultPage from './pages/SearchResultPage';
+import MovieSurveyPage from './pages/MovieSurveyPage';
 
 function App() {
   return (
@@ -27,13 +28,9 @@ function App() {
             <Route path="/signup/success" element={<SucessTemplate />} />
             <Route path="/survey/success" element={<SucessTemplate />} />
             <Route path="/survey/genre" element={<GenreSurveyTemplate />} />
-            <Route path="/survey/movies/:id" />
+            <Route path="/survey/movies" element={<MovieSurveyPage />} />
             <Route path="/search" element={<SearchTemplate />} />
             <Route path="/search/:movie" element={<SearchResultPage />} />
-            <Route
-              path="/survey/movies/:id"
-              element={<MovieSurveyTemplate />}
-            />
             <Route
               path="/mypage"
               element={<MypageTemplate name="김동영" review={2} movie={1} />}
