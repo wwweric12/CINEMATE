@@ -14,6 +14,7 @@ import LoginPage from './pages/LoginPage';
 import MovieListPage from './pages/MovieListPage';
 import SignupPage from './pages/SignupPage';
 import MovieDetailPage from './pages/MovieDetailPage';
+import CreateReviewPage from './pages/CreateReviewPage';
 
 function App() {
   return (
@@ -47,10 +48,7 @@ function App() {
               element={<MypageReviewsTemplate name="김동영" count={3} />}
             />
             <Route path="/movies/:id" element={<MovieDetailPage />} />
-            <Route
-              path="/movies/:id/review"
-              element={<CreateReviewTemplate />}
-            />
+            <Route path="/movies/:id/review" element={<CreateReviewPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

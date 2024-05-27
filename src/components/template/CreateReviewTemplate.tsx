@@ -5,15 +5,20 @@ import ReviewInput from '../molecules/ReviewInput';
 import PrimaryButton from '../atoms/PrimaryButton';
 import PrimaryModal from '../molecules/PrimaryModal';
 
-const CreateReviewTemplate = () => {
-  const [review, setReview] = useState('');
+interface CreateReviewTemplate {
+  review: string;
+  setReview: React.Dispatch<React.SetStateAction<string>>;
+  onReviewSubmit: () => void;
+}
+
+const CreateReviewTemplate = ({
+  review,
+  setReview,
+  onReviewSubmit,
+}: CreateReviewTemplate) => {
   const [modalState, setModalState] = useState(false);
   const handleInputChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setReview(e.target.value);
-  };
-  const handleReviewSubmit = () => {
-    setModalState(false);
-    // submit api 추가
   };
 
   return (
@@ -26,7 +31,10 @@ const CreateReviewTemplate = () => {
             cancelText="뒤로가기"
             checkText="작성하기"
             onCancelClick={() => setModalState(false)}
-            onCheckClick={handleReviewSubmit}
+            onCheckClick={() => {
+              onReviewSubmit();
+              setModalState(false);
+            }}
           />
         </Background>
       )}
@@ -46,8 +54,8 @@ const CreateReviewTemplate = () => {
               size="medium"
               type="button"
               onClick={() => setModalState(true)}
-              state
-              enabled
+              state={!!review}
+              enabled={!!review}
             >
               작성하기
             </PrimaryButton>

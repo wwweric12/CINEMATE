@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import GradeStar from '../atoms/GradeStar';
 import PrimaryButton from '../atoms/PrimaryButton';
 import { createArray } from '../../util/CreateArray';
@@ -17,7 +18,13 @@ const RatingMovie = ({
   score,
   setScore,
 }: RatingMovieProps) => {
+  const navigate = useNavigate();
+
   const starArray = createArray(5);
+  const handleButtonClick = () => {
+    navigate(`/movies/${movieId}/review`);
+  };
+
   return (
     <Container>
       <Text>평가하기</Text>
@@ -33,7 +40,13 @@ const RatingMovie = ({
           />
         ))}
       </StarContainer>
-      <PrimaryButton type="button" size="medium" state onClick={() => {}}>
+      <PrimaryButton
+        type="button"
+        size="medium"
+        state
+        enabled
+        onClick={handleButtonClick}
+      >
         리뷰 작성하기
       </PrimaryButton>
     </Container>
