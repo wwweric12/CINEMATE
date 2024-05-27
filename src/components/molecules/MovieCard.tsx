@@ -6,7 +6,7 @@ export interface MovieCardProps {
   id: number;
   movieImg: string;
   title: string;
-  date: number;
+  date?: number;
   grade: number;
   isLiked?: boolean;
   onCancelClick?: (id: number) => void;

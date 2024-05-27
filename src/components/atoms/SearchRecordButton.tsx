@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import CancelButton from './CancelButton';
 
 interface SearchRecordButtonProps {
@@ -12,7 +13,9 @@ const SearchRecordButton = ({
 }: SearchRecordButtonProps) => {
   return (
     <ButtonContainer>
-      <ButtonField>{text}</ButtonField>
+      <Link to={`/search/${text}`}>
+        <ButtonField>{text}</ButtonField>
+      </Link>
       <CancelButton onCancelClick={onKeywordRemove} />
     </ButtonContainer>
   );
