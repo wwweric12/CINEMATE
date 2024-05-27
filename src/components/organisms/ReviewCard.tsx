@@ -3,10 +3,12 @@ import { useState } from 'react';
 import etcSvg from '../../assets/images/etc.svg';
 import ReviewGrade from '../atoms/ReviewGrade';
 import HeartButton from '../atoms/HeartButton';
+import { ReviewProps } from '../../api/likeFetcher';
 import EtcButton from './EtcButton';
 
 interface ReviewCard {
   id: number;
+  movieId: number;
   reviewer: string;
   grade: number;
   content: string;
@@ -14,11 +16,14 @@ interface ReviewCard {
   count: number;
   isLiked?: boolean;
   isMine?: boolean;
-  onHeartClick: (id: number) => void;
+  onReviewHeartClick: ({ movieId, reviewId }: ReviewProps) => void;
+  onModifyClick?: () => void;
+  onDeleteClick?: () => void;
 }
 
 const ReviewCard = ({
   id,
+  movieId,
   reviewer,
   grade,
   content,
@@ -26,11 +31,26 @@ const ReviewCard = ({
   count,
   isLiked,
   isMine,
-  onHeartClick,
+  onReviewHeartClick,
+  onModifyClick,
+  onDeleteClick,
 }: ReviewCard) => {
   const [etcState, setEtcState] = useState(false);
   const handleEtc = () => {
     setEtcState((prev) => !prev);
+  };
+  const [likedState, setLikedState] = useState(isLiked);
+  const [heartCount, setHeartCount] = useState(count);
+
+  const handeHeartCount = () => {
+    if (!isMine) {
+      if (likedState) {
+        setHeartCount((prev) => prev - 1);
+      } else {
+        setHeartCount((prev) => prev + 1);
+      }
+      setLikedState((prev) => !prev);
+    }
   };
 
   return (
@@ -47,7 +67,12 @@ const ReviewCard = ({
             </Etc>
             {etcState && (
               <ButtonContainer>
-                <EtcButton />
+                {onDeleteClick && onModifyClick && (
+                  <EtcButton
+                    onDeleteClick={onDeleteClick}
+                    onModifyClick={onModifyClick}
+                  />
+                )}
               </ButtonContainer>
             )}
           </EtcContainer>
@@ -57,8 +82,15 @@ const ReviewCard = ({
       </CardHeader>
       <ReviewContent>{content}</ReviewContent>
       <CardFooter>
-        <HeartButton isLiked={isLiked} onClick={() => onHeartClick(id)} />
-        <LikeCount>{count}개</LikeCount>
+        <HeartButton
+          isMine={isMine}
+          isLiked={isLiked}
+          onClick={() => {
+            onReviewHeartClick({ movieId, reviewId: id });
+            handeHeartCount();
+          }}
+        />
+        <LikeCount>{heartCount}개</LikeCount>
       </CardFooter>
     </ReviewCardContainer>
   );

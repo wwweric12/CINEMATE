@@ -1,16 +1,25 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import { ReactComponent as FillHeartSvg } from '../../assets/images/fill_heart.svg';
 import { ReactComponent as EmptyHeartSvg } from '../../assets/images/heart.svg';
 
 interface HeartButtonProps {
+  isMine?: boolean;
   isLiked?: boolean;
   onClick: () => void;
 }
 
-const HeartButton = ({ isLiked, onClick }: HeartButtonProps) => {
+const HeartButton = ({ isMine, isLiked, onClick }: HeartButtonProps) => {
+  const [heart, setHeart] = useState(isLiked);
   return (
-    <ButtonContainer onClick={onClick}>
-      {isLiked ? <FillHeartSvg /> : <EmptyHeartSvg />}
+    <ButtonContainer
+      disabled={isMine}
+      onClick={() => {
+        onClick();
+        setHeart((prev) => !prev);
+      }}
+    >
+      {heart ? <FillHeartSvg /> : <EmptyHeartSvg />}
     </ButtonContainer>
   );
 };

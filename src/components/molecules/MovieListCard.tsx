@@ -9,6 +9,7 @@ export interface MovieListCardProps {
   title: string;
   grade: number;
   isLiked?: boolean;
+  onMovieHeartClick: (movieId: number) => void;
 }
 
 const MovieListCard = ({
@@ -17,8 +18,8 @@ const MovieListCard = ({
   title,
   grade,
   isLiked,
+  onMovieHeartClick,
 }: MovieListCardProps) => {
-  const handleHeart = () => {};
   return (
     <CardContainer>
       <Link to={`movies/${id}`}>
@@ -29,7 +30,7 @@ const MovieListCard = ({
           <Title>{title}</Title>
           <MovieGrade grade={grade} />
         </ContentBox>
-        <HeartButton isLiked={isLiked} onClick={handleHeart} />
+        <HeartButton isLiked={isLiked} onClick={() => onMovieHeartClick(id)} />
       </ContentContainer>
     </CardContainer>
   );

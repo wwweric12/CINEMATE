@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   ChangeEventHandler,
@@ -17,6 +17,7 @@ const MainLayout = () => {
   const hasFooter = ['/', '/search', '/mypage'];
   const hasNotHeaderPages = ['success'];
   const location = useLocation();
+  const params = useParams();
   const [searchInput, setSearchInput] = useState('');
   const [keyword, setKeyword] = useRecoilState(keywordState);
   const [searchMovie, setSearchMovie] = useRecoilState(searchState);
@@ -30,7 +31,11 @@ const MainLayout = () => {
   }, [SearchMovieState]);
 
   const handlePrevClick = () => {
-    navigate(-1);
+    if (location.pathname === `/movies/${params.id}`) {
+      navigate(`/`);
+    } else {
+      navigate(-1);
+    }
   };
 
   const handleSearchChange: ChangeEventHandler<HTMLInputElement> = (e) => {

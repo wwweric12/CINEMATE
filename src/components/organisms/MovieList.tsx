@@ -9,13 +9,19 @@ interface MovieListProps {
   isGenre?: boolean;
   listData: MovieData[];
   genre?: string;
+  onMovieHeartClick: (movieId: number) => void;
 }
 interface ScrollState {
   left: boolean;
   right: boolean;
 }
 
-const MovieList = ({ isGenre, listData, genre }: MovieListProps) => {
+const MovieList = ({
+  isGenre,
+  listData,
+  genre,
+  onMovieHeartClick,
+}: MovieListProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollState, setScrollState] = useState<ScrollState>({
     left: false,
@@ -80,7 +86,8 @@ const MovieList = ({ isGenre, listData, genre }: MovieListProps) => {
             img={item.posterPath}
             title={item.movieTitle}
             grade={item.rating}
-            isLiked={true} //아직 Api에 있지 않음 추후에 교체
+            isLiked={item.isLiked}
+            onMovieHeartClick={onMovieHeartClick}
           />
         ))}
       </MovieListBox>
@@ -116,8 +123,6 @@ const GenreName = styled.div`
   font-weight: 700;
   margin: 10px 40px;
 `;
-
-const MovieButton = styled.button``;
 
 const LeftScrollButton = styled.button`
   position: absolute;

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-type SelectOption = 'latest' | 'like' | 'old' | 'grade';
+export type SelectOption = 'latest' | 'like' | 'old' | 'grade';
 
 export interface SelectFilterProps {
   defaultOption: SelectOption;
-  onSelectChange: (selectoption: SelectFilterProps['defaultOption']) => void;
+  setOrderby: React.Dispatch<React.SetStateAction<SelectOption>>;
 }
 
 const OPTIONS: { value: SelectOption; name: string }[] = [
@@ -14,22 +14,18 @@ const OPTIONS: { value: SelectOption; name: string }[] = [
   { value: 'grade', name: '평점순' },
 ];
 
-const SelectFilter = ({ defaultOption, onSelectChange }: SelectFilterProps) => {
+const SelectFilter = ({ defaultOption, setOrderby }: SelectFilterProps) => {
   const handleSelectChange = (e: React.FormEvent<HTMLSelectElement>) => {
     const selectedOption = e.currentTarget
       .value as SelectFilterProps['defaultOption'];
-    onSelectChange(selectedOption);
+    setOrderby(selectedOption);
   };
 
   return (
     <SelectWrapper>
-      <SelectContainer onChange={handleSelectChange}>
+      <SelectContainer value={defaultOption} onChange={handleSelectChange}>
         {OPTIONS.map((item) => (
-          <SelectOption
-            key={item.value}
-            value={item.value}
-            defaultValue={defaultOption}
-          >
+          <SelectOption key={item.value} value={item.value}>
             {item.name}
           </SelectOption>
         ))}

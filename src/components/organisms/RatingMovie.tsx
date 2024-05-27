@@ -1,16 +1,29 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import GradeStar from '../atoms/GradeStar';
 import PrimaryButton from '../atoms/PrimaryButton';
 import { createArray } from '../../util/CreateArray';
+import { PutRatingProps } from '../../api/ratingFetcher';
 
 interface RatingMovieProps {
-  onReviewWrite: () => void;
+  movieId: number;
+  onRatingClick: ({ movieId, rating }: PutRatingProps) => void;
+  score: number;
+  setScore: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const RatingMovie = ({ onReviewWrite }: RatingMovieProps) => {
-  const [score, setScore] = useState<number>(0);
+const RatingMovie = ({
+  movieId,
+  onRatingClick,
+  score,
+  setScore,
+}: RatingMovieProps) => {
+  const navigate = useNavigate();
   const starArray = createArray(5);
+  const handleButtonClick = () => {
+    navigate(`/movies/${movieId}/review`);
+  };
+
   return (
     <Container>
       <Text>평가하기</Text>
@@ -18,13 +31,21 @@ const RatingMovie = ({ onReviewWrite }: RatingMovieProps) => {
         {starArray.map((index) => (
           <GradeStar
             key={index}
+            movieId={movieId}
             index={index + 1}
             score={score}
             setScore={setScore}
+            onRatingClick={onRatingClick}
           />
         ))}
       </StarContainer>
-      <PrimaryButton type="button" size="medium" state onClick={onReviewWrite}>
+      <PrimaryButton
+        type="button"
+        size="medium"
+        state={!!score}
+        enabled={!!score}
+        onClick={handleButtonClick}
+      >
         리뷰 작성하기
       </PrimaryButton>
     </Container>

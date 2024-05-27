@@ -55,6 +55,7 @@ const MypageReviewsTemplate = ({ name, count }: MypageReviewTemplateProps) => {
         {REVIEW_DATA.map((item) => (
           <ReviewCard
             key={item.id}
+            movieId={item.id}
             id={item.id}
             reviewer={item.reviewer}
             grade={item.grade}
@@ -63,7 +64,7 @@ const MypageReviewsTemplate = ({ name, count }: MypageReviewTemplateProps) => {
             date={item.date}
             isLiked={item.isLiked}
             isMine={item.isMine}
-            onHeartClick={() => handleHeartClick(item.id)}
+            onReviewHeartClick={() => handleHeartClick(item.id)}
           />
         ))}
       </ReviewContainer>

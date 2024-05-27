@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MovieListTemplate from '../components/template/MovieListTemplate';
 import { useRecommendMovie } from '../hooks/useRecommendMovie';
+import { PostMovieLike } from '../api/likeFetcher';
 
 const MovieListPage = () => {
   const navigate = useNavigate();
@@ -14,6 +15,10 @@ const MovieListPage = () => {
     }
   }, []);
 
+  const handleHeartClick = async (movieId: number) => {
+    const res = await PostMovieLike({ movieId });
+  };
+
   if (isMovieLoading) {
     return <div>Loding...</div>;
   }
@@ -24,6 +29,7 @@ const MovieListPage = () => {
   return (
     <>
       <MovieListTemplate
+        onMovieHeartClick={handleHeartClick}
         defaultRecommendResult={MovieState?.data.defaultRecommendResult}
         genreMovieLists={MovieState?.data.genreMovieLists}
       />

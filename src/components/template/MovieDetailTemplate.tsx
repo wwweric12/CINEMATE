@@ -1,132 +1,119 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import HeartButton from '../atoms/HeartButton';
 import MovieGrade from '../atoms/MovieGrade';
 import MovieMember from '../atoms/MovieMember';
 import RatingMovie from '../organisms/RatingMovie';
-import SelectFilter, { SelectFilterProps } from '../molecules/SelectFilter';
+import SelectFilter, { SelectOption } from '../molecules/SelectFilter';
 import ReviewCard from '../organisms/ReviewCard';
+import { MovieData } from '../../types/GetMovieListPayload';
+import { Credit } from '../../types/GetMovieDetailPayload';
+import { PutRatingProps } from '../../api/ratingFetcher';
+import { Review } from '../../types/GetReviewPayload';
+import { ReviewProps } from '../../api/likeFetcher';
 
-interface MovieDetailTemplate {
-  backgroundImg: string;
-  date: number;
-  title: string;
-  grade: number;
-  isLiked: boolean;
-  onHeartClick: () => void;
-  movieImg: string;
-  moviePlot: string;
-  onSelectChange: (selectoption: SelectFilterProps['defaultOption']) => void;
+interface MovieDetailTemplateProps {
+  score: number;
+  orderby: SelectOption;
+  setOrderby: React.Dispatch<React.SetStateAction<SelectOption>>;
+  setScore: React.Dispatch<React.SetStateAction<number>>;
+  movie: MovieData;
+  credit: Credit;
+  ReviewState: Review[];
+  onRatingClick: ({ movieId, rating }: PutRatingProps) => void;
+  onDeleteClick: () => void;
+  onMovieHeartClick: (movieId: number) => void;
+  onReviewHeartClick: ({ movieId, reviewId }: ReviewProps) => void;
 }
 
-const MEMBER_LIST = [
-  { image: '', name: '김남주' },
-  { image: '', name: '김남주' },
-  { image: '', name: '김남주' },
-  { image: '', name: '김남주' },
-  { image: '', name: '김남주' },
-];
-
-const REVIEW_DATA = [
-  {
-    id: 123,
-    reviewer: '김동영',
-    grade: 4.5,
-    content: '아니이건좀 아닌데',
-    count: 3,
-    date: 3,
-    isLiked: false,
-    isMine: false,
-  },
-  {
-    id: 123123,
-    reviewer: '김동영',
-    grade: 4.5,
-    content: '아니이건좀 아닌데',
-    count: 3,
-    date: 3,
-    isLiked: false,
-    isMine: false,
-  },
-  {
-    id: 123123123,
-    reviewer: '김동영',
-    grade: 4.5,
-    content: '아니이건좀 아닌데',
-    count: 3,
-    date: 3,
-    isLiked: false,
-    isMine: false,
-  },
-];
-
 const MovieDetailTemplate = ({
-  backgroundImg,
-  date,
-  title,
-  grade,
-  isLiked,
-  onHeartClick,
-  movieImg,
-  moviePlot,
-  onSelectChange,
-}: MovieDetailTemplate) => {
-  const handleReviewWrite = () => {};
-  const handleHeartClick = (id: number) => {};
-
+  orderby,
+  setOrderby,
+  score,
+  setScore,
+  ReviewState,
+  movie,
+  credit,
+  onRatingClick,
+  onDeleteClick,
+  onMovieHeartClick,
+  onReviewHeartClick,
+}: MovieDetailTemplateProps) => {
+  const navigate = useNavigate();
+  const handleModifyClick = () => {
+    navigate(`/movies/${movie.id}/review`, { state: 'update' });
+  };
   return (
     <>
-      <BackgroundContainer image={backgroundImg}>
+      <BackgroundContainer image={movie.backdropPath}>
         <BackgroundImage />
         <MovieHeaderField>
           <MovieInfoContainer>
-            <MovieDate>{date}</MovieDate>
+            <MovieDate>{movie.releaseDate}</MovieDate>
             <InfoLayout>
-              <MovieTitle>{title}</MovieTitle>
-              <MovieGrade grade={grade} />
+              <MovieTitle>{movie.movieTitle}</MovieTitle>
+              <MovieGrade grade={movie.rating} />
             </InfoLayout>
           </MovieInfoContainer>
           <ButtonImageLayout>
-            <HeartButton isLiked={isLiked} onClick={onHeartClick} />
-            <MovieImage src={movieImg} />
+            <HeartButton
+              isLiked={movie.isLiked}
+              onClick={() => onMovieHeartClick(movie.id)}
+            />
+            <MovieImage src={movie.posterPath} />
           </ButtonImageLayout>
         </MovieHeaderField>
       </BackgroundContainer>
       <FieldContainer>
         <ContentTitle>작품정보</ContentTitle>
-        <PlotField>{moviePlot}</PlotField>
-        <ContentTitle>감독 및 출연진</ContentTitle>
+        <PlotField>{movie.overview}</PlotField>
+        <ContentTitle>감독</ContentTitle>
+        <DirectorContainer>
+          <MovieMember
+            image={credit.crew[0].profile_path}
+            name={credit.crew[0].name}
+          />
+        </DirectorContainer>
+        <ContentTitle>출연진</ContentTitle>
         <MovieMembersContainer>
-          {MEMBER_LIST.map((item) => (
-            <>
-              <MovieMember image={item.image} name={item.name} />
-            </>
+          {credit.cast.map((item) => (
+            <MovieMember
+              key={item.id}
+              image={item.profile_path}
+              name={item.name}
+            />
           ))}
         </MovieMembersContainer>
         <ContentTitle>리뷰 및 평점</ContentTitle>
         <RatingMovieContainer>
-          <RatingMovie onReviewWrite={handleReviewWrite} />
+          <RatingMovie
+            movieId={movie.id}
+            onRatingClick={onRatingClick}
+            score={score}
+            setScore={setScore}
+          />
         </RatingMovieContainer>
         <ReviewContainer>
           <ReviewHeader>
             <ReviewTitle>모든 리뷰</ReviewTitle>
-            <SelectFilter
-              defaultOption="latest"
-              onSelectChange={onSelectChange}
-            />
+            <SelectFilter defaultOption={orderby} setOrderby={setOrderby} />
           </ReviewHeader>
           <ReviewFieldContainer>
-            {REVIEW_DATA.map((item) => (
+            {ReviewState.map((item) => (
               <ReviewCard
                 key={item.id}
                 id={item.id}
-                reviewer={item.reviewer}
-                grade={item.grade}
+                movieId={item.movieId}
+                reviewer={item.member.nickName}
+                grade={item.rating}
                 content={item.content}
-                count={item.count}
-                date={item.date}
+                count={item.likes}
+                date={1}
                 isLiked={item.isLiked}
                 isMine={item.isMine}
-                onHeartClick={() => handleHeartClick(item.id)}
+                onModifyClick={handleModifyClick}
+                onDeleteClick={onDeleteClick}
+                onReviewHeartClick={onReviewHeartClick}
               />
             ))}
           </ReviewFieldContainer>
@@ -231,9 +218,18 @@ const PlotField = styled.div`
   margin-bottom: 28px;
 `;
 
+const DirectorContainer = styled.div`
+  width: 100%;
+  padding: 20px;
+  background-color: rgba(163, 163, 163, 0.1);
+  border-radius: 12px;
+  margin-bottom: 22px;
+`;
+
 const MovieMembersContainer = styled.div`
   display: flex;
   align-self: center;
+  justify-content: space-between;
   max-height: 204px;
   padding: 20px;
   background-color: rgba(163, 163, 163, 0.1);

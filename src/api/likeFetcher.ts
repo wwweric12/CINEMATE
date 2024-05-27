@@ -1,0 +1,49 @@
+import axios from 'axios';
+import { Axios } from '../util/axios/axios';
+
+export interface ReviewProps {
+  movieId: number;
+  reviewId?: number;
+}
+
+export const PostMovieLike = async ({ movieId }: ReviewProps) => {
+  try {
+    const res = await Axios.post(
+      `api/movie/likes/${movieId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      },
+    );
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      alert(error);
+    } else {
+      throw error;
+    }
+  }
+};
+
+export const PostReviewLike = async ({ movieId, reviewId }: ReviewProps) => {
+  try {
+    const res = await Axios.post(
+      `api/review/likes/${movieId}/${reviewId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      },
+    );
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      alert(error);
+    } else {
+      throw error;
+    }
+  }
+};
