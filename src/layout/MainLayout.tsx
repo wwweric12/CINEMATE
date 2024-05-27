@@ -1,10 +1,17 @@
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { ChangeEventHandler, FormEventHandler, useState } from 'react';
+import {
+  ChangeEventHandler,
+  FormEventHandler,
+  useEffect,
+  useState,
+} from 'react';
 import { useRecoilState } from 'recoil';
 import Footer from '../components/organisms/Footer';
 import { Header } from '../components/organisms/Header';
 import { keywordState } from '../store/atoms/Keyword/state';
+import { useSearchMovie } from '../hooks/useSearchMovie';
+import { searchState } from '../store/atoms/Search/state';
 
 const MainLayout = () => {
   const hasFooter = ['/', '/search', '/mypage'];
@@ -13,7 +20,16 @@ const MainLayout = () => {
   const params = useParams();
   const [searchInput, setSearchInput] = useState('');
   const [keyword, setKeyword] = useRecoilState(keywordState);
+  const [searchMovie, setSearchMovie] = useRecoilState(searchState);
+  const { SearchMovieState } = useSearchMovie(searchInput);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (SearchMovieState?.data) {
+      setSearchMovie(SearchMovieState.data);
+    }
+  }, [SearchMovieState]);
+
   const handlePrevClick = () => {
     if (location.pathname === `/movies/${params.id}`) {
       navigate(`/`);
@@ -23,6 +39,9 @@ const MainLayout = () => {
   };
 
   const handleSearchChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (e.target.value === '') {
+      setSearchMovie([]);
+    }
     setSearchInput(e.target.value);
   };
 
@@ -32,9 +51,13 @@ const MainLayout = () => {
       id: Date.now(),
       text: searchInput,
     };
-    setKeyword((prev) => [...prev, newKeyword]);
+    setKeyword((prev) => {
+      const isDuplicate = prev.some((item) => item.text === newKeyword.text);
+      return isDuplicate ? prev : [...prev, newKeyword];
+    });
     navigate(`/search/${searchInput}`);
     setSearchInput('');
+    setSearchMovie([]);
   };
 
   return (
