@@ -2,13 +2,18 @@ import styled from 'styled-components';
 import union from '../../assets/images/union.svg';
 import PrimaryButton, { PrimaryButtonProps } from '../atoms/PrimaryButton';
 
-const EtcButton = () => {
+interface EtcButtonProps {
+  onModifyClick: () => void;
+  onDeleteClick: () => void;
+}
+
+const EtcButton = ({ onModifyClick, onDeleteClick }: EtcButtonProps) => {
   const REVIEW_SETTING: PrimaryButtonProps[] = [
     {
       type: 'button',
       children: '수정하기',
       onClick: () => {
-        handleModify();
+        onModifyClick();
       },
       state: false,
       size: 'small',
@@ -17,18 +22,12 @@ const EtcButton = () => {
       type: 'button',
       children: '삭제하기',
       onClick: () => {
-        handleDelete();
+        onDeleteClick();
       },
       state: true,
       size: 'small',
     },
   ];
-  const handleModify = () => {
-    console.log('수정');
-  };
-  const handleDelete = () => {
-    console.log('삭제');
-  };
 
   return (
     <>
@@ -40,6 +39,7 @@ const EtcButton = () => {
             type={item.type}
             onClick={item.onClick}
             state={item.state}
+            enabled
             size="small"
           >
             {item.children}

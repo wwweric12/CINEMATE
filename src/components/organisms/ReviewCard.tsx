@@ -15,6 +15,8 @@ interface ReviewCard {
   isLiked?: boolean;
   isMine?: boolean;
   onHeartClick: (id: number) => void;
+  onModifyClick?: () => void;
+  onDeleteClick?: () => void;
 }
 
 const ReviewCard = ({
@@ -27,6 +29,8 @@ const ReviewCard = ({
   isLiked,
   isMine,
   onHeartClick,
+  onModifyClick,
+  onDeleteClick,
 }: ReviewCard) => {
   const [etcState, setEtcState] = useState(false);
   const handleEtc = () => {
@@ -47,7 +51,12 @@ const ReviewCard = ({
             </Etc>
             {etcState && (
               <ButtonContainer>
-                <EtcButton />
+                {onDeleteClick && onModifyClick && (
+                  <EtcButton
+                    onDeleteClick={onDeleteClick}
+                    onModifyClick={onModifyClick}
+                  />
+                )}
               </ButtonContainer>
             )}
           </EtcContainer>

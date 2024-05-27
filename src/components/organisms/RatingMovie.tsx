@@ -19,7 +19,6 @@ const RatingMovie = ({
   setScore,
 }: RatingMovieProps) => {
   const navigate = useNavigate();
-
   const starArray = createArray(5);
   const handleButtonClick = () => {
     navigate(`/movies/${movieId}/review`);
@@ -43,8 +42,8 @@ const RatingMovie = ({
       <PrimaryButton
         type="button"
         size="medium"
-        state
-        enabled
+        state={!!score}
+        enabled={!!score}
         onClick={handleButtonClick}
       >
         리뷰 작성하기

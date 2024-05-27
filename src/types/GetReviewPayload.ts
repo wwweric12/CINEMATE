@@ -14,6 +14,7 @@ export interface Review {
   createdAt: string;
   modifiedAt: string;
   isMine: boolean;
+  isLiked: boolean;
 }
 
 export interface Member {

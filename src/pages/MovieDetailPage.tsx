@@ -6,6 +6,7 @@ import { PutRating, PutRatingProps } from '../api/ratingFetcher';
 import { useRating } from '../hooks/useRating';
 import { useReview } from '../hooks/useReview';
 import { SelectOption } from '../components/molecules/SelectFilter';
+import { DeleteReview } from '../api/reviewFetcher';
 
 const MovieDetailPage = () => {
   const params = useParams<{ id: string }>();
@@ -29,6 +30,11 @@ const MovieDetailPage = () => {
     PutRating({ movieId, rating });
   };
 
+  const handleDeleteClick = async () => {
+    const res = await DeleteReview(movieId);
+    alert(res?.message);
+  };
+
   if (isMovieDetailLoading || isRatingLoading || isReviewLoading) {
     return <div>Loding...</div>;
   }
@@ -48,6 +54,7 @@ const MovieDetailPage = () => {
         credit={MovieDetailState?.data.credit}
         onHeartClick={() => handleHeartClick(movieId)}
         onRatingClick={handleRatingClick}
+        onDeleteClick={handleDeleteClick}
       />
     )
   );

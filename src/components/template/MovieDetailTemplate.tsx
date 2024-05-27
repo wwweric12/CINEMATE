@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import HeartButton from '../atoms/HeartButton';
 import MovieGrade from '../atoms/MovieGrade';
 import MovieMember from '../atoms/MovieMember';
@@ -20,6 +21,7 @@ interface MovieDetailTemplateProps {
   ReviewState: Review[];
   onHeartClick: () => void;
   onRatingClick: ({ movieId, rating }: PutRatingProps) => void;
+  onDeleteClick: () => void;
 }
 
 const MovieDetailTemplate = ({
@@ -32,9 +34,13 @@ const MovieDetailTemplate = ({
   credit,
   onHeartClick,
   onRatingClick,
+  onDeleteClick,
 }: MovieDetailTemplateProps) => {
+  const navigate = useNavigate();
   const handleHeartClick = (id: number) => {};
-
+  const handleModifyClick = () => {
+    navigate(`/movies/${movie.id}/review`, { state: 'update' });
+  };
   return (
     <>
       <BackgroundContainer image={movie.backdropPath}>
@@ -97,8 +103,10 @@ const MovieDetailTemplate = ({
                 content={item.content}
                 count={item.likes}
                 date={1}
-                isLiked={true}
+                isLiked={item.isLiked}
                 isMine={item.isMine}
+                onModifyClick={handleModifyClick}
+                onDeleteClick={onDeleteClick}
                 onHeartClick={() => handleHeartClick(item.id)}
               />
             ))}
@@ -110,6 +118,18 @@ const MovieDetailTemplate = ({
 };
 
 export default MovieDetailTemplate;
+
+const Background = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
 
 const BackgroundContainer = styled.div<{ image: string }>`
   position: relative;

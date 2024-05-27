@@ -9,7 +9,6 @@ import MypageTemplate from './components/template/MypageTemplate';
 import MypageReviewsTemplate from './components/template/MypageReviewsTemplate';
 import MypageMoviesTemplate from './components/template/MypageMoviesTemplate';
 import SearchResultTemplate from './components/template/SearchResultTemplate';
-import CreateReviewTemplate from './components/template/CreateReviewTemplate';
 import LoginPage from './pages/LoginPage';
 import MovieListPage from './pages/MovieListPage';
 import SignupPage from './pages/SignupPage';
