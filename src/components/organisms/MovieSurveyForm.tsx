@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { useNavigate } from 'react-router-dom';
 import PrimaryButton from '../atoms/PrimaryButton';
 import {
   MovieState,
@@ -21,7 +20,6 @@ const MovieSurveyForm = ({
 }: MovieSurveyFormProps) => {
   const [surveyListData, setSurveyListData] =
     useRecoilState<SurveyListState>(surveyListState);
-  const navigate = useNavigate();
 
   const countSelectedMovie = (arr: MovieState[]) => {
     return arr.filter((value) => value.selected).length;

@@ -16,12 +16,12 @@ export interface MovieSurveyTemplateProps {
 
 const MovieSurveyTemplate = ({ surveyList }: MovieSurveyTemplateProps) => {
   const navigate = useNavigate();
-  const [movieList, setMovieList] =
+  const [surveyListData, setSurveyListData] =
     useRecoilState<SurveyListState>(surveyListState);
 
   useEffect(() => {
     const updateData = surveyList.map((item) => ({ ...item, selected: false }));
-    setMovieList((prev) => {
+    setSurveyListData((prev) => {
       return {
         ...prev,
         movie: updateData,
@@ -32,7 +32,6 @@ const MovieSurveyTemplate = ({ surveyList }: MovieSurveyTemplateProps) => {
   const handleSurveySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate('/survey/success');
-    console.log(movieList);
   };
 
   return (

@@ -34,8 +34,7 @@ const SignupPage = () => {
   ) => {
     const res = await authFetcher({ data, path: 'sign-up' });
     if (res.status === 200) {
-      navigate('/login');
-      alert('회원가입 성공!');
+      navigate('/signup/success');
     } else {
       alert(res.data);
     }
