@@ -2,42 +2,46 @@ import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import GenreSurveyImg from '../atoms/GenreSurveyImg';
-import { Genre, genreListState } from '../../store/atoms/Genre/state';
+import { Genre } from '../../store/atoms/Genre/state';
 import PrimaryButton from '../atoms/PrimaryButton';
 import { GENRE_LIST, GenreData } from '../../util/data/GenreDate';
+import {
+  SurveyListState,
+  surveyListState,
+} from '../../store/atoms/Movie/state';
 
 const GenreSurveyForm = () => {
-  const [genreList, setGenreList] = useRecoilState<Genre[]>(genreListState);
+  const [surveyListData, setSurveyListData] =
+    useRecoilState<SurveyListState>(surveyListState);
   const navigate = useNavigate();
   const countSelectedGenre = (obj: Genre[]) => {
     return obj.filter((value) => value.selected).length;
   };
 
   const handleSelectedGenre = (item: GenreData) => {
-    if (countSelectedGenre(genreList) < 3) {
-      setGenreList(
-        genreList.map((value) =>
+    if (countSelectedGenre(surveyListData.genre) < 3) {
+      setSurveyListData((prev) => ({
+        ...prev,
+        genre: prev.genre.map((value) =>
           value.key === item.type
             ? { ...value, selected: !value.selected }
             : value,
         ),
-      );
+      }));
     } else {
-      setGenreList(
-        genreList.map((value) => {
-          if (value.key === item.type) {
-            return { ...value, selected: false };
-          } else {
-            return value;
-          }
-        }),
-      );
+      setSurveyListData((prev) => ({
+        ...prev,
+        genre: prev.genre.map((value) =>
+          value.key === item.type ? { ...value, selected: false } : value,
+        ),
+      }));
     }
   };
 
   const handleSurveySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate('/survey/movies/1');
+    navigate('/survey/movies');
+    setSurveyListData((prev) => ({ ...prev, genre: surveyListData.genre }));
   };
 
   return (
@@ -53,8 +57,8 @@ const GenreSurveyForm = () => {
               name={item.name}
               src={item.image}
               isChecked={
-                genreList.find((value) => value.key === item.type)?.selected ||
-                false
+                surveyListData.genre.find((value) => value.key === item.type)
+                  ?.selected || false
               }
             />
           </GenreButton>
@@ -63,10 +67,10 @@ const GenreSurveyForm = () => {
       <PrimaryButton
         size="medium"
         type="submit"
-        state={countSelectedGenre(genreList) === 3}
-        enabled={countSelectedGenre(genreList) === 3}
+        state={countSelectedGenre(surveyListData.genre) === 3}
+        enabled={countSelectedGenre(surveyListData.genre) === 3}
       >
-        다음으로 1/3
+        다음으로
       </PrimaryButton>
     </FormContainer>
   );

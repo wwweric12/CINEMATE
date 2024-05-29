@@ -1,60 +1,50 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Description from '../atoms/Description';
 import MovieSurveyForm from '../organisms/MovieSurveyForm';
-import { MovieListState, movieListState } from '../../store/atoms/Movie/state';
+import { MovieData } from '../../types/GetMovieListPayload';
+import {
+  SurveyListState,
+  surveyListState,
+} from '../../store/atoms/Movie/state';
 
-export interface MovieSurveyData {
-  id: number;
-  image: string;
+export interface MovieSurveyTemplateProps {
+  surveyList: MovieData[];
 }
 
-export const MOCK_DATA: MovieSurveyData[] = [
-  { id: 1, image: '' },
-  { id: 2, image: '' },
-  { id: 3, image: '' },
-  { id: 4, image: '' },
-  { id: 5, image: '' },
-  { id: 6, image: '' },
-  { id: 7, image: '' },
-  { id: 8, image: '' },
-  { id: 9, image: '' },
-];
-
-const MovieSurveyTemplate = () => {
-  const [movieList, setMovieList] =
-    useRecoilState<MovieListState>(movieListState);
-  const param = useParams();
+const MovieSurveyTemplate = ({ surveyList }: MovieSurveyTemplateProps) => {
+  const navigate = useNavigate();
+  const [surveyListData, setSurveyListData] =
+    useRecoilState<SurveyListState>(surveyListState);
 
   useEffect(() => {
-    const updateData = MOCK_DATA.map((item) => ({ ...item, selected: false }));
-    if (param.id === '1') {
-      setMovieList((prev) => {
-        return {
-          ...prev,
-          first: updateData,
-        };
-      });
-    } else if (param.id === '2') {
-      setMovieList((prev) => {
-        return {
-          ...prev,
-          second: updateData,
-        };
-      });
-    }
-  }, [param]);
+    const updateData = surveyList.map((item) => ({ ...item, selected: false }));
+    setSurveyListData((prev) => {
+      return {
+        ...prev,
+        movie: updateData,
+      };
+    });
+  }, []);
+
+  const handleSurveySubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate('/survey/success');
+  };
 
   return (
     <TemplateContainer>
       <Description
         title="관심있는 영화를 선택해주세요"
-        content="최대 3가지의 영화를 선택하실 수 있습니다"
+        content="최대 6가지의 영화를 선택하실 수 있습니다"
         state="survey"
       />
-      <MovieSurveyForm />
+      <MovieSurveyForm
+        surveyList={surveyList}
+        onSurveySubmit={handleSurveySubmit}
+      />
     </TemplateContainer>
   );
 };
