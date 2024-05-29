@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import etcSvg from '../../assets/images/etc.svg';
 import ReviewGrade from '../atoms/ReviewGrade';
 import HeartButton from '../atoms/HeartButton';
@@ -17,8 +18,7 @@ interface ReviewCard {
   isLiked?: boolean;
   isMine?: boolean;
   onReviewHeartClick: ({ movieId, reviewId }: ReviewProps) => void;
-  onModifyClick?: () => void;
-  onDeleteClick?: () => void;
+  onDeleteClick?: (movieId: number) => void;
 }
 
 const ReviewCard = ({
@@ -32,15 +32,16 @@ const ReviewCard = ({
   isLiked,
   isMine,
   onReviewHeartClick,
-  onModifyClick,
   onDeleteClick,
 }: ReviewCard) => {
+  const navigate = useNavigate();
   const [etcState, setEtcState] = useState(false);
+  const [likedState, setLikedState] = useState(isLiked);
+  const [heartCount, setHeartCount] = useState(count);
+
   const handleEtc = () => {
     setEtcState((prev) => !prev);
   };
-  const [likedState, setLikedState] = useState(isLiked);
-  const [heartCount, setHeartCount] = useState(count);
 
   const handeHeartCount = () => {
     if (!isMine) {
@@ -51,6 +52,9 @@ const ReviewCard = ({
       }
       setLikedState((prev) => !prev);
     }
+  };
+  const handleModifyClick = () => {
+    navigate(`/movies/${movieId}/review`, { state: 'update' });
   };
 
   return (
@@ -67,10 +71,11 @@ const ReviewCard = ({
             </Etc>
             {etcState && (
               <ButtonContainer>
-                {onDeleteClick && onModifyClick && (
+                {onDeleteClick && (
                   <EtcButton
+                    movieId={movieId}
                     onDeleteClick={onDeleteClick}
-                    onModifyClick={onModifyClick}
+                    onModifyClick={handleModifyClick}
                   />
                 )}
               </ButtonContainer>

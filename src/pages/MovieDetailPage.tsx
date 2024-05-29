@@ -37,7 +37,7 @@ const MovieDetailPage = () => {
     PutRating({ movieId, rating });
   };
 
-  const handleDeleteClick = async () => {
+  const handleDeleteClick = async (movieId: number) => {
     const res = await DeleteReview(movieId);
     alert(res?.message);
   };

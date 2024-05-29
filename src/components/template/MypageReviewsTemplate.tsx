@@ -1,70 +1,44 @@
 import styled from 'styled-components';
 import DivideVector from '../atoms/DivideVector';
 import ReviewCard from '../organisms/ReviewCard';
+import { Review } from '../../types/GetReviewPayload';
 
 interface MypageReviewTemplateProps {
-  name: string;
-  count: number;
+  myReviewState: Review[];
+  onDeleteClick: (movieId: number) => void;
 }
 
-const REVIEW_DATA = [
-  {
-    id: 123,
-    reviewer: '김동영',
-    grade: 4.5,
-    content: '아니이건좀 아닌데',
-    count: 3,
-    date: 2024,
-    isLiked: false,
-    isMine: true,
-  },
-  {
-    id: 123123,
-    reviewer: '김동영',
-    grade: 4.5,
-    content: '아니이건좀 아닌데',
-    count: 3,
-    date: 2024,
-    isLiked: false,
-    isMine: true,
-  },
-  {
-    id: 123123123,
-    reviewer: '김동영',
-    grade: 4.5,
-    content: '아니이건좀 아닌데',
-    count: 3,
-    date: 2024,
-    isLiked: false,
-    isMine: true,
-  },
-];
-
-const MypageReviewsTemplate = ({ name, count }: MypageReviewTemplateProps) => {
+const MypageReviewsTemplate = ({
+  myReviewState,
+  onDeleteClick,
+}: MypageReviewTemplateProps) => {
   const handleHeartClick = (id: number) => {};
+
   return (
     <MypageContainer>
       <TextBox>
         <Text>
-          <EmphasisText>{name}</EmphasisText>
-          님의 리뷰는 총 <EmphasisText>{count}</EmphasisText> 개 입니다
+          <EmphasisText>{myReviewState[0].member.nickName}</EmphasisText>
+          님의 리뷰는 총 <EmphasisText>{myReviewState.length}</EmphasisText> 개
+          입니다
         </Text>
       </TextBox>
       <DivideVector />
       <ReviewContainer>
-        {REVIEW_DATA.map((item) => (
+        {myReviewState.map((item) => (
           <ReviewCard
             key={item.id}
-            movieId={item.id}
+            movieId={item.movieId}
             id={item.id}
-            reviewer={item.reviewer}
-            grade={item.grade}
+            reviewer={item.member.nickName}
+            grade={item.rating}
             content={item.content}
-            count={item.count}
-            date={item.date}
+            count={item.likes}
+            date={1}
             isLiked={item.isLiked}
             isMine={item.isMine}
             onReviewHeartClick={() => handleHeartClick(item.id)}
+            onDeleteClick={onDeleteClick}
           />
         ))}
       </ReviewContainer>
