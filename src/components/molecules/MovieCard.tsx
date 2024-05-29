@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import CancelButton from '../atoms/CancelButton';
 import MovieGrade from '../atoms/MovieGrade';
 
 export interface MovieCardProps {
   id: number;
+  isMypage?: boolean;
   movieImg: string;
   title: string;
   date?: number;
@@ -14,6 +16,7 @@ export interface MovieCardProps {
 
 const MovieCard = ({
   id,
+  isMypage,
   movieImg,
   title,
   date,
@@ -23,13 +26,29 @@ const MovieCard = ({
 }: MovieCardProps) => {
   return (
     <CardContainer>
-      <CardImage src={movieImg} />
+      {isMypage ? (
+        <Link to={`/movies/${id}`}>
+          <CardImage src={movieImg} />
+        </Link>
+      ) : (
+        <CardImage src={movieImg} />
+      )}
       <ContentContainer>
-        <ContentBox>
-          <MovieTitle>{title}</MovieTitle>
-          <MovieDate>{date}</MovieDate>
-          <MovieGrade grade={grade} />
-        </ContentBox>
+        {isMypage ? (
+          <Link to={`/movies/${id}`}>
+            <ContentBox>
+              <MovieTitle>{title}</MovieTitle>
+              <MovieDate>{date}</MovieDate>
+              <MovieGrade grade={grade} />
+            </ContentBox>
+          </Link>
+        ) : (
+          <ContentBox>
+            <MovieTitle>{title}</MovieTitle>
+            <MovieDate>{date}</MovieDate>
+            <MovieGrade grade={grade} />
+          </ContentBox>
+        )}
         {!isLiked && onCancelClick && (
           <CancelButton onCancelClick={() => onCancelClick(id)} />
         )}
@@ -60,6 +79,7 @@ const ContentContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 `;
 

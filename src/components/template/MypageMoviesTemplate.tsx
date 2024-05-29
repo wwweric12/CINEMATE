@@ -1,39 +1,37 @@
 import styled from 'styled-components';
 import DivideVector from '../atoms/DivideVector';
 import MovieCard from '../molecules/MovieCard';
-import MovieListCard from '../molecules/MovieListCard';
+import { MovieData } from '../../types/GetMovieListPayload';
 
 interface MypageMoviesTemplateProps {
-  count: number;
+  myMovieList: MovieData[];
+  onCancelClick: (id: number) => void;
 }
 
-const REVIEW_DATA = [
-  { id: 1, movieImg: '', title: '브레드 이발소', date: 2024, grade: 4.5 },
-  { id: 2, movieImg: '', title: '브레드 이발소', date: 2024, grade: 4.5 },
-  { id: 3, movieImg: '', title: '브레드 이발소', date: 2024, grade: 4.5 },
-  { id: 113431, movieImg: '', title: '브레드 이발소', date: 2024, grade: 4.5 },
-];
-
-const MypageMoviesTemplate = ({ count }: MypageMoviesTemplateProps) => {
-  const handleCancelClick = (id: number) => {};
+const MypageMoviesTemplate = ({
+  myMovieList,
+  onCancelClick,
+}: MypageMoviesTemplateProps) => {
   return (
     <MypageContainer>
       <TextBox>
         <Text>
-          좋아하는 영화는 총 <EmphasisText>{count}</EmphasisText> 개 입니다
+          좋아하는 영화는 총 <EmphasisText>{myMovieList.length}</EmphasisText>{' '}
+          개 입니다
         </Text>
       </TextBox>
       <DivideVector />
       <ReviewContainer>
-        {REVIEW_DATA.map((item) => (
+        {myMovieList.map((item) => (
           <MovieCard
             key={item.id}
             id={item.id}
-            movieImg={item.movieImg}
-            title={item.title}
-            date={item.date}
-            grade={item.grade}
-            onCancelClick={() => handleCancelClick(item.id)}
+            movieImg={item.posterPath}
+            title={item.movieTitle}
+            date={1}
+            grade={item.rating}
+            isMypage
+            onCancelClick={() => onCancelClick(item.id)}
           />
         ))}
       </ReviewContainer>
