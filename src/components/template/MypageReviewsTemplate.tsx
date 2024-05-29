@@ -13,14 +13,12 @@ const MypageReviewsTemplate = ({
   onDeleteClick,
 }: MypageReviewTemplateProps) => {
   const handleHeartClick = (id: number) => {};
-
   return (
     <MypageContainer>
       <TextBox>
         <Text>
-          <EmphasisText>{myReviewState[0].member.nickName}</EmphasisText>
-          님의 리뷰는 총 <EmphasisText>{myReviewState.length}</EmphasisText> 개
-          입니다
+          작성하신 리뷰는 총 <EmphasisText>{myReviewState.length}</EmphasisText>{' '}
+          개 입니다
         </Text>
       </TextBox>
       <DivideVector />

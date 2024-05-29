@@ -7,7 +7,7 @@ import HeartButton from '../atoms/HeartButton';
 import { ReviewProps } from '../../api/likeFetcher';
 import EtcButton from './EtcButton';
 
-interface ReviewCard {
+interface ReviewCardProps {
   id: number;
   movieId: number;
   reviewer: string;
@@ -33,7 +33,7 @@ const ReviewCard = ({
   isMine,
   onReviewHeartClick,
   onDeleteClick,
-}: ReviewCard) => {
+}: ReviewCardProps) => {
   const navigate = useNavigate();
   const [etcState, setEtcState] = useState(false);
   const [likedState, setLikedState] = useState(isLiked);
