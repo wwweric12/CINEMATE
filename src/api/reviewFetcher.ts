@@ -54,7 +54,7 @@ export const PutReview = async ({ movieId, content }: ReviewProps) => {
 };
 
 export const DeleteReview = async (
-  movieId: string,
+  movieId: number,
 ): Promise<DeleteReviewPayload | undefined> => {
   try {
     const res = await Axios.delete(`api/movie/${movieId}/review`, {

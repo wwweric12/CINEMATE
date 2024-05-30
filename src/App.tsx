@@ -4,8 +4,6 @@ import MainLayout from './layout/MainLayout';
 import GenreSurveyTemplate from './components/template/GenreSurveyTemplate';
 import SearchTemplate from './components/template/SearchTemplate';
 import MypageTemplate from './components/template/MypageTemplate';
-import MypageReviewsTemplate from './components/template/MypageReviewsTemplate';
-import MypageMoviesTemplate from './components/template/MypageMoviesTemplate';
 import LoginPage from './pages/LoginPage';
 import MovieListPage from './pages/MovieListPage';
 import SignupPage from './pages/SignupPage';
@@ -15,6 +13,9 @@ import SearchResultPage from './pages/SearchResultPage';
 import MovieSurveyPage from './pages/MovieSurveyPage';
 import SuccessSurveyPage from './pages/SuccessSurveyPage';
 import SuccessSignupPage from './pages/SuccessSignupPage';
+import MypageReviewsPage from './pages/MypageReviewsPage';
+import MypageMoviesPage from './pages/MypageMoviesPage';
+import Mypage from './pages/Mypage';
 
 function App() {
   return (
@@ -31,18 +32,9 @@ function App() {
             <Route path="/survey/movies" element={<MovieSurveyPage />} />
             <Route path="/search" element={<SearchTemplate />} />
             <Route path="/search/:movie" element={<SearchResultPage />} />
-            <Route
-              path="/mypage"
-              element={<MypageTemplate name="김동영" review={2} movie={1} />}
-            />
-            <Route
-              path="/mypage/movies"
-              element={<MypageMoviesTemplate count={3} />}
-            />
-            <Route
-              path="/mypage/reviews"
-              element={<MypageReviewsTemplate name="김동영" count={3} />}
-            />
+            <Route path="/mypage" element={<Mypage />} />
+            <Route path="/mypage/movies" element={<MypageMoviesPage />} />
+            <Route path="/mypage/reviews" element={<MypageReviewsPage />} />
             <Route path="/movies/:id" element={<MovieDetailPage />} />
             <Route path="/movies/:id/review" element={<CreateReviewPage />} />
           </Route>

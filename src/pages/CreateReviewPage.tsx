@@ -13,11 +13,11 @@ const CreateReviewPage = () => {
   const handleReviewSubmit = async () => {
     if (state === 'update') {
       await PutReview({ movieId, content: review });
+      navigate(-1);
     } else {
       const res = await PostReview({ movieId, content: review });
+      navigate(`/movies/${movieId}`);
     }
-
-    navigate(`/movies/${movieId}`);
   };
 
   return (

@@ -3,11 +3,16 @@ import union from '../../assets/images/union.svg';
 import PrimaryButton, { PrimaryButtonProps } from '../atoms/PrimaryButton';
 
 interface EtcButtonProps {
+  movieId: number;
   onModifyClick: () => void;
-  onDeleteClick: () => void;
+  onDeleteClick: (movieId: number) => void;
 }
 
-const EtcButton = ({ onModifyClick, onDeleteClick }: EtcButtonProps) => {
+const EtcButton = ({
+  movieId,
+  onModifyClick,
+  onDeleteClick,
+}: EtcButtonProps) => {
   const REVIEW_SETTING: PrimaryButtonProps[] = [
     {
       type: 'button',
@@ -22,7 +27,7 @@ const EtcButton = ({ onModifyClick, onDeleteClick }: EtcButtonProps) => {
       type: 'button',
       children: '삭제하기',
       onClick: () => {
-        onDeleteClick();
+        onDeleteClick(movieId);
       },
       state: true,
       size: 'small',

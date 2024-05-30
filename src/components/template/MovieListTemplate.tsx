@@ -37,7 +37,7 @@ const MovieListTemplate = ({
             key={item.genreId}
             isGenre
             listData={item.movieList}
-            genre={handleGenre(item.genreId)} //일단 아직 장르가 설정되지 않음
+            genre={handleGenre(item.genreId)}
           />
         ))}
       </GenreContainer>

@@ -2,27 +2,26 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import DivideVector from '../atoms/DivideVector';
 import MypageButton from '../molecules/MypageButton';
+import { MypageData } from '../../types/GetMypagePayload';
 
 interface MypageTemplateProps {
-  name: string;
-  review: number;
-  movie: number;
+  myPageData: MypageData;
 }
 
-const MypageTemplate = ({ name, review, movie }: MypageTemplateProps) => {
+const MypageTemplate = ({ myPageData }: MypageTemplateProps) => {
   return (
     <MypageContainer>
       <TextBox>
-        <Name>{name}</Name>
+        <Name>{myPageData.nickname}</Name>
         <Text> 님의 마이페이지</Text>
       </TextBox>
       <DivideVector />
       <ButtonContainer>
-        <Link to="/mypage/review">
-          <MypageButton count={review} content="작성한 리뷰" />
+        <Link to="/mypage/reviews">
+          <MypageButton count={myPageData.myReviews} content="작성한 리뷰" />
         </Link>
-        <Link to="/mypage/likemovie">
-          <MypageButton count={movie} content="좋아요한 영화" />
+        <Link to="/mypage/movies">
+          <MypageButton count={myPageData.likeMovies} content="좋아요한 영화" />
         </Link>
       </ButtonContainer>
     </MypageContainer>

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import HeartButton from '../atoms/HeartButton';
 import MovieGrade from '../atoms/MovieGrade';
 import MovieMember from '../atoms/MovieMember';
@@ -21,7 +20,7 @@ interface MovieDetailTemplateProps {
   credit: Credit;
   ReviewState: Review[];
   onRatingClick: ({ movieId, rating }: PutRatingProps) => void;
-  onDeleteClick: () => void;
+  onDeleteClick: (movieId: number) => void;
   onMovieHeartClick: (movieId: number) => void;
   onReviewHeartClick: ({ movieId, reviewId }: ReviewProps) => void;
 }
@@ -39,10 +38,6 @@ const MovieDetailTemplate = ({
   onMovieHeartClick,
   onReviewHeartClick,
 }: MovieDetailTemplateProps) => {
-  const navigate = useNavigate();
-  const handleModifyClick = () => {
-    navigate(`/movies/${movie.id}/review`, { state: 'update' });
-  };
   return (
     <>
       <BackgroundContainer image={movie.backdropPath}>
@@ -111,8 +106,7 @@ const MovieDetailTemplate = ({
                 date={1}
                 isLiked={item.isLiked}
                 isMine={item.isMine}
-                onModifyClick={handleModifyClick}
-                onDeleteClick={onDeleteClick}
+                onDeleteClick={() => onDeleteClick(item.movieId)}
                 onReviewHeartClick={onReviewHeartClick}
               />
             ))}

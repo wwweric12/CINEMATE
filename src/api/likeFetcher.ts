@@ -1,12 +1,15 @@
 import axios from 'axios';
 import { Axios } from '../util/axios/axios';
+import { PostLikeMoviePayload } from '../types/PostLikeMoviePayload';
 
 export interface ReviewProps {
   movieId: number;
   reviewId?: number;
 }
 
-export const PostMovieLike = async ({ movieId }: ReviewProps) => {
+export const PostMovieLike = async ({
+  movieId,
+}: ReviewProps): Promise<PostLikeMoviePayload | undefined> => {
   try {
     const res = await Axios.post(
       `api/movie/likes/${movieId}`,
