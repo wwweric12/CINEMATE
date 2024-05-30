@@ -6,6 +6,7 @@ import { keywordState } from '../../store/atoms/Keyword/state';
 import SearchRecordButton from '../atoms/SearchRecordButton';
 import { searchState } from '../../store/atoms/Search/state';
 import SearchCard from '../atoms/SearchCard';
+import { validArray } from '../../util/validArray';
 
 const SearchTemplate = () => {
   const [searchMovie, setSearchMovie] = useRecoilState(searchState);
@@ -13,7 +14,7 @@ const SearchTemplate = () => {
   const handleDeleteKeyword = (id: number) => {
     setKeyword((value) => value.filter((item) => item.id !== id));
   };
-  if (searchMovie && searchMovie?.length !== 0) {
+  if (validArray(searchMovie)) {
     return (
       <ListContainer>
         {searchMovie?.map((item) => (

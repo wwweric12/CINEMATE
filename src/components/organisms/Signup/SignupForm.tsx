@@ -41,7 +41,8 @@ const SignupForm = ({
   });
 
   const handleSubmitButton = () => {
-    return !!email && !!nickName && !!password;
+    const array = [email, nickName, password];
+    return array.every((item) => item);
   };
 
   const handleDuplicatedInput = (type: keyof SignupInput) => {

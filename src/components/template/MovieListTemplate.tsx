@@ -13,7 +13,7 @@ const MovieListTemplate = ({
   genreMovieLists,
   onMovieHeartClick,
 }: MovieListTemplateProps) => {
-  const handleGenre = (genreId: number) => {
+  const getGenreName = (genreId: number) => {
     const genre = GENRE_LIST.filter((item) => item.id === genreId);
     return genre[0].name;
   };
@@ -37,7 +37,7 @@ const MovieListTemplate = ({
             key={item.genreId}
             isGenre
             listData={item.movieList}
-            genre={handleGenre(item.genreId)}
+            genre={getGenreName(item.genreId)}
           />
         ))}
       </GenreContainer>
