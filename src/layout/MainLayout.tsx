@@ -74,7 +74,9 @@ const MainLayout = () => {
         />
       )}
       <Outlet />
-      {hasFooter.includes(location.pathname) && <Footer />}
+      {hasFooter.includes(location.pathname) && (
+        <Footer path={location.pathname} />
+      )}
     </Container>
   );
 };

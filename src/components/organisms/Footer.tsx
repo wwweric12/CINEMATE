@@ -1,25 +1,37 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import FooterButtons, { FooterButtonProps } from '../atoms/FooterButton';
 
-const Footer = () => {
+interface FooterProps {
+  path: string;
+}
+
+const Footer = ({ path }: FooterProps) => {
+  const navigate = useNavigate();
   const footer: FooterButtonProps[] = [
     {
       type: 'home',
       text: '홈',
-      isSelected: true,
-      onClick: () => {},
+      path: '/',
+      onClick: () => {
+        navigate('/');
+      },
     },
     {
       type: 'search',
       text: '검색',
-      isSelected: false,
-      onClick: () => {},
+      path: '/search',
+      onClick: () => {
+        navigate('/search');
+      },
     },
     {
       type: 'mypage',
       text: '마이페이지',
-      isSelected: false,
-      onClick: () => {},
+      path: '/mypage',
+      onClick: () => {
+        navigate('/mypage');
+      },
     },
   ];
 
@@ -31,7 +43,7 @@ const Footer = () => {
           key={item.type}
           type={item.type}
           text={item.text}
-          isSelected={item.isSelected}
+          isSelected={item.path === path}
         />
       ))}
     </FooterContainer>
