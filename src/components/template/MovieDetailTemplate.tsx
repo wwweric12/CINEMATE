@@ -18,7 +18,7 @@ interface MovieDetailTemplateProps {
   setScore: React.Dispatch<React.SetStateAction<number>>;
   movie: MovieData;
   credit: Credit;
-  ReviewState: Review[];
+  reviewState: Review[];
   onRatingClick: ({ movieId, rating }: PutRatingProps) => void;
   onDeleteClick: (movieId: number) => void;
   onMovieHeartClick: (movieId: number) => void;
@@ -30,7 +30,7 @@ const MovieDetailTemplate = ({
   setOrderby,
   score,
   setScore,
-  ReviewState,
+  reviewState,
   movie,
   credit,
   onRatingClick,
@@ -94,7 +94,7 @@ const MovieDetailTemplate = ({
             <SelectFilter defaultOption={orderby} setOrderby={setOrderby} />
           </ReviewHeader>
           <ReviewFieldContainer>
-            {ReviewState.map((item) => (
+            {reviewState.map((item) => (
               <ReviewCard
                 key={item.id}
                 id={item.id}

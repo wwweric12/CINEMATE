@@ -21,14 +21,14 @@ const MainLayout = () => {
   const [searchInput, setSearchInput] = useState('');
   const [keyword, setKeyword] = useRecoilState(keywordState);
   const [searchMovie, setSearchMovie] = useRecoilState(searchState);
-  const { SearchMovieState } = useSearchMovie(searchInput);
+  const { searchMovieState } = useSearchMovie(searchInput);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (SearchMovieState?.data) {
-      setSearchMovie(SearchMovieState.data);
+    if (searchMovieState?.data) {
+      setSearchMovie(searchMovieState.data);
     }
-  }, [SearchMovieState]);
+  }, [searchMovieState]);
 
   const handlePrevClick = () => {
     if (location.pathname === `/movies/${params.id}`) {

@@ -5,11 +5,11 @@ import { useSearchMovie } from '../hooks/useSearchMovie';
 const SearchResultPage = () => {
   const params = useParams<{ movie: string }>();
   const movieTitle = params.movie || '';
-  const { SearchMovieState } = useSearchMovie(movieTitle);
+  const { searchMovieState } = useSearchMovie(movieTitle);
   return (
     <>
-      {SearchMovieState?.data && (
-        <SearchResultTemplate searchMovieList={SearchMovieState?.data} />
+      {searchMovieState?.data && (
+        <SearchResultTemplate searchMovieList={searchMovieState?.data} />
       )}
     </>
   );

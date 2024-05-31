@@ -6,7 +6,7 @@ import { PostMovieLike } from '../api/likeFetcher';
 
 const MovieListPage = () => {
   const navigate = useNavigate();
-  const { isMovieLoading, MovieState } = useRecommendMovie();
+  const { isMovieLoading, movieState } = useRecommendMovie();
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
     if (!token) {
@@ -22,7 +22,7 @@ const MovieListPage = () => {
   if (isMovieLoading) {
     return <div>Loding...</div>;
   }
-  if (!MovieState) {
+  if (!movieState) {
     return null;
   }
 
@@ -30,8 +30,8 @@ const MovieListPage = () => {
     <>
       <MovieListTemplate
         onMovieHeartClick={handleHeartClick}
-        defaultRecommendResult={MovieState?.data.defaultRecommendResult}
-        genreMovieLists={MovieState?.data.genreMovieLists}
+        defaultRecommendResult={movieState?.data.defaultRecommendResult}
+        genreMovieLists={movieState?.data.genreMovieLists}
       />
     </>
   );

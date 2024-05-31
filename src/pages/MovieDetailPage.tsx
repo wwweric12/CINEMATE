@@ -14,16 +14,16 @@ const MovieDetailPage = () => {
   const movieId = params.id || '';
   const [orderby, setOrderby] = useState<SelectOption>('latest');
 
-  const { isRatingLoading, RatingState } = useRating(movieId);
-  const { isMovieDetailLoading, MovieDetailState } = useMovieDetail(movieId);
-  const { isReviewLoading, ReviewState } = useReview({ movieId, orderby });
-  const [score, setScore] = useState<number>(RatingState?.data || 0);
+  const { isRatingLoading, ratingState } = useRating(movieId);
+  const { isMovieDetailLoading, movieDetailState } = useMovieDetail(movieId);
+  const { isReviewLoading, reviewState } = useReview({ movieId, orderby });
+  const [score, setScore] = useState<number>(ratingState?.data || 0);
 
   useEffect(() => {
-    if (RatingState !== undefined) {
-      setScore(RatingState.data);
+    if (ratingState !== undefined) {
+      setScore(ratingState.data);
     }
-  }, [RatingState]);
+  }, [ratingState]);
 
   const handleMovieHeartClick = async (movieId: number) => {
     const res = await PostMovieLike({ movieId });
@@ -45,20 +45,20 @@ const MovieDetailPage = () => {
   if (isMovieDetailLoading || isRatingLoading || isReviewLoading) {
     return <div>Loding...</div>;
   }
-  if (!MovieDetailState || !RatingState || !ReviewState) {
+  if (!movieDetailState || !ratingState || !reviewState) {
     return null;
   }
 
   return (
-    MovieDetailState?.data && (
+    movieDetailState?.data && (
       <MovieDetailTemplate
         score={score}
         setScore={setScore}
         orderby={orderby}
         setOrderby={setOrderby}
-        ReviewState={ReviewState.data}
-        movie={MovieDetailState?.data.movie}
-        credit={MovieDetailState?.data.credit}
+        reviewState={reviewState.data}
+        movie={movieDetailState?.data.movie}
+        credit={movieDetailState?.data.credit}
         onMovieHeartClick={handleMovieHeartClick}
         onRatingClick={handleRatingClick}
         onDeleteClick={handleDeleteClick}

@@ -26,7 +26,7 @@ export const useSearchMovie = (title: string) => {
   const {
     isLoading: isSearchMovieLoading,
     isError: isSearchMovieError,
-    data: SearchMovieState,
+    data: searchMovieState,
     isSuccess,
   } = useQuery<GetSearchMoviePayload, AxiosError>(
     ['movieList', { token, title }],
@@ -36,7 +36,7 @@ export const useSearchMovie = (title: string) => {
   return {
     isSearchMovieLoading,
     isSearchMovieError,
-    SearchMovieState,
+    searchMovieState,
     isSuccess,
   };
 };

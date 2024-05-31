@@ -21,7 +21,7 @@ export const useSurveyMovie = () => {
   const {
     isLoading: isSurveyMovieLoading,
     isError: isSurveyMovieError,
-    data: SurveyMovieState,
+    data: surveyMovieState,
     isSuccess,
   } = useQuery<GetSurveyMoviePayload, AxiosError>(
     ['surveylist', { token }],
@@ -31,7 +31,7 @@ export const useSurveyMovie = () => {
   return {
     isSurveyMovieLoading,
     isSurveyMovieError,
-    SurveyMovieState,
+    surveyMovieState,
     isSuccess,
   };
 };

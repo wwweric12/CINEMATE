@@ -22,7 +22,7 @@ export const useMovieDetail = (movieId: string) => {
   const {
     isLoading: isMovieDetailLoading,
     isError: isMovieDetailError,
-    data: MovieDetailState,
+    data: movieDetailState,
     isSuccess,
   } = useQuery<GetMovieDetailPayload, AxiosError>(
     ['movieDetail', { token, movieId }],
@@ -32,7 +32,7 @@ export const useMovieDetail = (movieId: string) => {
   return {
     isMovieDetailLoading,
     isMovieDetailError,
-    MovieDetailState,
+    movieDetailState,
     isSuccess,
   };
 };

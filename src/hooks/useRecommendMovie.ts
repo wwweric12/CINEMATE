@@ -17,7 +17,7 @@ export const useRecommendMovie = () => {
   const {
     isLoading: isMovieLoading,
     isError: isMovieError,
-    data: MovieState,
+    data: movieState,
     isSuccess,
   } = useQuery<GetMovieListPayload, AxiosError>(
     ['movieList', token],
@@ -27,5 +27,5 @@ export const useRecommendMovie = () => {
     },
   );
 
-  return { isMovieLoading, isMovieError, MovieState, isSuccess };
+  return { isMovieLoading, isMovieError, movieState, isSuccess };
 };
