@@ -7,6 +7,7 @@ import { theme } from '../../styles/theme';
 export interface FooterButtonProps {
   text: string;
   type: 'home' | 'search' | 'mypage';
+  path?: '/' | '/search' | '/mypage';
   isSelected?: boolean;
   onClick: () => void;
 }
