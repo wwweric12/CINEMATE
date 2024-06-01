@@ -5,6 +5,7 @@ import etcSvg from '../../assets/images/etc.svg';
 import ReviewGrade from '../atoms/ReviewGrade';
 import HeartButton from '../atoms/HeartButton';
 import { ReviewProps } from '../../api/likeFetcher';
+import { formatTime } from '../../util/date';
 import EtcButton from './EtcButton';
 
 interface ReviewCardProps {
@@ -13,7 +14,7 @@ interface ReviewCardProps {
   reviewer: string;
   grade: number;
   content: string;
-  date: number;
+  date: Date;
   count: number;
   isLiked?: boolean;
   isMine?: boolean;
@@ -82,7 +83,7 @@ const ReviewCard = ({
             )}
           </EtcContainer>
         ) : (
-          <ReviewDate>{date}일전</ReviewDate>
+          <ReviewDate>{formatTime(date)}</ReviewDate>
         )}
       </CardHeader>
       <ReviewContent>{content}</ReviewContent>

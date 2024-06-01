@@ -18,6 +18,7 @@ const SearchResultTemplate = ({ searchMovieList }: SearchResultTemplate) => {
           <Link to={`/movies/${item.id}`} key={item.id}>
             <MovieCard
               id={item.id}
+              date={item.releaseDate}
               movieImg={item.posterPath}
               title={item.movieTitle}
               grade={item.rating}

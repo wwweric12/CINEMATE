@@ -15,7 +15,7 @@ export interface Movie {
   backdropPath: string;
   originalTitle: string;
   movieTitle: string;
-  releaseDate: string;
+  releaseDate: Date;
   posterPath: string;
   overview: string;
 }

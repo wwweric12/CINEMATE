@@ -2,13 +2,14 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import CancelButton from '../atoms/CancelButton';
 import MovieGrade from '../atoms/MovieGrade';
+import { getYearFromDate } from '../../util/date';
 
 export interface MovieCardProps {
   id: number;
   isMypage?: boolean;
   movieImg: string;
   title: string;
-  date?: number;
+  date: Date;
   grade: number;
   isLiked?: boolean;
   onCancelClick?: (id: number) => void;
@@ -38,14 +39,14 @@ const MovieCard = ({
           <Link to={`/movies/${id}`}>
             <ContentBox>
               <MovieTitle>{title}</MovieTitle>
-              <MovieDate>{date}</MovieDate>
+              <MovieDate>{getYearFromDate(date)}</MovieDate>
               <MovieGrade grade={grade} />
             </ContentBox>
           </Link>
         ) : (
           <ContentBox>
             <MovieTitle>{title}</MovieTitle>
-            <MovieDate>{date}</MovieDate>
+            <MovieDate>{getYearFromDate(date)}</MovieDate>
             <MovieGrade grade={grade} />
           </ContentBox>
         )}

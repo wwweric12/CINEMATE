@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import DivideVector from '../atoms/DivideVector';
 import MovieCard from '../molecules/MovieCard';
-import { MovieData } from '../../types/GetMovieListPayload';
+import { Movie } from '../../types/GetMyMoviesPayload';
 
 interface MypageMoviesTemplateProps {
-  myMovieList: MovieData[];
+  myMovieList: Movie[];
   onCancelClick: (id: number) => void;
 }
 
@@ -28,7 +28,7 @@ const MypageMoviesTemplate = ({
             id={item.id}
             movieImg={item.posterPath}
             title={item.movieTitle}
-            date={1}
+            date={item.releaseDate}
             grade={item.rating}
             isMypage
             onCancelClick={() => onCancelClick(item.id)}

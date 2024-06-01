@@ -10,6 +10,7 @@ import { Credit } from '../../types/GetMovieDetailPayload';
 import { PutRatingProps } from '../../api/ratingFetcher';
 import { Review } from '../../types/GetReviewPayload';
 import { ReviewProps } from '../../api/likeFetcher';
+import { getYearFromDate } from '../../util/date';
 
 interface MovieDetailTemplateProps {
   score: number;
@@ -44,7 +45,7 @@ const MovieDetailTemplate = ({
         <BackgroundImage />
         <MovieHeaderField>
           <MovieInfoContainer>
-            <MovieDate>{movie.releaseDate}</MovieDate>
+            <MovieDate>{getYearFromDate(movie.releaseDate)}</MovieDate>
             <InfoLayout>
               <MovieTitle>{movie.movieTitle}</MovieTitle>
               <MovieGrade grade={movie.rating} />
@@ -103,7 +104,7 @@ const MovieDetailTemplate = ({
                 grade={item.rating}
                 content={item.content}
                 count={item.likes}
-                date={1}
+                date={item.createdAt}
                 isLiked={item.isLiked}
                 isMine={item.isMine}
                 onDeleteClick={() => onDeleteClick(item.movieId)}

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import GradeStar from '../atoms/GradeStar';
 import PrimaryButton from '../atoms/PrimaryButton';
-import { createArray } from '../../util/CreateArray';
+import { createArray } from '../../util/createArray';
 import { PutRatingProps } from '../../api/ratingFetcher';
 
 interface RatingMovieProps {
