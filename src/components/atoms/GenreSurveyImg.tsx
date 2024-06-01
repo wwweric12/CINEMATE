@@ -26,7 +26,7 @@ export default GenreSurveyImg;
 
 const SurveyImgContainer = styled.div`
   position: relative;
-  min-width: 86px;
+  width: 86px;
   height: 86px;
   border-radius: 14px;
 `;
