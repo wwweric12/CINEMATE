@@ -4,6 +4,7 @@ import MovieListCard from '../molecules/MovieListCard';
 import { ReactComponent as PrevSvg } from '../../assets/images/back.svg';
 import { ReactComponent as NextSvg } from '../../assets/images/next.svg';
 import { MovieData } from '../../types/GetMovieListPayload';
+import { noPosterImage } from '../../util/noImage';
 
 interface MovieListProps {
   isGenre?: boolean;
@@ -64,6 +65,7 @@ const MovieList = ({
     }
   };
 
+
   return (
     <MovieListContainer>
       {scrollState.left && (
@@ -83,7 +85,7 @@ const MovieList = ({
           <MovieListCard
             key={item.id}
             id={item.id}
-            img={item.posterPath}
+            img={noPosterImage(item.posterPath)} 
             title={item.movieTitle}
             grade={item.rating}
             isLiked={item.isLiked}

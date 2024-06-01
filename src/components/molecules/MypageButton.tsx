@@ -3,12 +3,13 @@ import next from '../../assets/images/next.svg';
 
 interface MypageProps {
   content: string;
-  count: number;
+  count?: number;
+  onClick:()=>void;
 }
 
-const MypageButton = ({ content, count }: MypageProps) => {
+const MypageButton = ({ content, count,onClick }: MypageProps) => {
   return (
-    <ButtonContainer>
+    <ButtonContainer onClick={onClick}>
       <ContentContainer>
         <ButtonContent>{content}</ButtonContent>
         <ContentCount>{count}</ContentCount>
