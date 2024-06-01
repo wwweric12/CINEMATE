@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import DivideVector from '../atoms/DivideVector';
 import ReviewCard from '../organisms/ReviewCard';
 import { Review } from '../../types/GetReviewPayload';
@@ -12,7 +13,6 @@ const MypageReviewsTemplate = ({
   myReviewState,
   onDeleteClick,
 }: MypageReviewTemplateProps) => {
-  const handleHeartClick = (id: number) => {};
   return (
     <MypageContainer>
       <TextBox>
@@ -24,8 +24,8 @@ const MypageReviewsTemplate = ({
       <DivideVector />
       <ReviewContainer>
         {myReviewState.map((item) => (
+          <Link to={`/movies/${item.movieId}`} key={item.id}>
           <ReviewCard
-            key={item.id}
             movieId={item.movieId}
             id={item.id}
             reviewer={item.member.nickName}
@@ -35,9 +35,9 @@ const MypageReviewsTemplate = ({
             date={item.createdAt}
             isLiked={item.isLiked}
             isMine={item.isMine}
-            onReviewHeartClick={() => handleHeartClick(item.id)}
             onDeleteClick={onDeleteClick}
           />
+          </Link>
         ))}
       </ReviewContainer>
     </MypageContainer>

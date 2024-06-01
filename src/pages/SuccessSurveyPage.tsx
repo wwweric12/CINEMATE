@@ -34,7 +34,6 @@ const SuccessSurveyPage = () => {
   const handleSurveySubmit = () => {
     const { movieIds, genreIds } = handleSelectedSurvey();
     const res = PostSurvey({ movieIds, genreIds });
-    console.log(res);
     navigate('/');
   };
 

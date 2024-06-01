@@ -40,7 +40,6 @@ const MovieDetailTemplate = ({
   onMovieHeartClick,
   onReviewHeartClick,
 }: MovieDetailTemplateProps) => {
-  console.log(reviewState);
   return (
     <>
       <BackgroundContainer image={movie.backdropPath}>

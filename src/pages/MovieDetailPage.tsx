@@ -50,22 +50,20 @@ const MovieDetailPage = () => {
   }
 
   return (
-    movieDetailState?.data && (
       <MovieDetailTemplate
         score={score}
         setScore={setScore}
         orderby={orderby}
         setOrderby={setOrderby}
         reviewState={reviewState.data}
-        movie={movieDetailState?.data.movie}
-        credit={movieDetailState?.data.credit}
+        movie={movieDetailState.data.movie}
+        credit={movieDetailState.data.credit}
         onMovieHeartClick={handleMovieHeartClick}
         onRatingClick={handleRatingClick}
         onDeleteClick={handleDeleteClick}
         onReviewHeartClick={handleReviewHeartClick}
       />
     )
-  );
 };
 
 export default MovieDetailPage;

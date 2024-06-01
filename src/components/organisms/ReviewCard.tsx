@@ -18,7 +18,7 @@ interface ReviewCardProps {
   count: number;
   isLiked?: boolean;
   isMine?: boolean;
-  onReviewHeartClick: ({ movieId, reviewId }: ReviewProps) => void;
+  onReviewHeartClick?: ({ movieId, reviewId }: ReviewProps) => void;
   onDeleteClick?: (movieId: number) => void;
 }
 
@@ -92,7 +92,7 @@ const ReviewCard = ({
           isMine={isMine}
           isLiked={isLiked}
           onClick={() => {
-            onReviewHeartClick({ movieId, reviewId: id });
+            onReviewHeartClick&&onReviewHeartClick({ movieId, reviewId: id });
             handeHeartCount();
           }}
         />
