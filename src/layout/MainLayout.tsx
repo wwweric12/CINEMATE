@@ -23,6 +23,13 @@ const MainLayout = () => {
   const [searchMovie, setSearchMovie] = useRecoilState(searchState);
   const { searchMovieState } = useSearchMovie(searchInput);
   const navigate = useNavigate();
+  const accessKey = localStorage.getItem("accessToken");
+  
+  useEffect(() => {
+    if (!accessKey) {
+      navigate("/login")
+    }
+  }, [accessKey]);
 
   useEffect(() => {
     if (searchMovieState?.data) {

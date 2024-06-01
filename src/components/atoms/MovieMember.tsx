@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { noUserImage } from '../../util/noImage';
 
 interface MovieMemberProps {
   image?: string;
@@ -8,7 +9,7 @@ interface MovieMemberProps {
 const MovieMember = ({ image, name }: MovieMemberProps) => {
   return (
     <MovieMemberContainer>
-      <MemberImage src={image} />
+      <MemberImage src={noUserImage(image)} />
       <MemberName>{name}</MemberName>
     </MovieMemberContainer>
   );

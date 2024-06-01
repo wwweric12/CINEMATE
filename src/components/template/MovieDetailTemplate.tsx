@@ -12,6 +12,7 @@ import { Review } from '../../types/GetReviewPayload';
 import { ReviewProps } from '../../api/likeFetcher';
 import { getYearFromDate } from '../../util/date';
 import NoReviewCard from '../atoms/NoReviewCard';
+import { noPosterImage } from '../../util/noImage';
 
 interface MovieDetailTemplateProps {
   score: number;
@@ -57,7 +58,7 @@ const MovieDetailTemplate = ({
               isLiked={movie.isLiked}
               onClick={() => onMovieHeartClick(movie.id)}
             />
-            <MovieImage src={movie.posterPath} />
+            <MovieImage src={noPosterImage(movie.posterPath)} />
           </ButtonImageLayout>
         </MovieHeaderField>
       </BackgroundContainer>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import DivideVector from '../atoms/DivideVector';
 import MypageButton from '../molecules/MypageButton';
 import { MypageData } from '../../types/GetMypagePayload';
@@ -9,6 +9,19 @@ interface MypageTemplateProps {
 }
 
 const MypageTemplate = ({ myPageData }: MypageTemplateProps) => {
+  const navigate = useNavigate()
+  const handleReviewClick=()=>{
+    navigate("/mypage/reviews")
+  }
+  const handleMovieClick=()=>{
+    navigate("/mypage/movies")
+  }
+  const handleLogoutClick=()=>{
+    localStorage.removeItem("accessToken")
+    alert("로그아웃 되었습니다.")
+    navigate("/login")
+  }
+
   return (
     <MypageContainer>
       <TextBox>
@@ -17,12 +30,9 @@ const MypageTemplate = ({ myPageData }: MypageTemplateProps) => {
       </TextBox>
       <DivideVector />
       <ButtonContainer>
-        <Link to="/mypage/reviews">
-          <MypageButton count={myPageData.myReviews} content="작성한 리뷰" />
-        </Link>
-        <Link to="/mypage/movies">
-          <MypageButton count={myPageData.likeMovies} content="좋아요한 영화" />
-        </Link>
+          <MypageButton count={myPageData.myReviews} content="작성한 리뷰"  onClick={handleReviewClick}/>
+          <MypageButton count={myPageData.likeMovies} content="좋아요한 영화" onClick={handleMovieClick} />
+          <MypageButton content="로그아웃" onClick={handleLogoutClick}/>
       </ButtonContainer>
     </MypageContainer>
   );
@@ -57,3 +67,4 @@ const ButtonContainer = styled.div`
   gap: 8px;
   padding: 18px 12px;
 `;
+
