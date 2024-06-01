@@ -15,7 +15,7 @@ const SearchResultTemplate = ({ searchMovieList }: SearchResultTemplate) => {
       <DivideVector />
       <SearchResultContainer>
         {searchMovieList.map((item) => (
-          <Link to={`/movies/${item.id}`} key={item.id}>
+          <Link to={`/movies/${item.id}`} key={item.id} state={"search"}>
             <MovieCard
               id={item.id}
               date={item.releaseDate}

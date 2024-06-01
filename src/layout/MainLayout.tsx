@@ -31,7 +31,11 @@ const MainLayout = () => {
   }, [searchMovieState]);
 
   const handlePrevClick = () => {
-    if (location.pathname === `/movies/${params.id}`) {
+    if(location.state==="search"){
+      navigate("/search");
+    }
+
+    else if (location.pathname === `/movies/${params.id}`) {
       navigate(`/`);
     } else {
       navigate(-1);
