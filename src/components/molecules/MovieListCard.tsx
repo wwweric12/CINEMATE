@@ -39,7 +39,7 @@ const MovieListCard = ({
 export default MovieListCard;
 
 const CardContainer = styled.div`
-  width: 140px;
+  min-width: 140px;
   height: 244px;
   border-radius: 10px;
   display: flex;
@@ -48,6 +48,7 @@ const CardContainer = styled.div`
 `;
 
 const MovieImg = styled.img`
+  width: 100%;
   height: 190px;
   border-radius: 10px 10px 0 0;
 `;
