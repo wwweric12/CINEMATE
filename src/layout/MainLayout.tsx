@@ -47,17 +47,20 @@ const MainLayout = () => {
 
   const handleSearchSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    const newKeyword = {
-      id: Date.now(),
-      text: searchInput,
-    };
-    setKeyword((prev) => {
-      const isDuplicate = prev.some((item) => item.text === newKeyword.text);
-      return isDuplicate ? prev : [...prev, newKeyword];
-    });
-    navigate(`/search/${searchInput}`);
+    if(searchInput.trim()!=""){
+      const newKeyword = {
+        id: Date.now(),
+        text: searchInput,
+      };
+      setKeyword((prev) => {
+        const isDuplicate = prev.some((item) => item.text === newKeyword.text);
+        return isDuplicate ? prev : [...prev, newKeyword];
+      });
+      navigate(`/search/${searchInput}`);
+    }
     setSearchInput('');
     setSearchMovie([]);
+    
   };
 
   return (
