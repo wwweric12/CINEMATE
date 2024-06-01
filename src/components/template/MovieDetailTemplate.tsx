@@ -11,6 +11,7 @@ import { PutRatingProps } from '../../api/ratingFetcher';
 import { Review } from '../../types/GetReviewPayload';
 import { ReviewProps } from '../../api/likeFetcher';
 import { getYearFromDate } from '../../util/date';
+import NoReviewCard from '../atoms/NoReviewCard';
 
 interface MovieDetailTemplateProps {
   score: number;
@@ -39,6 +40,7 @@ const MovieDetailTemplate = ({
   onMovieHeartClick,
   onReviewHeartClick,
 }: MovieDetailTemplateProps) => {
+  console.log(reviewState);
   return (
     <>
       <BackgroundContainer image={movie.backdropPath}>
@@ -92,25 +94,34 @@ const MovieDetailTemplate = ({
         <ReviewContainer>
           <ReviewHeader>
             <ReviewTitle>모든 리뷰</ReviewTitle>
-            <SelectFilter defaultOption={orderby} setOrderby={setOrderby} />
+            {reviewState.length !== 0 && (
+              <SelectFilter defaultOption={orderby} setOrderby={setOrderby} />
+            )}
           </ReviewHeader>
           <ReviewFieldContainer>
-            {reviewState.map((item) => (
-              <ReviewCard
-                key={item.id}
-                id={item.id}
-                movieId={item.movieId}
-                reviewer={item.member.nickName}
-                grade={item.rating}
-                content={item.content}
-                count={item.likes}
-                date={item.createdAt}
-                isLiked={item.isLiked}
-                isMine={item.isMine}
-                onDeleteClick={() => onDeleteClick(item.movieId)}
-                onReviewHeartClick={onReviewHeartClick}
+            {reviewState.length ? (
+              reviewState.map((item) => (
+                <ReviewCard
+                  key={item.id}
+                  id={item.id}
+                  movieId={item.movieId}
+                  reviewer={item.member.nickName}
+                  grade={item.rating}
+                  content={item.content}
+                  count={item.likes}
+                  date={item.createdAt}
+                  isLiked={item.isLiked}
+                  isMine={item.isMine}
+                  onDeleteClick={() => onDeleteClick(item.movieId)}
+                  onReviewHeartClick={onReviewHeartClick}
+                />
+              ))
+            ) : (
+              <NoReviewCard
+                title="작성된 리뷰가 없습니다"
+                desc="영화에 대한 리뷰를 작성해보세요"
               />
-            ))}
+            )}
           </ReviewFieldContainer>
         </ReviewContainer>
       </FieldContainer>
