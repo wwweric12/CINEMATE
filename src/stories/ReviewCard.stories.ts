@@ -13,7 +13,6 @@ export const ReviewCd: Story = {
   args: {
     reviewer: '김동영',
     grade: 4.3,
-    date: 8,
     count: 1,
     isLiked: true,
     isMine: false,

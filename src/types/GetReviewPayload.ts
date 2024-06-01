@@ -11,8 +11,8 @@ export interface Review {
   rating: number;
   likes: number;
   member: Member;
-  createdAt: string;
-  modifiedAt: string;
+  createdAt: Date;
+  modifiedAt: Date;
   isMine: boolean;
   isLiked: boolean;
 }

@@ -32,7 +32,7 @@ const MypageReviewsTemplate = ({
             grade={item.rating}
             content={item.content}
             count={item.likes}
-            date={1}
+            date={item.createdAt}
             isLiked={item.isLiked}
             isMine={item.isMine}
             onReviewHeartClick={() => handleHeartClick(item.id)}

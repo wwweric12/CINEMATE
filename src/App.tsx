@@ -3,7 +3,6 @@ import { RecoilRoot } from 'recoil';
 import MainLayout from './layout/MainLayout';
 import GenreSurveyTemplate from './components/template/GenreSurveyTemplate';
 import SearchTemplate from './components/template/SearchTemplate';
-import MypageTemplate from './components/template/MypageTemplate';
 import LoginPage from './pages/LoginPage';
 import MovieListPage from './pages/MovieListPage';
 import SignupPage from './pages/SignupPage';
