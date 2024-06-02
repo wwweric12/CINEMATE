@@ -5,10 +5,11 @@ import { ReactComponent as PrevSvg } from '../../assets/images/back.svg';
 import { ReactComponent as NextSvg } from '../../assets/images/next.svg';
 import { MovieData } from '../../types/GetMovieListPayload';
 import { noPosterImage } from '../../util/noImage';
+import { RelativeMovie } from '../../types/GetRelativeMovies';
 
 interface MovieListProps {
   isGenre?: boolean;
-  listData: MovieData[];
+  listData: MovieData[] |RelativeMovie[];
   genre?: string;
   onMovieHeartClick: (movieId: number) => void;
 }
