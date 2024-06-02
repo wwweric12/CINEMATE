@@ -8,6 +8,9 @@ import { useReview } from '../hooks/useReview';
 import { SelectOption } from '../components/molecules/SelectFilter';
 import { DeleteReview } from '../api/reviewFetcher';
 import { PostMovieLike, PostReviewLike, ReviewProps } from '../api/likeFetcher';
+import { useRelativeMovies } from '../hooks/useRelativeMovies';
+
+
 
 const MovieDetailPage = () => {
   const params = useParams<{ id: string }>();
@@ -17,6 +20,7 @@ const MovieDetailPage = () => {
   const { isRatingLoading, ratingState } = useRating(movieId);
   const { isMovieDetailLoading, movieDetailState } = useMovieDetail(movieId);
   const { isReviewLoading, reviewState } = useReview({ movieId, orderby });
+  const { isRelativeMoviesLoading, relativeMoviesState }=useRelativeMovies(movieId)
   const [score, setScore] = useState<number>(ratingState?.data || 0);
 
   useEffect(() => {
@@ -42,10 +46,10 @@ const MovieDetailPage = () => {
     alert(res?.message);
   };
 
-  if (isMovieDetailLoading || isRatingLoading || isReviewLoading) {
+  if (isMovieDetailLoading || isRatingLoading || isReviewLoading ||isRelativeMoviesLoading) {
     return <div>Loding...</div>;
   }
-  if (!movieDetailState || !ratingState || !reviewState) {
+  if (!movieDetailState || !ratingState || !reviewState || !relativeMoviesState ) {
     return null;
   }
 
@@ -56,6 +60,7 @@ const MovieDetailPage = () => {
         orderby={orderby}
         setOrderby={setOrderby}
         reviewState={reviewState.data}
+        relativeMoviesState={relativeMoviesState.data}
         movie={movieDetailState.data.movie}
         credit={movieDetailState.data.credit}
         onMovieHeartClick={handleMovieHeartClick}

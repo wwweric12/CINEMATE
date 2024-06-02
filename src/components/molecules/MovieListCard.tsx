@@ -22,7 +22,7 @@ const MovieListCard = ({
 }: MovieListCardProps) => {
   return (
     <CardContainer>
-      <Link to={`movies/${id}`}>
+      <Link to={`/movies/${id}`}>
         <MovieImg src={img} />
       </Link>
       <ContentContainer>

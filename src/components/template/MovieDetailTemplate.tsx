@@ -13,6 +13,8 @@ import { ReviewProps } from '../../api/likeFetcher';
 import { getYearFromDate } from '../../util/date';
 import NoReviewCard from '../atoms/NoReviewCard';
 import { noPosterImage } from '../../util/noImage';
+import MovieList from '../organisms/MovieList';
+import { RelativeMovie } from '../../types/GetRelativeMovies';
 
 interface MovieDetailTemplateProps {
   score: number;
@@ -22,6 +24,7 @@ interface MovieDetailTemplateProps {
   movie: MovieData;
   credit: Credit;
   reviewState: Review[];
+  relativeMoviesState: RelativeMovie[]
   onRatingClick: ({ movieId, rating }: PutRatingProps) => void;
   onDeleteClick: (movieId: number) => void;
   onMovieHeartClick: (movieId: number) => void;
@@ -36,6 +39,7 @@ const MovieDetailTemplate = ({
   reviewState,
   movie,
   credit,
+  relativeMoviesState,
   onRatingClick,
   onDeleteClick,
   onMovieHeartClick,
@@ -125,6 +129,13 @@ const MovieDetailTemplate = ({
           </ReviewFieldContainer>
         </ReviewContainer>
       </FieldContainer>
+      <RelativeContainer >
+          <ContentTitle>관련된 영화</ContentTitle>
+          <MovieList
+            listData={relativeMoviesState}
+            onMovieHeartClick={onMovieHeartClick}
+          />
+        </RelativeContainer>
     </>
   );
 };
@@ -282,3 +293,9 @@ const ReviewFieldContainer = styled.div`
   align-items: center;
   gap: 8px;
 `;
+
+const RelativeContainer =styled.div`
+  position:relative;
+  padding:40px;
+`
+
