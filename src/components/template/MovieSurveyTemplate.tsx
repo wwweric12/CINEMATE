@@ -9,6 +9,7 @@ import {
   SurveyListState,
   surveyListState,
 } from '../../store/atoms/Movie/state';
+import { PostSurvey } from '../../api/surveyFetcher';
 
 export interface MovieSurveyTemplateProps {
   surveyList: MovieData[];
@@ -29,10 +30,35 @@ const MovieSurveyTemplate = ({ surveyList }: MovieSurveyTemplateProps) => {
     });
   }, []);
 
+  const handleSelectedSurvey = () => {
+    const movieIds: number[] = surveyListData.movie.reduce<number[]>(
+      (movies, item) => {
+        if (item.selected) {
+          movies.push(item.id);
+        }
+        return movies;
+      },
+      [],
+    );
+    const genreIds: number[] = surveyListData.genre.reduce<number[]>(
+      (genres, item) => {
+        if (item.selected) {
+          genres.push(item.id);
+        }
+        return genres;
+      },
+      [],
+    );
+    return { movieIds, genreIds };
+  }
+
   const handleSurveySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const { movieIds, genreIds } = handleSelectedSurvey();
+    const res = PostSurvey({ movieIds, genreIds });
     navigate('/survey/success');
   };
+
 
   return (
     <TemplateContainer>

@@ -25,7 +25,7 @@ const MovieListPage = () => {
   if (!movieState) {
     return null;
   }
-
+  
   return (
     <>
       <MovieListTemplate

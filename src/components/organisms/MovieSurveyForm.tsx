@@ -74,7 +74,7 @@ const MovieSurveyForm = ({
         state={countSelectedMovie(surveyListData.movie) > 0}
         enabled={countSelectedMovie(surveyListData.movie) > 0}
       >
-        다음으로
+        완료하기
       </PrimaryButton>
     </FormContainer>
   );
