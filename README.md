@@ -2,8 +2,8 @@
 
 
 <!--프로젝트 대문 이미지-->
-![CINEMATE](img/Logo.png)
 
+<img width="100%" alt="Logo" src="https://github.com/wwweric12/CINEMATE/assets/99941018/0951e8e8-d098-455f-88c8-bb47dc7a8269">
 
 
 <!--목차-->
