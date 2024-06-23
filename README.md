@@ -8,7 +8,7 @@
 
 <!--목차-->
 # 목차
-- [[[1] 프로젝트에 대하여](#1-프로젝트에-대하여)
+- [[1] 프로젝트에 대하여](#1-프로젝트에-대하여)
   - [Features](#features)
   - [Technologies](#technologies)
 - [[2] Getting Started](#2-getting-started)
