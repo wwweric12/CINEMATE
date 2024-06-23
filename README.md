@@ -37,6 +37,7 @@
 - [axios](https://github.com/axios/axios) 1.6.8
 - [react-dom](https://reactjs.org/docs/react-dom.html) 18.2.0
 - [react-hook-form](https://react-hook-form.com/) 7.51.2
+- [react-query](https://react-query.tanstack.com/) 3.39.3
 - [react-router-dom](https://reactrouter.com/web/guides/quick-start) 6.22.3
 - [recoil](https://recoiljs.org/) 0.7.7
 - [recoil-persist](https://github.com/dsalvagni/recoil-persist) 5.1.0
