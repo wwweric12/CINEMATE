@@ -100,7 +100,9 @@ export default MainLayout;
 const Container = styled.div`
   width: 100%;
   height: 100%;
+  max-width: 768px;
   min-height: 100vh;
   position: relative;
+  margin: 0 auto;
   background-color: ${({ theme }) => theme.colors.darkgray2};
 `;

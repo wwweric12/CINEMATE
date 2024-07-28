@@ -9,6 +9,10 @@ const GlobalStyle = createGlobalStyle`
     color: white;
     font-family: 'Pretendard', sans-serif;
     box-sizing: border-box;
+    
+  }
+  body{
+    background-color: ${({ theme }) => theme.colors.darkgray2};
   }
 
   button {
