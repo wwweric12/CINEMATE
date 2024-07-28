@@ -74,10 +74,10 @@ export const Header = ({ path, ...props }: HeaderProps) => {
 };
 
 const HeaderContainer = styled.div`
-  width: 100%;
   position: fixed;
+  width:100%;
+  max-width: 768px;
   top: 0;
-  left: 0;
   padding: 20px 40px;
   background-color: ${({ theme }) => theme.colors.darkgray2};
   z-index: 30;
