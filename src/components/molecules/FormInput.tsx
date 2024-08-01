@@ -23,7 +23,6 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
       type,
       placeholder,
       value,
-      onChange,
       validationStatus,
       register,
     }: FormInputProps,
@@ -47,7 +46,6 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
           placeholder={placeholder}
           value={value}
           {...register}
-          onChange={onChange}
         />
         {validationStatus !== 'default' && (
           <CheckImg
