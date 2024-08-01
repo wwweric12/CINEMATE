@@ -17,9 +17,11 @@ export interface LoginFormProps {
 }
 
 const LoginForm = ({ onLoginSubmit }: LoginFormProps) => {
+    
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<LoginInput>({
     resolver: yupResolver(validation),
@@ -37,6 +39,7 @@ const LoginForm = ({ onLoginSubmit }: LoginFormProps) => {
               placeholder="이메일을 입력해주세요"
               validationStatus={errors['email'] ? 'error' : 'default'}
               register={register('email')}
+              setValue={setValue}
             />
             {errors.email && (
               <ErrorMessage>{errors.email.message}</ErrorMessage>
@@ -48,6 +51,7 @@ const LoginForm = ({ onLoginSubmit }: LoginFormProps) => {
               placeholder="비밀번호를 입력해주세요"
               validationStatus={errors['password'] ? 'error' : 'default'}
               register={register('password')}
+              setValue={setValue}
             />
             {errors.password && (
               <ErrorMessage>{errors.password.message}</ErrorMessage>

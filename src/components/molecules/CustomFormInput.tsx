@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ChangeEvent } from 'react';
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, UseFormSetValue } from 'react-hook-form';
 import emailSvg from '../../assets/images/login_email.svg';
 import nameSvg from '../../assets/images/login_user.svg';
 import passwordSvg from '../../assets/images/login_password.svg';
@@ -15,6 +15,7 @@ export interface FormInputProps {
   placeholder?: string;
   onInputChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   validationStatus: 'default' | 'error' | 'success';
+  setValue: UseFormSetValue<SignupInput>
 }
 
 const CustomFormInput = ({
@@ -23,6 +24,7 @@ const CustomFormInput = ({
   control,
   onInputChange,
   validationStatus,
+  setValue,
 }: FormInputProps) => {
   let image: string;
   if (type === 'nickName') {
@@ -31,6 +33,10 @@ const CustomFormInput = ({
     image = emailSvg;
   } else if (type === 'password') {
     image = passwordSvg;
+  }
+
+  const handleRemoveValue =(type:FormInputProps["type"])=>{
+    setValue(type,"")
   }
 
   return (
@@ -50,11 +56,8 @@ const CustomFormInput = ({
               onInputChange && onInputChange(event);
             }}
           />
-          {validationStatus !== 'default' && (
-            <CheckImg
-              src={validationStatus === 'error' ? errorSvg : successSvg}
-            />
-          )}
+          {validationStatus === 'error' &&   <RemoveButton onClick={()=>handleRemoveValue(type)}><CheckImg src={errorSvg}/></RemoveButton>}
+          {validationStatus === 'success' &&   <CheckImg src={successSvg}/>}
         </InputContainer>
       )}
     />
@@ -100,3 +103,5 @@ const InputField = styled.input`
 `;
 
 const CheckImg = styled.img``;
+
+const RemoveButton = styled.button``;
