@@ -1,20 +1,21 @@
 import styled from 'styled-components';
 import { ChangeEvent, forwardRef } from 'react';
-import { UseFormRegisterReturn } from 'react-hook-form';
+import { UseFormRegisterReturn, UseFormSetValue} from 'react-hook-form';
 import emailSvg from '../../assets/images/login_email.svg';
-import nameSvg from '../../assets/images/login_user.svg';
 import passwordSvg from '../../assets/images/login_password.svg';
 import errorSvg from '../../assets/images/login_error.svg';
 import successSvg from '../../assets/images/login_success.svg';
+import { LoginInput } from '../organisms/Login/LoginForm';
 
 export interface FormInputProps {
-  type: 'nickName' | 'password' | 'email';
+  type:  'password' | 'email';
   value?: string;
   placeholder?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   validationStatus: 'default' | 'error' | 'success';
   register?: UseFormRegisterReturn;
   duplicatedStatus?: boolean;
+  setValue: UseFormSetValue<LoginInput>
 }
 
 const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
@@ -25,16 +26,18 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
       value,
       validationStatus,
       register,
+      setValue,
     }: FormInputProps,
     ref,
   ) => {
     let image;
-    if (type === 'nickName') {
-      image = nameSvg;
-    } else if (type === 'email') {
+     if (type === 'email') {
       image = emailSvg;
     } else if (type === 'password') {
       image = passwordSvg;
+    }
+    const handleRemoveValue =(type:FormInputProps["type"])=>{
+      setValue(type,"")
     }
 
     return (
@@ -47,11 +50,8 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
           value={value}
           {...register}
         />
-        {validationStatus !== 'default' && (
-          <CheckImg
-            src={validationStatus === 'error' ? errorSvg : successSvg}
-          />
-        )}
+        {validationStatus === 'error' &&   <RemoveButton onClick={()=>handleRemoveValue(type)}><CheckImg src={errorSvg}/></RemoveButton>}
+        {validationStatus === 'success' &&   <CheckImg src={successSvg}/>}
       </InputContainer>
     );
   },
@@ -97,3 +97,5 @@ const InputField = styled.input`
 `;
 
 const CheckImg = styled.img``;
+
+const RemoveButton = styled.button``;

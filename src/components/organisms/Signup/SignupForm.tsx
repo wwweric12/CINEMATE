@@ -28,6 +28,7 @@ const SignupForm = ({
 }: SignupFormProps) => {
   const {
     handleSubmit,
+    setValue,
     formState: { errors },
     control,
   } = useForm<SignupInput>({
@@ -62,6 +63,7 @@ const SignupForm = ({
             <CustomFormInput
               control={control}
               type="nickName"
+              setValue={setValue}
               placeholder="닉네임을 입력해주세요"
               validationStatus={
                 errors['nickName'] || handleDuplicatedInput('nickName')
@@ -86,6 +88,7 @@ const SignupForm = ({
             <CustomFormInput
               control={control}
               type="email"
+              setValue={setValue}
               placeholder="이메일을 입력해주세요"
               validationStatus={
                 errors['email'] || handleDuplicatedInput('email')
@@ -110,6 +113,7 @@ const SignupForm = ({
             <CustomFormInput
               control={control}
               type="password"
+              setValue={setValue}
               placeholder="비밀번호를 입력해주세요"
               validationStatus={
                 errors['password'] ? 'error' : !password ? 'default' : 'success'
