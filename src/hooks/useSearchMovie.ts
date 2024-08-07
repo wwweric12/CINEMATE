@@ -2,6 +2,7 @@ import { useQuery } from 'react-query';
 import { AxiosError } from 'axios';
 import { Axios } from '../util/axios/axios';
 import { GetSearchMoviePayload } from '../types/GetSearchMoviesPayload';
+import { useDebounce } from './useDebounce';
 
 interface FetchSearchProps {
   token: string;
@@ -22,6 +23,9 @@ const fetchSearch = async ({ token, title }: FetchSearchProps) => {
 };
 
 export const useSearchMovie = (title: string) => {
+  const debouncedQuery =useDebounce(title,700)
+
+
   const token = localStorage.getItem('accessToken') || '';
   const {
     isLoading: isSearchMovieLoading,
@@ -29,8 +33,8 @@ export const useSearchMovie = (title: string) => {
     data: searchMovieState,
     isSuccess,
   } = useQuery<GetSearchMoviePayload, AxiosError>(
-    ['movieList', { token, title }],
-    () => fetchSearch({ token, title }),
+    ['movieList', { token, debouncedQuery }],
+    () => fetchSearch({ token, title: debouncedQuery }),
   );
 
   return {
