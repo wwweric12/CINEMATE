@@ -69,15 +69,20 @@ const MovieDetailTemplate = ({
       <FieldContainer>
         <ContentTitle>작품정보</ContentTitle>
         <PlotField>{movie.overview}</PlotField>
-        <ContentTitle>감독</ContentTitle>
-        <DirectorContainer>
-          <MovieMember
-            image={credit.crew[0].profile_path}
-            name={credit.crew[0].name}
-          />
-        </DirectorContainer>
-        <ContentTitle>출연진</ContentTitle>
-        <MovieMembersContainer>
+        {credit.crew[0] && 
+        <>
+          <ContentTitle>감독</ContentTitle>
+          <DirectorContainer>
+            <MovieMember
+              image={credit.crew[0].profile_path}
+              name={credit.crew[0].name}
+            />
+          </DirectorContainer>
+        </>}
+        {credit.cast && 
+        <> 
+          <ContentTitle>출연진</ContentTitle>
+          <MovieMembersContainer>
           {credit.cast.map((item) => (
             <MovieMember
               key={item.id}
@@ -85,7 +90,8 @@ const MovieDetailTemplate = ({
               name={item.name}
             />
           ))}
-        </MovieMembersContainer>
+          </MovieMembersContainer> 
+        </>}
         <ContentTitle>리뷰 및 평점</ContentTitle>
         <RatingMovieContainer>
           <RatingMovie
