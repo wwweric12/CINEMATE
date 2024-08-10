@@ -1,26 +1,23 @@
 import styled from 'styled-components';
-import { ChangeEventHandler, FormEventHandler } from 'react';
-import { useParams } from 'react-router-dom';
+import { ChangeEventHandler, FormEventHandler, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import Logo from '../atoms/Logo';
 import CancelButton from '../atoms/CancelButton';
 import { ReactComponent as ChevronSvg } from '../../assets/images/chevron.svg';
 import { ReactComponent as SearchSvg } from '../../assets/images/search.svg';
+import { searchState } from '../../store/atoms/Search/state';
+import { keywordState } from '../../store/atoms/Keyword/state';
+import { useSearchMovie } from '../../hooks/useSearchMovie';
 
 type DetailHeaderProps = {
   title?: string;
   onPrevClick: () => void;
 };
 
-type SearchBarProps = {
-  onSearchSubmit: FormEventHandler<HTMLFormElement>;
-  onSearchChange: ChangeEventHandler<HTMLInputElement>;
-  value: string;
-  setSearchInput: React.Dispatch<React.SetStateAction<string>>;
-};
-
 type HeaderProps = {
   path: string;
-} & (SearchBarProps | DetailHeaderProps);
+} &  DetailHeaderProps;
 
 export const Header = ({ path, ...props }: HeaderProps) => {
   const param = useParams();
@@ -35,19 +32,60 @@ export const Header = ({ path, ...props }: HeaderProps) => {
     '/mypage/reviews',
     `/movie/${param.id}/review`,
   ];
+
+
+
+
   const renderInner = () => {
     if (path.includes(searchHeader)) {
-      const { onSearchSubmit, value, setSearchInput, onSearchChange } =
-        props as SearchBarProps;
+      const [searchMovie, setSearchMovie] = useRecoilState(searchState);
+      const [keyword, setKeyword] = useRecoilState(keywordState);
+      const [searchInput, setSearchInput] = useState('');
+      const navigate =useNavigate()
+      const { searchMovieState } = useSearchMovie(searchInput);
+
+      useEffect(() => {
+        if (searchMovieState?.data) {
+          setSearchMovie(searchMovieState.data);
+        }
+        console.log(searchMovieState)
+      }, [searchMovieState]);
+
       const handleCancelClick = () => {
         setSearchInput('');
       };
 
+      const handleSearchChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+        if (e.target.value === '') {
+          setSearchMovie([]);
+        }
+        setSearchInput(e.target.value);
+      };
+    
+      const handleSearchSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+        e.preventDefault();
+        if(searchInput.trim()!=""){
+          const newKeyword = {
+            id: Date.now(),
+            text: searchInput,
+          };
+          setKeyword((prev) => {
+            const isDuplicate = prev.some((item) => item.text === newKeyword.text);
+            return isDuplicate ? prev : [...prev, newKeyword];
+          });
+          navigate(`/search/${searchInput}`);
+        }
+        setSearchInput('');
+        setSearchMovie([]);
+        
+      };
+
+
       return (
         <SearchBarContainer>
-          <SearchBarBox onSubmit={onSearchSubmit}>
+          <SearchBarBox onSubmit={handleSearchSubmit}>
             <SearchImg />
-            <Input value={value} onChange={onSearchChange} />
+            <Input value={searchInput} onChange={handleSearchChange} />
             <CancelButton onCancelClick={handleCancelClick} />
           </SearchBarBox>
         </SearchBarContainer>

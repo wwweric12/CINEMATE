@@ -1,14 +1,30 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import DivideVector from '../atoms/DivideVector';
 import MovieCard from '../molecules/MovieCard';
 import { MovieData } from '../../types/GetMovieListPayload';
+import { validArray } from '../../util/validArray';
+import { searchState } from '../../store/atoms/Search/state';
+import SearchCard from '../atoms/SearchCard';
 
 interface SearchResultTemplate {
   searchMovieList: MovieData[];
 }
 
 const SearchResultTemplate = ({ searchMovieList }: SearchResultTemplate) => {
+  const [searchMovie, setSearchMovie] = useRecoilState(searchState);
+  if (validArray(searchMovie)) {
+    return (
+      <ListContainer>
+        {searchMovie?.map((item) => (
+          <Link to={`/movies/${item.id}`} key={item.id}>
+            <SearchCard movieImg={item.posterPath} title={item.movieTitle} />
+          </Link>
+        ))}
+      </ListContainer>
+    );
+  } else {
   return (
     <TitleContainer>
       <SearchText>검색된 결과</SearchText>
@@ -28,9 +44,18 @@ const SearchResultTemplate = ({ searchMovieList }: SearchResultTemplate) => {
       </SearchResultContainer>
     </TitleContainer>
   );
+}
 };
 
 export default SearchResultTemplate;
+
+const ListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px;
+`;
 
 const TitleContainer = styled.div`
   display: flex;
