@@ -21,6 +21,10 @@ const MypageTemplate = ({ myPageData }: MypageTemplateProps) => {
     alert("로그아웃 되었습니다.")
     navigate("/login")
   }
+  
+  const handleGenreModify=()=>{
+    navigate("/survey/genre/modified")
+  }
 
   return (
     <MypageContainer>
@@ -32,6 +36,7 @@ const MypageTemplate = ({ myPageData }: MypageTemplateProps) => {
       <ButtonContainer>
           <MypageButton count={myPageData.myReviews} content="작성한 리뷰"  onClick={handleReviewClick}/>
           <MypageButton count={myPageData.likeMovies} content="좋아요한 영화" onClick={handleMovieClick} />
+          <MypageButton content="장르 수정하기" onClick={handleGenreModify}/>
           <MypageButton content="로그아웃" onClick={handleLogoutClick}/>
       </ButtonContainer>
     </MypageContainer>
