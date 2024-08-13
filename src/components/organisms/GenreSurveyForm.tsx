@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import GenreSurveyImg from '../atoms/GenreSurveyImg';
 import { Genre } from '../../store/atoms/Genre/state';
 import PrimaryButton from '../atoms/PrimaryButton';
@@ -9,14 +10,38 @@ import {
   SurveyListState,
   surveyListState,
 } from '../../store/atoms/Movie/state';
+import { MyGenre } from '../../types/GetMyGenresPayload';
 
-const GenreSurveyForm = () => {
+interface GenreSurveyFormProps{
+  state:"modify" |"setting"
+  myGenres?:MyGenre
+}
+
+const GenreSurveyForm = ({state,myGenres}:GenreSurveyFormProps ) => {
   const [surveyListData, setSurveyListData] =
     useRecoilState<SurveyListState>(surveyListState);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(myGenres){
+      for(let i=0; i<3; i++){
+        setSurveyListData((prev) => ({
+          ...prev,
+          genre: prev.genre.map((value) =>
+            value.id === myGenres.genres[i].id
+              ? { ...value, selected: true }
+              : value,
+          ),
+        }));
+      }
+    }
+    
+  },[])
+
   const countSelectedGenre = (obj: Genre[]) => {
     return obj.filter((value) => value.selected).length;
   };
+
 
   const handleSelectedGenre = (item: GenreData) => {
     if (countSelectedGenre(surveyListData.genre) < 3) {
@@ -40,7 +65,11 @@ const GenreSurveyForm = () => {
 
   const handleSurveySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate('/survey/movies');
+    if(state==="modify"){
+      navigate('/');
+    }else if(state==="setting"){
+      navigate('/survey/movies');
+    }
     setSurveyListData((prev) => ({ ...prev, genre: surveyListData.genre }));
   };
 
@@ -70,7 +99,7 @@ const GenreSurveyForm = () => {
         state={countSelectedGenre(surveyListData.genre) === 3}
         enabled={countSelectedGenre(surveyListData.genre) === 3}
       >
-        다음으로
+        {state==="modify" ? "수정하기" : "다음으로" }
       </PrimaryButton>
     </FormContainer>
   );
