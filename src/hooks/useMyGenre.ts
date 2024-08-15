@@ -8,7 +8,7 @@ interface FetchMyGenreProps {
 }
 
 const fetchMyGenre = async ({ token }: FetchMyGenreProps) => {
-  const res = await Axios.get('/api/genre/likes', {
+  const res = await Axios.get('/api/member-genres', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
