@@ -15,6 +15,7 @@ import SuccessSignupPage from './pages/SuccessSignupPage';
 import MypageReviewsPage from './pages/MypageReviewsPage';
 import MypageMoviesPage from './pages/MypageMoviesPage';
 import Mypage from './pages/Mypage';
+import GenreModifyPage from './pages/GenreModifyPage';
 
 function App() {
   return (
@@ -27,7 +28,14 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/signup/success" element={<SuccessSignupPage />} />
             <Route path="/survey/success" element={<SuccessSurveyPage />} />
-            <Route path="/survey/genre" element={<GenreSurveyTemplate />} />
+            <Route
+              path="/survey/genre"
+              element={<GenreSurveyTemplate state="setting" />}
+            />
+            <Route
+              path="/survey/genre/modified"
+              element={<GenreModifyPage />}
+            />
             <Route path="/survey/movies" element={<MovieSurveyPage />} />
             <Route path="/search" element={<SearchTemplate />} />
             <Route path="/search/:movie" element={<SearchResultPage />} />
