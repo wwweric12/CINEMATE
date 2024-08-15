@@ -6,7 +6,7 @@ import { GENRE_LIST } from '../../util/data/GenreDate';
 
 interface MovieListTemplateProps extends MovieListPayload {
   onMovieHeartClick: (movieId: number) => void;
-  onMovieKebabClick:(movieId:number,event: React.MouseEvent) => void;
+  onMovieKebabClick: (movieId: number, event: React.MouseEvent) => void;
 }
 
 const MovieListTemplate = ({

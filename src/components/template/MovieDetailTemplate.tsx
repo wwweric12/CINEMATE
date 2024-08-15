@@ -15,6 +15,8 @@ import NoReviewCard from '../atoms/NoReviewCard';
 import { noPosterImage } from '../../util/noImage';
 import MovieList from '../organisms/MovieList';
 import { RelativeMovie } from '../../types/GetRelativeMovies';
+import { ReactComponent as KebabSvg } from '../../assets/images/kebab.svg';
+
 
 interface MovieDetailTemplateProps {
   score: number;
@@ -53,11 +55,16 @@ const MovieDetailTemplate = ({
         <BackgroundImage />
         <MovieHeaderField>
           <MovieInfoContainer>
+            <KebabButton onClick={() => onMovieKebabClick(movie.id)}>
+              <KebabImg/>
+            </KebabButton>
+            <InfoBox>
             <MovieDate>{getYearFromDate(movie.releaseDate)}</MovieDate>
             <InfoLayout>
               <MovieTitle>{movie.movieTitle}</MovieTitle>
               <MovieGrade grade={movie.rating} />
             </InfoLayout>
+            </InfoBox>
           </MovieInfoContainer>
           <ButtonImageLayout>
             <HeartButton
@@ -142,7 +149,6 @@ const MovieDetailTemplate = ({
       <RelativeContainer>
         <ContentTitle>관련된 영화</ContentTitle>
         <MovieList
-          onMovieKebabClick={onMovieKebabClick}
           listData={relativeMoviesState}
           onMovieHeartClick={onMovieHeartClick}
         />
@@ -183,10 +189,24 @@ const MovieHeaderField = styled.div`
 
 const MovieInfoContainer = styled.div`
   display: flex;
-  justify-content: end;
   flex-direction: column;
+  justify-content: space-between;
   gap: 7px;
 `;
+
+
+const KebabImg = styled(KebabSvg)`
+`;
+
+const KebabButton = styled.button`
+  width:min-content;
+`;
+
+const InfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+`
 
 const InfoLayout = styled.div`
   display: flex;

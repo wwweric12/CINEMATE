@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import MovieDetailTemplate from '../components/template/MovieDetailTemplate';
 import { useMovieDetail } from '../hooks/useMovieDetail';
 import { PutRating, PutRatingProps } from '../api/ratingFetcher';
@@ -11,9 +12,10 @@ import {
   PostMovieLike,
   PostReviewLike,
   ReviewProps,
-  PostMovieHates,
 } from '../api/likeFetcher';
 import { useRelativeMovies } from '../hooks/useRelativeMovies';
+import { backgroundState } from '../store/atoms/Background/state';
+import SelectList from '../components/molecules/SelectList';
 
 const MovieDetailPage = () => {
   const params = useParams<{ id: string }>();
@@ -26,6 +28,7 @@ const MovieDetailPage = () => {
   const { isRelativeMoviesLoading, relativeMoviesState } =
     useRelativeMovies(movieId);
   const [score, setScore] = useState<number>(ratingState?.data || 0);
+  const [background, setBackground] = useRecoilState(backgroundState);
 
   useEffect(() => {
     if (ratingState !== undefined) {
@@ -37,8 +40,8 @@ const MovieDetailPage = () => {
     const res = await PostMovieLike({ movieId });
   };
 
-  const handleMovieKebabClick = async (movieId: number) => {
-    const res = await PostMovieHates({ movieId });
+  const handleMovieKebabClick = (movieId: number) => {
+    setBackground(true);
   };
 
   const handleReviewHeartClick = async ({ movieId, reviewId }: ReviewProps) => {
@@ -72,6 +75,7 @@ const MovieDetailPage = () => {
   }
 
   return (
+    <>
     <MovieDetailTemplate
       score={score}
       setScore={setScore}
@@ -87,6 +91,8 @@ const MovieDetailPage = () => {
       onDeleteClick={handleDeleteClick}
       onReviewHeartClick={handleReviewHeartClick}
     />
+    {background && <SelectList movieId={movieDetailState.data.movie.id} />}
+    </>
   );
 };
 

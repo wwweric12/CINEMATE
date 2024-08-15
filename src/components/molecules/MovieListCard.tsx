@@ -11,7 +11,7 @@ export interface MovieListCardProps {
   grade: number;
   isLiked?: boolean;
   onMovieHeartClick: (movieId: number) => void;
-  onMovieKebabClick: (movieId: number, event: React.MouseEvent) => void;
+  onMovieKebabClick?: (movieId: number, event: React.MouseEvent) => void;
 }
 
 const MovieListCard = ({
@@ -27,9 +27,9 @@ const MovieListCard = ({
     <CardContainer>
       <Link to={`/movies/${id}`}>
         <MovieImg src={img} />
-        <KebabButton onClick={(event) => onMovieKebabClick(id, event)}>
+        {onMovieKebabClick && <KebabButton onClick={(event) =>  onMovieKebabClick(id, event)}>
           <KebabImg />
-        </KebabButton>
+        </KebabButton>}
       </Link>
       <ContentContainer>
         <ContentBox>

@@ -44,8 +44,9 @@ const MainLayout = () => {
 
 
   return (
+    <>
+    {background&&<Background  onClick={handleBackgroundClick}/>}
     <Container>
-      {background&&<Background  onClick={handleBackgroundClick}/>}
       {!hasNotHeaderPages.includes(location.pathname) && (
         <Header
           title="뒤로가기"
@@ -58,6 +59,7 @@ const MainLayout = () => {
         <Footer path={location.pathname} />
       )}
     </Container>
+    </>
   );
 };
 
@@ -74,7 +76,7 @@ const Container = styled.div`
 `;
 
 const Background = styled.div`
-  position: absolute;
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;

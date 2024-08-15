@@ -8,13 +8,12 @@ interface SelectListProps {
   movieId?: number;
 }
 
-const SelectList = ({ movieId }: SelectListProps) => {
+const SelectList = ({ movieId}: SelectListProps) => {
   const [background, setBackground] = useRecoilState(backgroundState);
   const handleSelectClick = async (movieId?: number) => {
     if (movieId) {
       const res = await PostMovieHates({ movieId });
       setBackground(false);
-
       alert(res?.data);
     }
   };

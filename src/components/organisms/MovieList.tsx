@@ -12,7 +12,7 @@ interface MovieListProps {
   listData: MovieData[] |RelativeMovie[];
   genre?: string;
   onMovieHeartClick: (movieId: number) => void;
-  onMovieKebabClick:(movieId:number,event: React.MouseEvent) => void;
+  onMovieKebabClick?:(movieId:number,event: React.MouseEvent) => void;
 }
 interface ScrollState {
   left: boolean;

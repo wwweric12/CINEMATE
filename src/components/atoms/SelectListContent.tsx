@@ -34,5 +34,5 @@ const SelectContentBox = styled.button`
 `;
 
 const SelectContent = styled.div`
-margin-left:12px;
+  margin-left:12px;
 `;
