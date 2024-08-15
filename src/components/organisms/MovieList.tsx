@@ -12,6 +12,7 @@ interface MovieListProps {
   listData: MovieData[] |RelativeMovie[];
   genre?: string;
   onMovieHeartClick: (movieId: number) => void;
+  onMovieKebabClick:(movieId:number,event: React.MouseEvent) => void;
 }
 interface ScrollState {
   left: boolean;
@@ -23,6 +24,7 @@ const MovieList = ({
   listData,
   genre,
   onMovieHeartClick,
+  onMovieKebabClick,
 }: MovieListProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollState, setScrollState] = useState<ScrollState>({
@@ -91,6 +93,7 @@ const MovieList = ({
             grade={item.rating}
             isLiked={item.isLiked}
             onMovieHeartClick={onMovieHeartClick}
+            onMovieKebabClick={onMovieKebabClick}
           />
         ))}
       </MovieListBox>

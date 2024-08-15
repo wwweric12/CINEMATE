@@ -24,10 +24,11 @@ interface MovieDetailTemplateProps {
   movie: MovieData;
   credit: Credit;
   reviewState: Review[];
-  relativeMoviesState: RelativeMovie[]
+  relativeMoviesState: RelativeMovie[];
   onRatingClick: ({ movieId, rating }: PutRatingProps) => void;
   onDeleteClick: (movieId: number) => void;
   onMovieHeartClick: (movieId: number) => void;
+  onMovieKebabClick: (movieId: number) => void;
   onReviewHeartClick: ({ movieId, reviewId }: ReviewProps) => void;
 }
 
@@ -43,6 +44,7 @@ const MovieDetailTemplate = ({
   onRatingClick,
   onDeleteClick,
   onMovieHeartClick,
+  onMovieKebabClick,
   onReviewHeartClick,
 }: MovieDetailTemplateProps) => {
   return (
@@ -69,29 +71,31 @@ const MovieDetailTemplate = ({
       <FieldContainer>
         <ContentTitle>작품정보</ContentTitle>
         <PlotField>{movie.overview}</PlotField>
-        {credit.crew[0] && 
-        <>
-          <ContentTitle>감독</ContentTitle>
-          <DirectorContainer>
-            <MovieMember
-              image={credit.crew[0].profile_path}
-              name={credit.crew[0].name}
-            />
-          </DirectorContainer>
-        </>}
-        {credit.cast && 
-        <> 
-          <ContentTitle>출연진</ContentTitle>
-          <MovieMembersContainer>
-          {credit.cast.map((item) => (
-            <MovieMember
-              key={item.id}
-              image={item.profile_path}
-              name={item.name}
-            />
-          ))}
-          </MovieMembersContainer> 
-        </>}
+        {credit.crew[0] && (
+          <>
+            <ContentTitle>감독</ContentTitle>
+            <DirectorContainer>
+              <MovieMember
+                image={credit.crew[0].profile_path}
+                name={credit.crew[0].name}
+              />
+            </DirectorContainer>
+          </>
+        )}
+        {credit.cast && (
+          <>
+            <ContentTitle>출연진</ContentTitle>
+            <MovieMembersContainer>
+              {credit.cast.map((item) => (
+                <MovieMember
+                  key={item.id}
+                  image={item.profile_path}
+                  name={item.name}
+                />
+              ))}
+            </MovieMembersContainer>
+          </>
+        )}
         <ContentTitle>리뷰 및 평점</ContentTitle>
         <RatingMovieContainer>
           <RatingMovie
@@ -135,13 +139,14 @@ const MovieDetailTemplate = ({
           </ReviewFieldContainer>
         </ReviewContainer>
       </FieldContainer>
-      <RelativeContainer >
-          <ContentTitle>관련된 영화</ContentTitle>
-          <MovieList
-            listData={relativeMoviesState}
-            onMovieHeartClick={onMovieHeartClick}
-          />
-        </RelativeContainer>
+      <RelativeContainer>
+        <ContentTitle>관련된 영화</ContentTitle>
+        <MovieList
+          onMovieKebabClick={onMovieKebabClick}
+          listData={relativeMoviesState}
+          onMovieHeartClick={onMovieHeartClick}
+        />
+      </RelativeContainer>
     </>
   );
 };
@@ -300,8 +305,7 @@ const ReviewFieldContainer = styled.div`
   gap: 8px;
 `;
 
-const RelativeContainer =styled.div`
-  position:relative;
-  padding:40px;
-`
-
+const RelativeContainer = styled.div`
+  position: relative;
+  padding: 40px;
+`;

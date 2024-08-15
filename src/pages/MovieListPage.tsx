@@ -1,12 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import MovieListTemplate from '../components/template/MovieListTemplate';
 import { useRecommendMovie } from '../hooks/useRecommendMovie';
 import { PostMovieLike } from '../api/likeFetcher';
+import { backgroundState } from '../store/atoms/Background/state';
+import SelectList from '../components/molecules/SelectList';
 
 const MovieListPage = () => {
   const navigate = useNavigate();
   const { isMovieLoading, movieState } = useRecommendMovie();
+  const [selectedMovieId, setSelectedMovieId] = useState<number | undefined>();
+  const [background, setBackground] = useRecoilState(backgroundState);
+
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
     if (!token) {
@@ -19,20 +25,29 @@ const MovieListPage = () => {
     const res = await PostMovieLike({ movieId });
   };
 
+  const handleKebabClick = (movieId: number, event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setSelectedMovieId(movieId);
+    setBackground(true);
+  };
+
   if (isMovieLoading) {
     return <div>Loding...</div>;
   }
   if (!movieState) {
     return null;
   }
-  
+
   return (
     <>
       <MovieListTemplate
         onMovieHeartClick={handleHeartClick}
+        onMovieKebabClick={handleKebabClick}
         defaultRecommendResult={movieState?.data.defaultRecommendResult}
         genreMovieLists={movieState?.data.genreMovieLists}
       />
+      {background && <SelectList movieId={selectedMovieId} />}
     </>
   );
 };
