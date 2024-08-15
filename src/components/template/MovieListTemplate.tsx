@@ -6,12 +6,14 @@ import { GENRE_LIST } from '../../util/data/GenreDate';
 
 interface MovieListTemplateProps extends MovieListPayload {
   onMovieHeartClick: (movieId: number) => void;
+  onMovieKebabClick: (movieId: number, event: React.MouseEvent) => void;
 }
 
 const MovieListTemplate = ({
   defaultRecommendResult,
   genreMovieLists,
   onMovieHeartClick,
+  onMovieKebabClick,
 }: MovieListTemplateProps) => {
   const getGenreName = (genreId: number) => {
     const genre = GENRE_LIST.filter((item) => item.id === genreId);
@@ -26,6 +28,7 @@ const MovieListTemplate = ({
       <MovieList
         listData={defaultRecommendResult}
         onMovieHeartClick={onMovieHeartClick}
+        onMovieKebabClick={onMovieKebabClick}
       />
       <TitleLayout>
         <ListTitle title="선호하는 장르별 " />
@@ -34,6 +37,7 @@ const MovieListTemplate = ({
         {genreMovieLists.map((item) => (
           <MovieList
             onMovieHeartClick={onMovieHeartClick}
+            onMovieKebabClick={onMovieKebabClick}
             key={item.genreId}
             isGenre
             listData={item.movieList}

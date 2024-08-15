@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import MovieGrade from '../atoms/MovieGrade';
 import HeartButton from '../atoms/HeartButton';
+import { ReactComponent as KebabSvg } from '../../assets/images/kebab.svg';
 
 export interface MovieListCardProps {
   id: number;
@@ -10,6 +11,7 @@ export interface MovieListCardProps {
   grade: number;
   isLiked?: boolean;
   onMovieHeartClick: (movieId: number) => void;
+  onMovieKebabClick?: (movieId: number, event: React.MouseEvent) => void;
 }
 
 const MovieListCard = ({
@@ -19,11 +21,15 @@ const MovieListCard = ({
   grade,
   isLiked,
   onMovieHeartClick,
+  onMovieKebabClick,
 }: MovieListCardProps) => {
   return (
     <CardContainer>
       <Link to={`/movies/${id}`}>
         <MovieImg src={img} />
+        {onMovieKebabClick && <KebabButton onClick={(event) =>  onMovieKebabClick(id, event)}>
+          <KebabImg />
+        </KebabButton>}
       </Link>
       <ContentContainer>
         <ContentBox>
@@ -39,6 +45,7 @@ const MovieListCard = ({
 export default MovieListCard;
 
 const CardContainer = styled.div`
+  position: relative;
   min-width: 140px;
   height: 244px;
   border-radius: 10px;
@@ -81,3 +88,11 @@ const Title = styled.div`
   -webkit-box-orient: vertical;
   margin-right: 4px;
 `;
+
+const KebabImg = styled(KebabSvg)`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+`;
+
+const KebabButton = styled.button``;

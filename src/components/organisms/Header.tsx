@@ -48,7 +48,6 @@ export const Header = ({ path, ...props }: HeaderProps) => {
         if (searchMovieState?.data) {
           setSearchMovie(searchMovieState.data);
         }
-        console.log(searchMovieState)
       }, [searchMovieState]);
 
       const handleCancelClick = () => {
