@@ -9,11 +9,19 @@ import {
   SurveyListState,
   surveyListState,
 } from '../../store/atoms/Movie/state';
+import { MyGenre } from '../../types/GetMyGenresPayload';
+import { PatchSurveyGenre } from '../../api/surveyFetcher';
 
-const GenreSurveyForm = () => {
+interface GenreSurveyFormProps {
+  state: 'modify' | 'setting';
+  myGenres?: MyGenre;
+}
+
+const GenreSurveyForm = ({ state }: GenreSurveyFormProps) => {
   const [surveyListData, setSurveyListData] =
     useRecoilState<SurveyListState>(surveyListState);
   const navigate = useNavigate();
+
   const countSelectedGenre = (obj: Genre[]) => {
     return obj.filter((value) => value.selected).length;
   };
@@ -25,14 +33,14 @@ const GenreSurveyForm = () => {
         genre: prev.genre.map((value) =>
           value.key === item.type
             ? { ...value, selected: !value.selected }
-            : value,
+            : value
         ),
       }));
     } else {
       setSurveyListData((prev) => ({
         ...prev,
         genre: prev.genre.map((value) =>
-          value.key === item.type ? { ...value, selected: false } : value,
+          value.key === item.type ? { ...value, selected: false } : value
         ),
       }));
     }
@@ -40,8 +48,24 @@ const GenreSurveyForm = () => {
 
   const handleSurveySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate('/survey/movies');
-    setSurveyListData((prev) => ({ ...prev, genre: surveyListData.genre }));
+    if (state === 'modify') {
+      const genreIds: number[] = surveyListData.genre.reduce<number[]>(
+        (genres, item) => {
+          if (item.selected) {
+            genres.push(item.id);
+          }
+          return genres;
+        },
+        []
+      );
+      setSurveyListData((prev) => ({ ...prev, genre: surveyListData.genre }));
+      navigate('/');
+      console.log(surveyListData);
+      const res = PatchSurveyGenre(genreIds);
+    } else if (state === 'setting') {
+      setSurveyListData((prev) => ({ ...prev, genre: surveyListData.genre }));
+      navigate('/survey/movies');
+    }
   };
 
   return (
@@ -70,7 +94,7 @@ const GenreSurveyForm = () => {
         state={countSelectedGenre(surveyListData.genre) === 3}
         enabled={countSelectedGenre(surveyListData.genre) === 3}
       >
-        다음으로
+        {state === 'modify' ? '수정하기' : '다음으로'}
       </PrimaryButton>
     </FormContainer>
   );

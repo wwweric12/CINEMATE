@@ -1,16 +1,22 @@
 import styled from 'styled-components';
 import GenreSurveyForm from '../organisms/GenreSurveyForm';
 import Description from '../atoms/Description';
+import { MyGenre } from '../../types/GetMyGenresPayload';
 
-const GenreSurveyTemplate = () => {
+interface GenreSurveyTemplateProps {
+  state: 'modify' | 'setting';
+  myGenres?: MyGenre;
+}
+
+const GenreSurveyTemplate = ({ state, myGenres }: GenreSurveyTemplateProps) => {
   return (
     <TemplateContainer>
       <Description
-        title="선호하는장르를 선택해주세요"
+        title="선호하는 장르를 선택해주세요"
         content="선호하는 장르 3가지를 선택해 주세요"
         state="survey"
       />
-      <GenreSurveyForm />
+      <GenreSurveyForm state={state} myGenres={myGenres} />
     </TemplateContainer>
   );
 };
