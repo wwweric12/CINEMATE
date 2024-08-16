@@ -13,9 +13,10 @@ import MovieSurveyPage from './pages/MovieSurveyPage';
 import SuccessSurveyPage from './pages/SuccessSurveyPage';
 import SuccessSignupPage from './pages/SuccessSignupPage';
 import MypageReviewsPage from './pages/MypageReviewsPage';
-import MypageMoviesPage from './pages/MypageMoviesPage';
 import Mypage from './pages/Mypage';
 import GenreModifyPage from './pages/GenreModifyPage';
+import MyLikesMoviesPage from './pages/MyLikesMoviesPage';
+import MyHatesMoviesPage from './pages/MyHatesMoviesPage';
 
 function App() {
   return (
@@ -40,7 +41,8 @@ function App() {
             <Route path="/search" element={<SearchTemplate />} />
             <Route path="/search/:movie" element={<SearchResultPage />} />
             <Route path="/mypage" element={<Mypage />} />
-            <Route path="/mypage/movies" element={<MypageMoviesPage />} />
+            <Route path="/mypage/movies/likes" element={<MyLikesMoviesPage />} />
+            <Route path="/mypage/movies/hates" element={<MyHatesMoviesPage />} />
             <Route path="/mypage/reviews" element={<MypageReviewsPage />} />
             <Route path="/movies/:id" element={<MovieDetailPage />} />
             <Route path="/movies/:id/review" element={<CreateReviewPage />} />

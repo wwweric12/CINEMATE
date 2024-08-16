@@ -7,5 +7,6 @@ export interface GetMypagePayload {
 export interface MypageData {
   likeMovies: number;
   myReviews: number;
+  dislikeMovies:number;
   nickname: string;
 }

@@ -6,19 +6,25 @@ import { Movie } from '../../types/GetMyMoviesPayload';
 interface MypageMoviesTemplateProps {
   myMovieList: Movie[];
   onCancelClick: (id: number) => void;
+  state: "hates" | "likes"
 }
 
 const MypageMoviesTemplate = ({
   myMovieList,
   onCancelClick,
+  state,
 }: MypageMoviesTemplateProps) => {
   return (
     <MypageContainer>
       <TextBox>
-        <Text>
+        {state==="likes"&&<Text>
           좋아하는 영화는 총 <EmphasisText>{myMovieList.length}</EmphasisText>{' '}
           개 입니다
-        </Text>
+        </Text>}
+        {state==="hates"&&<Text>
+          관심없는 영화는 총 <EmphasisText>{myMovieList.length}</EmphasisText>{' '}
+          개 입니다
+        </Text>}
       </TextBox>
       <DivideVector />
       <ReviewContainer>

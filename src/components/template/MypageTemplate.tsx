@@ -13,9 +13,15 @@ const MypageTemplate = ({ myPageData }: MypageTemplateProps) => {
   const handleReviewClick=()=>{
     navigate("/mypage/reviews")
   }
-  const handleMovieClick=()=>{
-    navigate("/mypage/movies")
+  const handleMyMovieClick=()=>{
+    navigate("/mypage/movies/likes")
   }
+
+  const handleMyHateMovieClick=()=>{
+    navigate("/mypage/movies/hates")
+  }
+
+
   const handleLogoutClick=()=>{
     localStorage.removeItem("accessToken")
     alert("로그아웃 되었습니다.")
@@ -35,7 +41,8 @@ const MypageTemplate = ({ myPageData }: MypageTemplateProps) => {
       <DivideVector />
       <ButtonContainer>
           <MypageButton count={myPageData.myReviews} content="작성한 리뷰"  onClick={handleReviewClick}/>
-          <MypageButton count={myPageData.likeMovies} content="좋아요한 영화" onClick={handleMovieClick} />
+          <MypageButton count={myPageData.likeMovies} content="좋아요한 영화" onClick={handleMyMovieClick} />
+          <MypageButton count={myPageData.dislikeMovies} content="관심없는 영화" onClick={handleMyHateMovieClick} />
           <MypageButton content="장르 수정하기" onClick={handleGenreModify}/>
           <MypageButton content="로그아웃" onClick={handleLogoutClick}/>
       </ButtonContainer>
