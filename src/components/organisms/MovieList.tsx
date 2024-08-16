@@ -137,6 +137,7 @@ const LeftScrollButton = styled.button`
   top: 50%;
   left: 0;
   transform: translateY(-50%);
+  z-index: 30;
 `;
 
 const RightScrollButton = styled.button`
@@ -146,4 +147,5 @@ const RightScrollButton = styled.button`
   top: 50%;
   right: 0;
   transform: translateY(-50%);
+  z-index: 30;
 `;
