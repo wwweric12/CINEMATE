@@ -7,6 +7,7 @@ import SearchRecordButton from '../atoms/SearchRecordButton';
 import { searchState } from '../../store/atoms/Search/state';
 import SearchCard from '../atoms/SearchCard';
 import { validArray } from '../../util/validArray';
+import NoHistoryCard from '../atoms/NoHistoryCard';
 
 const SearchTemplate = () => {
   const [searchMovie, setSearchMovie] = useRecoilState(searchState);
@@ -25,20 +26,21 @@ const SearchTemplate = () => {
       </ListContainer>
     );
   } else {
+    console.log(keyword)
     return (
       <>
         <TitleContainer>
           <SearchText>최근 검색 기록</SearchText>
           <DivideVector />
           <SearchRecordContainer>
-            {keyword &&
+            {keyword.length!==0 ?
               keyword.map((item) => (
                 <SearchRecordButton
                   key={item.id}
                   text={item.text}
                   onKeywordRemove={() => handleDeleteKeyword(item.id)}
                 />
-              ))}
+              )): <NoHistoryCard title="최근 검색 기록이 없습니다"/>}
           </SearchRecordContainer>
         </TitleContainer>
       </>
@@ -73,6 +75,7 @@ const SearchText = styled.div`
 const SearchRecordContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 18px;
   gap: 8px;
   flex-wrap: wrap;
 `;
