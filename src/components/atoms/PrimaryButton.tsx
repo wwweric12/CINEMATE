@@ -69,7 +69,7 @@ const Button = styled.button<{
     size === 'small'
       ? $colorState
         ? theme.colors.choral
-        : theme.colors.darkgray4
+        : theme.colors.darkgray3
       : $colorState
         ? theme.colors.choral
         : theme.colors.darkgray3};

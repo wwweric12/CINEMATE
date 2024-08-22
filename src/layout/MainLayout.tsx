@@ -1,8 +1,6 @@
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import {
-  useEffect,
-} from 'react';
+import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import Footer from '../components/organisms/Footer';
 import { Header } from '../components/organisms/Header';
@@ -16,21 +14,18 @@ const MainLayout = () => {
   const [background, setBackground] = useRecoilState(backgroundState);
 
   const navigate = useNavigate();
-  const accessKey = localStorage.getItem("accessToken");
-  
+  const accessKey = localStorage.getItem('accessToken');
+
   useEffect(() => {
     if (!accessKey) {
-      navigate("/login")
+      navigate('/login');
     }
   }, [accessKey]);
 
-
   const handlePrevClick = () => {
-    if(location.state==="search"){
-      navigate("/search");
-    }
-
-    else if (location.pathname === `/movies/${params.id}`) {
+    if (location.state === 'search') {
+      navigate('/search');
+    } else if (location.pathname === `/movies/${params.id}`) {
       navigate(`/`);
     } else {
       navigate(-1);
@@ -38,27 +33,26 @@ const MainLayout = () => {
   };
 
   const handleBackgroundClick = (event: React.MouseEvent) => {
-    event.stopPropagation(); 
-    setBackground(false); 
+    event.stopPropagation();
+    setBackground(false);
   };
-
 
   return (
     <>
-    {background&&<Background  onClick={handleBackgroundClick}/>}
-    <Container>
-      {!hasNotHeaderPages.includes(location.pathname) && (
-        <Header
-          title="뒤로가기"
-          path={location.pathname}
-          onPrevClick={handlePrevClick}
-        />
-      )}
-      <Outlet />
-      {hasFooter.includes(location.pathname) && (
-        <Footer path={location.pathname} />
-      )}
-    </Container>
+      {background && <Background onClick={handleBackgroundClick} />}
+      <Container>
+        {!hasNotHeaderPages.includes(location.pathname) && (
+          <Header
+            title="뒤로가기"
+            path={location.pathname}
+            onPrevClick={handlePrevClick}
+          />
+        )}
+        <Outlet />
+        {hasFooter.includes(location.pathname) && (
+          <Footer path={location.pathname} />
+        )}
+      </Container>
     </>
   );
 };
