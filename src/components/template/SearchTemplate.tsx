@@ -26,7 +26,6 @@ const SearchTemplate = () => {
       </ListContainer>
     );
   } else {
-    console.log(keyword)
     return (
       <>
         <TitleContainer>
