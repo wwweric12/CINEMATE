@@ -8,8 +8,9 @@ interface NotFoundCard {
   contentDesc: string;
   cardDesc: string;
   leftBtnDesc: string;
-  rightbtnDesx: string;
-  onNavigateClick: () => void;
+  rightBtnDesc: string;
+  onLeftClick: () => void;
+  onRightClick: () => void;
 }
 
 const NotFoundCard = ({
@@ -18,8 +19,9 @@ const NotFoundCard = ({
   contentDesc,
   cardDesc,
   leftBtnDesc,
-  rightbtnDesx,
-  onNavigateClick,
+  rightBtnDesc,
+  onLeftClick,
+  onRightClick,
 }: NotFoundCard) => {
   return (
     <CardContainer>
@@ -33,19 +35,21 @@ const NotFoundCard = ({
       <ButtonContainer>
         <PrimaryButton
           type="button"
-          onClick={onNavigateClick}
+          onClick={onLeftClick}
           state={false}
           size="small"
+          enabled
         >
           {leftBtnDesc}
         </PrimaryButton>
         <PrimaryButton
           type="button"
-          onClick={onNavigateClick}
+          onClick={onRightClick}
           state
           size="small"
+          enabled
         >
-          {rightbtnDesx}
+          {rightBtnDesc}
         </PrimaryButton>
       </ButtonContainer>
     </CardContainer>
@@ -58,7 +62,9 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 306px;
+  width: 100%;
+  min-width: 306px;
+  max-width: 350px;
   background-color: ${({ theme }) => theme.colors.darkgray4};
   border-radius: 14px;
   padding: 84px 0 54px 0;

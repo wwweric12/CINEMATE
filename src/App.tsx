@@ -17,6 +17,7 @@ import Mypage from './pages/Mypage';
 import GenreModifyPage from './pages/GenreModifyPage';
 import MyLikesMoviesPage from './pages/MyLikesMoviesPage';
 import MyHatesMoviesPage from './pages/MyHatesMoviesPage';
+import NotFoundTemplate from './components/template/NotFoundTemplate';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/*" element={<NotFoundTemplate />} />
             <Route path="/" element={<MovieListPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/signup/success" element={<SuccessSignupPage />} />
@@ -41,8 +43,14 @@ function App() {
             <Route path="/search" element={<SearchTemplate />} />
             <Route path="/search/:movie" element={<SearchResultPage />} />
             <Route path="/mypage" element={<Mypage />} />
-            <Route path="/mypage/movies/likes" element={<MyLikesMoviesPage />} />
-            <Route path="/mypage/movies/hates" element={<MyHatesMoviesPage />} />
+            <Route
+              path="/mypage/movies/likes"
+              element={<MyLikesMoviesPage />}
+            />
+            <Route
+              path="/mypage/movies/hates"
+              element={<MyHatesMoviesPage />}
+            />
             <Route path="/mypage/reviews" element={<MypageReviewsPage />} />
             <Route path="/movies/:id" element={<MovieDetailPage />} />
             <Route path="/movies/:id/review" element={<CreateReviewPage />} />

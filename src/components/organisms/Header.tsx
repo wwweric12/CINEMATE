@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { ChangeEventHandler, FormEventHandler, useEffect, useState } from 'react';
+import {
+  ChangeEventHandler,
+  FormEventHandler,
+  useEffect,
+  useState,
+} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import Logo from '../atoms/Logo';
@@ -17,7 +22,7 @@ type DetailHeaderProps = {
 
 type HeaderProps = {
   path: string;
-} &  DetailHeaderProps;
+} & DetailHeaderProps;
 
 export const Header = ({ path, ...props }: HeaderProps) => {
   const param = useParams();
@@ -33,15 +38,12 @@ export const Header = ({ path, ...props }: HeaderProps) => {
     `/movie/${param.id}/review`,
   ];
 
-
-
-
   const renderInner = () => {
     if (path.includes(searchHeader)) {
       const [searchMovie, setSearchMovie] = useRecoilState(searchState);
       const [keyword, setKeyword] = useRecoilState(keywordState);
       const [searchInput, setSearchInput] = useState('');
-      const navigate =useNavigate()
+      const navigate = useNavigate();
       const { searchMovieState } = useSearchMovie(searchInput);
 
       useEffect(() => {
@@ -60,25 +62,25 @@ export const Header = ({ path, ...props }: HeaderProps) => {
         }
         setSearchInput(e.target.value);
       };
-    
+
       const handleSearchSubmit: FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
-        if(searchInput.trim()!=""){
+        if (searchInput.trim() != '') {
           const newKeyword = {
             id: Date.now(),
             text: searchInput,
           };
           setKeyword((prev) => {
-            const isDuplicate = prev.some((item) => item.text === newKeyword.text);
+            const isDuplicate = prev.some(
+              (item) => item.text === newKeyword.text,
+            );
             return isDuplicate ? prev : [...prev, newKeyword];
           });
           navigate(`/search/${searchInput}`);
         }
         setSearchInput('');
         setSearchMovie([]);
-        
       };
-
 
       return (
         <SearchBarContainer>
@@ -99,7 +101,7 @@ export const Header = ({ path, ...props }: HeaderProps) => {
           </PrevButton>
         </HeaderContainer>
       );
-    } else if (mainHeader.includes(path)) {
+    } else {
       return (
         <HeaderContainer>
           <Logo />
@@ -112,7 +114,7 @@ export const Header = ({ path, ...props }: HeaderProps) => {
 
 const HeaderContainer = styled.div`
   position: fixed;
-  width:100%;
+  width: 100%;
   max-width: 768px;
   top: 0;
   padding: 20px 40px;

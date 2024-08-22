@@ -18,7 +18,8 @@ export const NoFound: Story = {
     contentDesc: '페이지를 찾을 수 없습니다',
     cardDesc: '페이지가 존재하지 않거나 사용할 수 없는 페이지입니다',
     leftBtnDesc: '이전 페이지로',
-    rightbtnDesx: '홈으로',
-    onNavigateClick: fn(),
+    rightBtnDesc: '홈으로',
+    onLeftClick: fn(),
+    onRightClick: fn(),
   },
 };
