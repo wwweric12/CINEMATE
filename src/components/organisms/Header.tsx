@@ -119,7 +119,7 @@ const HeaderContainer = styled.div`
   top: 0;
   padding: 20px 40px;
   background-color: ${({ theme }) => theme.colors.darkgray2};
-  z-index: 30;
+  z-index: 50;
 `;
 
 const PrevButton = styled.button`

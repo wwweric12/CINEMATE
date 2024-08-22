@@ -49,9 +49,12 @@ const MainLayout = () => {
           />
         )}
         <Outlet />
-        {hasFooter.includes(location.pathname) && (
+        {(hasFooter.includes(location.pathname) && (
           <Footer path={location.pathname} />
-        )}
+        )) ||
+          (location.pathname.includes('search') && (
+            <Footer path={location.pathname} />
+          ))}
       </Container>
     </>
   );
@@ -78,6 +81,6 @@ const Background = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 50;
+  z-index: 51;
   background-color: rgba(0, 0, 0, 0.5);
 `;

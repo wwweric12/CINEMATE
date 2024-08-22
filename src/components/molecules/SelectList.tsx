@@ -8,7 +8,7 @@ interface SelectListProps {
   movieId?: number;
 }
 
-const SelectList = ({ movieId}: SelectListProps) => {
+const SelectList = ({ movieId }: SelectListProps) => {
   const [background, setBackground] = useRecoilState(backgroundState);
   const handleSelectClick = async (movieId?: number) => {
     if (movieId) {
@@ -43,7 +43,7 @@ const SelectContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.darkgray4};
   border-radius: 18px 18px 0 0;
   padding: 10px 24px;
-  z-index: 51;
+  z-index: 60;
 `;
 
 const GrayLine = styled.div`
