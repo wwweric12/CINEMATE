@@ -9,6 +9,7 @@ import { backgroundState } from '../store/atoms/Background/state';
 const MainLayout = () => {
   const hasFooter = ['/', '/search', '/mypage'];
   const hasNotHeaderPages = ['success'];
+  const hasNotToken = ['/login', '/signup'];
   const location = useLocation();
   const params = useParams();
   const [background, setBackground] = useRecoilState(backgroundState);
@@ -17,7 +18,8 @@ const MainLayout = () => {
   const accessKey = localStorage.getItem('accessToken');
 
   useEffect(() => {
-    if (!accessKey) {
+    if (!accessKey && !hasNotToken.includes(location.pathname)) {
+      alert('로그인 정보가 유효하지 않습니다.');
       navigate('/login');
     }
   }, [accessKey]);

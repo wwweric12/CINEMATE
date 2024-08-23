@@ -17,8 +17,6 @@ const LoginPage = () => {
       } else {
         navigate('/survey/genre');
       }
-    } else {
-      alert(res.data);
     }
   };
   return (

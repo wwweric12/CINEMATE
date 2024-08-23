@@ -18,10 +18,11 @@ export const authFetcher = async ({ path, data }: AuthProps) => {
   }
   try {
     const res = await Axios.post(`/api/auth/${path}`, requestData);
+
     return res.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      alert(error);
+      alert(error.response?.data.data);
     } else {
       throw error;
     }
