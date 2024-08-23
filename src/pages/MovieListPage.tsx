@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import MovieListTemplate from '../components/template/MovieListTemplate';
@@ -9,17 +9,9 @@ import SelectList from '../components/molecules/SelectList';
 
 const MovieListPage = () => {
   const navigate = useNavigate();
-  const { isMovieLoading, movieState } = useRecommendMovie();
+  const { isMovieLoading, movieState, isMovieError } = useRecommendMovie();
   const [selectedMovieId, setSelectedMovieId] = useState<number | undefined>();
   const [background, setBackground] = useRecoilState(backgroundState);
-
-  useEffect(() => {
-    const token = localStorage.getItem('accessToken');
-    if (!token) {
-      alert('로그인 정보가 유효하지 않습니다.');
-      navigate('/login');
-    }
-  }, []);
 
   const handleHeartClick = async (movieId: number) => {
     const res = await PostMovieLike({ movieId });
@@ -31,6 +23,11 @@ const MovieListPage = () => {
     setSelectedMovieId(movieId);
     setBackground(true);
   };
+  if (isMovieError) {
+    alert('로그인 정보가 유효하지 않습니다.');
+    navigate('/login');
+    return null;
+  }
 
   if (isMovieLoading) {
     return <div>Loding...</div>;
