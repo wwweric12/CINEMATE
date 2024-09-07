@@ -31,6 +31,7 @@ export const useRecommendMovie = () => {
     ['movieList', token],
     () => fetchMovie(token || ''),
     {
+      refetchOnWindowFocus: false,
       enabled: !!token,
     },
   );
