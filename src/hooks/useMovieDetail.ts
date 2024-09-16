@@ -25,7 +25,7 @@ export const useMovieDetail = (movieId: string) => {
     data: movieDetailState,
     isSuccess,
   } = useQuery<GetMovieDetailPayload, AxiosError>(
-    ['movieDetail', { token, movieId }],
+    ['movieDetail', { movieId }],
     () => fetchMovieDetail({ token, movieId }),
   );
 

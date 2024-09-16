@@ -23,7 +23,7 @@ export const useMyMovie = () => {
     isError: isMyMovieError,
     data: myMovieState,
     isSuccess,
-  } = useQuery<GetMyMoviesPayload, AxiosError>(['myMovie', { token }], () =>
+  } = useQuery<GetMyMoviesPayload, AxiosError>(['myMovie'], () =>
     fetchMyMovie({ token }),
   );
 

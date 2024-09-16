@@ -23,7 +23,7 @@ export const useMyReview = () => {
     isError: isMyReviewError,
     data: myReviewState,
     isSuccess,
-  } = useQuery<GetReviewPayload, AxiosError>(['myReview', { token }], () =>
+  } = useQuery<GetReviewPayload, AxiosError>(['myReview'], () =>
     fetchMyReview({ token }),
   );
 

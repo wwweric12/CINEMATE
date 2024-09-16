@@ -30,7 +30,7 @@ export const useReview = ({ movieId, orderby }: FetchReviewProps) => {
     data: reviewState,
     isSuccess,
   } = useQuery<GetReviewPayload, AxiosError>(
-    ['review', { token, movieId, orderby }],
+    ['review', { movieId, orderby }],
     () => fetchReview({ token, movieId, orderby }),
   );
 

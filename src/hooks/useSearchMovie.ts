@@ -23,8 +23,7 @@ const fetchSearch = async ({ token, title }: FetchSearchProps) => {
 };
 
 export const useSearchMovie = (title: string) => {
-  const debouncedQuery =useDebounce(title,700)
-
+  const debouncedQuery = useDebounce(title, 700);
 
   const token = localStorage.getItem('accessToken') || '';
   const {
@@ -33,7 +32,7 @@ export const useSearchMovie = (title: string) => {
     data: searchMovieState,
     isSuccess,
   } = useQuery<GetSearchMoviePayload, AxiosError>(
-    ['movieList', { token, debouncedQuery }],
+    ['movieList', { debouncedQuery }],
     () => fetchSearch({ token, title: debouncedQuery }),
   );
 

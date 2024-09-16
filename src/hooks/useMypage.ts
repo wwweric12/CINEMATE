@@ -23,7 +23,7 @@ export const useMypage = () => {
     isError: isMyPageError,
     data: myPageState,
     isSuccess,
-  } = useQuery<GetMypagePayload, AxiosError>(['mypage', { token }], () =>
+  } = useQuery<GetMypagePayload, AxiosError>(['mypage'], () =>
     fetchMyPage({ token }),
   );
 

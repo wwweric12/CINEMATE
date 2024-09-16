@@ -24,9 +24,8 @@ export const useRating = (movieId: string) => {
     isError: isRatingError,
     data: ratingState,
     isSuccess,
-  } = useQuery<GetRatingListPayload, AxiosError>(
-    ['rating', { token, movieId }],
-    () => fetchRating({ token, movieId }),
+  } = useQuery<GetRatingListPayload, AxiosError>(['rating', { movieId }], () =>
+    fetchRating({ token, movieId }),
   );
 
   return { isRatingLoading, isRatingError, ratingState, isSuccess };

@@ -23,8 +23,8 @@ export const useMyGenre = () => {
     isError: isMyGenresError,
     data: myGenres,
     isSuccess,
-  } = useQuery<GetMyGenresPayload, AxiosError>(['myGenre', { token }], () =>
-    fetchMyGenre({ token })
+  } = useQuery<GetMyGenresPayload, AxiosError>(['myGenre'], () =>
+    fetchMyGenre({ token }),
   );
 
   return {

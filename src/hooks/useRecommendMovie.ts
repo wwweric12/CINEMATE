@@ -28,7 +28,7 @@ export const useRecommendMovie = () => {
     data: movieState,
     isSuccess,
   } = useQuery<GetMovieListPayload, AxiosError>(
-    ['movieList', token],
+    ['movieList'],
     () => fetchMovie(token || ''),
     {
       refetchOnWindowFocus: false,
