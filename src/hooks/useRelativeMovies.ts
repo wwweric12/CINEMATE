@@ -8,7 +8,10 @@ interface FetchRelativeMoviesProps {
   movieId: string;
 }
 
-const fetchRelativeMovies = async ({ token, movieId }: FetchRelativeMoviesProps) => {
+const fetchRelativeMovies = async ({
+  token,
+  movieId,
+}: FetchRelativeMoviesProps) => {
   const res = await Axios.get(`/api/related-movie/${movieId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -25,9 +28,14 @@ export const useRelativeMovies = (movieId: string) => {
     data: relativeMoviesState,
     isSuccess,
   } = useQuery<GetRelativeMovies, AxiosError>(
-    ['relativeMovies', { token, movieId }],
+    ['relativeMovies', { movieId }],
     () => fetchRelativeMovies({ token, movieId }),
   );
 
-  return { isRelativeMoviesLoading, isRelativeMoviesError, relativeMoviesState, isSuccess };
+  return {
+    isRelativeMoviesLoading,
+    isRelativeMoviesError,
+    relativeMoviesState,
+    isSuccess,
+  };
 };

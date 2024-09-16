@@ -23,7 +23,7 @@ export const useMyHatesMovie = () => {
     isError: isMyHatesMovieError,
     data: myHatesMovieState,
     isSuccess,
-  } = useQuery<GetMyMoviesPayload, AxiosError>(['myHatesMovie', { token }], () =>
+  } = useQuery<GetMyMoviesPayload, AxiosError>(['myHatesMovie'], () =>
     fetchMyHatesMovie({ token }),
   );
 

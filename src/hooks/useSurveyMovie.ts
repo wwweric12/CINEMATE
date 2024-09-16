@@ -23,9 +23,8 @@ export const useSurveyMovie = () => {
     isError: isSurveyMovieError,
     data: surveyMovieState,
     isSuccess,
-  } = useQuery<GetSurveyMoviePayload, AxiosError>(
-    ['surveylist', { token }],
-    () => fetchSurvey({ token }),
+  } = useQuery<GetSurveyMoviePayload, AxiosError>(['surveylist'], () =>
+    fetchSurvey({ token }),
   );
 
   return {
