@@ -7,8 +7,8 @@ export interface ReviewProps {
   reviewId: number;
 }
 
-export interface MovieProps{
-  movieId:number
+export interface MovieProps {
+  movieId: number;
 }
 
 export const PostMovieLike = async ({
@@ -48,7 +48,7 @@ export const PostReviewLike = async ({ movieId, reviewId }: ReviewProps) => {
     return res.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      alert(error);
+      throw new Error(error.message);
     } else {
       throw error;
     }

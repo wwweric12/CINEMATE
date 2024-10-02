@@ -92,7 +92,7 @@ const ReviewCard = ({
           isMine={isMine}
           isLiked={isLiked}
           onClick={() => {
-            onReviewHeartClick&&onReviewHeartClick({ movieId, reviewId: id });
+            onReviewHeartClick && onReviewHeartClick({ movieId, reviewId: id });
             handeHeartCount();
           }}
         />
