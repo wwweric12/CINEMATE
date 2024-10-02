@@ -30,7 +30,7 @@ export const PostSurvey = async ({ movieIds, genreIds }: SurveyProps) => {
   }
 };
 
-export const PatchSurveyGenre = async ( genreIds : SurveyProps["genreIds"]) => {
+export const PatchSurveyGenre = async (genreIds: SurveyProps['genreIds']) => {
   const genreIdsStr = genreIds.join(',');
   try {
     const res = await Axios.patch(
@@ -51,4 +51,3 @@ export const PatchSurveyGenre = async ( genreIds : SurveyProps["genreIds"]) => {
     }
   }
 };
-

@@ -8,14 +8,11 @@ import { useRating } from '../hooks/useRating';
 import { useReview } from '../hooks/useReview';
 import { SelectOption } from '../components/molecules/SelectFilter';
 import { DeleteReview } from '../api/reviewFetcher';
-import {
-  PostMovieLike,
-  PostReviewLike,
-  ReviewProps,
-} from '../api/likeFetcher';
+import { PostMovieLike, ReviewProps } from '../api/likeFetcher';
 import { useRelativeMovies } from '../hooks/useRelativeMovies';
 import { backgroundState } from '../store/atoms/Background/state';
 import SelectList from '../components/molecules/SelectList';
+import { usePostReviewLike } from '../hooks/useReviewLike';
 
 const MovieDetailPage = () => {
   const params = useParams<{ id: string }>();
@@ -29,6 +26,7 @@ const MovieDetailPage = () => {
     useRelativeMovies(movieId);
   const [score, setScore] = useState<number>(ratingState?.data || 0);
   const [background, setBackground] = useRecoilState(backgroundState);
+  const reviewLikeMutation = usePostReviewLike();
 
   useEffect(() => {
     if (ratingState !== undefined) {
@@ -44,8 +42,8 @@ const MovieDetailPage = () => {
     setBackground(true);
   };
 
-  const handleReviewHeartClick = async ({ movieId, reviewId }: ReviewProps) => {
-    const res = await PostReviewLike({ movieId, reviewId });
+  const handleReviewHeartClick = ({ movieId, reviewId }: ReviewProps) => {
+    reviewLikeMutation.mutate({ movieId, reviewId });
   };
 
   const handleRatingClick = ({ movieId, rating }: PutRatingProps) => {
@@ -76,22 +74,22 @@ const MovieDetailPage = () => {
 
   return (
     <>
-    <MovieDetailTemplate
-      score={score}
-      setScore={setScore}
-      orderby={orderby}
-      setOrderby={setOrderby}
-      reviewState={reviewState.data}
-      relativeMoviesState={relativeMoviesState.data}
-      movie={movieDetailState.data.movie}
-      credit={movieDetailState.data.credit}
-      onMovieHeartClick={handleMovieHeartClick}
-      onMovieKebabClick={handleMovieKebabClick}
-      onRatingClick={handleRatingClick}
-      onDeleteClick={handleDeleteClick}
-      onReviewHeartClick={handleReviewHeartClick}
-    />
-    {background && <SelectList movieId={movieDetailState.data.movie.id} />}
+      <MovieDetailTemplate
+        score={score}
+        setScore={setScore}
+        orderby={orderby}
+        setOrderby={setOrderby}
+        reviewState={reviewState.data}
+        relativeMoviesState={relativeMoviesState.data}
+        movie={movieDetailState.data.movie}
+        credit={movieDetailState.data.credit}
+        onMovieHeartClick={handleMovieHeartClick}
+        onMovieKebabClick={handleMovieKebabClick}
+        onRatingClick={handleRatingClick}
+        onDeleteClick={handleDeleteClick}
+        onReviewHeartClick={handleReviewHeartClick}
+      />
+      {background && <SelectList movieId={movieDetailState.data.movie.id} />}
     </>
   );
 };
